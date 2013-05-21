@@ -1,5 +1,6 @@
 package gruppe63_dungeon_crawler;
 
+
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -16,18 +17,22 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 
-public class Einstellungen extends JFrame {
+public class Settings extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	
 	private int difficulty = 0;
+	//Menu menu = new Menu();
 	
-	public Einstellungen()
+	
+	public Settings()
 	{
 		super("Einstellungen");
 	}
 	
 	public void initialize() {
+		
+		//menu.initialize();
+		//menu.setVisible(false);
 
 		Container cp = this.getContentPane();
 
@@ -42,10 +47,16 @@ public class Einstellungen extends JFrame {
 			}
 		};
 		
-		JLabel lDifficulty = new JLabel("Schwierigkeitsgrad", JLabel.CENTER);
+		/* Prefixes:
+		 * b = Button
+		 * rb = RadioButton
+		 * l = Label
+		 */
+		
+		JLabel lDifficulty = new JLabel("Difficulty", JLabel.CENTER);
 		
 		GridBagConstraints lDifficultyc = new GridBagConstraints();
-		lDifficultyc.gridx = 1;
+		lDifficultyc.gridx = 0;
 		lDifficultyc.gridy = 0;
 		lDifficultyc.gridwidth = 2;
 		lDifficultyc.fill = GridBagConstraints.BOTH;
@@ -62,11 +73,12 @@ public class Einstellungen extends JFrame {
 		rbHardc.gridx = 1;
 		rbHardc.gridy = 1;
 		
+		// Max. 1 Button can be active, so we have to put the Radiobuttons in a Buttongroup
 		ButtonGroup diffGroup = new ButtonGroup();
 		diffGroup.add(rbEasy);
 		diffGroup.add(rbHard);
 
-		JButton bSave = new JButton("Speichern und schlieﬂen");
+		JButton bSave = new JButton("Save and exit");
 
 		bSave.addActionListener(new ActionListener() {
 
@@ -75,9 +87,10 @@ public class Einstellungen extends JFrame {
 				
 				if(rbEasy.isSelected())
 					difficulty = 0;
-				if(rbHard.isSelected())
+				else if(rbHard.isSelected())
 					difficulty = 1;
-				dispose();
+				setVisible(false);
+				//menu.setVisible(true);
 
 			}
 		});
@@ -88,15 +101,15 @@ public class Einstellungen extends JFrame {
 		bSavec.fill = GridBagConstraints.HORIZONTAL;
 		bSavec.weightx = 1.0;
 
-		JButton bClose = new JButton("Schlieﬂen");
+		JButton bClose = new JButton("Exit without saving");
 
 		bClose.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				dispose();
-				
+				setVisible(false);
+				//menu.setVisible(true);
 
 			}
 		});
@@ -129,6 +142,11 @@ public class Einstellungen extends JFrame {
 	public int getDifficulty()
 	{
 		return difficulty;
+	}
+	
+	public void setDifficulty(int diffnew)
+	{
+		difficulty = diffnew;
 	}
 
 }
