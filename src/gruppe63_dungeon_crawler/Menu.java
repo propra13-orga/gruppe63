@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class Menu extends JFrame {
+public class Menu extends Controller {
 
 	private static final long serialVersionUID = 1L;
 	Settings settings = new Settings();
@@ -25,7 +25,7 @@ public class Menu extends JFrame {
 
 	public Menu() {
 
-		super("Menü");
+		super("Menu");
 		
 
 	}
@@ -108,6 +108,7 @@ public class Menu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// open Settings
+				//cp.removeAll();
 				settings.setVisible(true);
 		        //setVisible(false);
 
@@ -145,6 +146,7 @@ public class Menu extends JFrame {
 		cp.add(bStart, bStartc);
 		cp.add(bSettings, bSettingsc);
 		cp.add(bExit, bExitc);
+		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

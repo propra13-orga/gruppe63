@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 
-public class Settings extends JFrame {
+public class Settings extends Controller {
 	
 	private static final long serialVersionUID = 1L;
 	private int difficulty = 0;

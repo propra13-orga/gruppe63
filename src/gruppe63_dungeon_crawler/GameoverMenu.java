@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class GameoverMenu extends JFrame {
+public class GameoverMenu extends Controller {
 
 	private static final long serialVersionUID = 1L;
 	Settings settings = new Settings();
