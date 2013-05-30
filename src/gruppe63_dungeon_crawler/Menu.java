@@ -12,24 +12,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
-public class Menu extends Controller{
+public class Menu extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
 	
 	// Game klasse?
-	private Panel game;
+	private Game game;
 	
-	private JPanel nextPanel;
+	private JPanel GameoverPanel;
 	private Container cp;
 	int difficulty;
+	public Controller controller;
+	
+	private int xFrame=600;
+	private int yFrame=700;
 	
 
 	public Menu() {
@@ -38,11 +44,32 @@ public class Menu extends Controller{
 		
 
 	}
+	
+	JLabel lTitle;
+	JLabel lDifficulty;
+	JRadioButton rbEasy;
+	JRadioButton rbHard;
+	ButtonGroup diffGroup;
+	JButton bStart;
+	JButton bSettings;
+	JButton bExit;
+	JButton bSave;
+	JButton bClose;
+	JButton bRestart;
+	GridBagConstraints lTitlec = new GridBagConstraints();
+	GridBagConstraints lDifficultyc = new GridBagConstraints();
+	GridBagConstraints bStartc = new GridBagConstraints();
+	GridBagConstraints bSettingsc = new GridBagConstraints();
+	GridBagConstraints rbEasyc = new GridBagConstraints();
+	GridBagConstraints rbHardc = new GridBagConstraints();
+	GridBagConstraints bSavec = new GridBagConstraints();
+	GridBagConstraints bClosec = new GridBagConstraints();
+	GridBagConstraints bExitc = new GridBagConstraints();
+	GridBagConstraints bExitc2 = new GridBagConstraints();
+	GridBagConstraints bRestartc = new GridBagConstraints();
+	GridBagConstraints lEndec = new GridBagConstraints();
 
 	public void initialize() {
-
-		//settings.initialize();
-		//settings.setVisible(false);
 		
 		cp = this.getContentPane();
 		
@@ -56,32 +83,21 @@ public class Menu extends Controller{
 		 * Initialize Elements, structure with Gridbagdesign
 		 * 
 		 */
-		final JLabel lTitle;
-		final JLabel lDifficulty;
-		final JRadioButton rbEasy;
-		final JRadioButton rbHard;
-		final ButtonGroup diffGroup;
-		final JButton bStart;
-		final JButton bSettings;
-		final JButton bExit;
-		final JButton bSave;
-		final JButton bClose;
-		final GridBagConstraints lTitlec = new GridBagConstraints();
-		final GridBagConstraints lDifficultyc = new GridBagConstraints();
-		final GridBagConstraints bStartc = new GridBagConstraints();
-		final GridBagConstraints bSettingsc = new GridBagConstraints();
-		final GridBagConstraints rbEasyc = new GridBagConstraints();
-		final GridBagConstraints rbHardc = new GridBagConstraints();
-		final GridBagConstraints bSavec = new GridBagConstraints();
-		final GridBagConstraints bClosec = new GridBagConstraints();
-		final GridBagConstraints bExitc = new GridBagConstraints();
+		
 		
 
 		bSettings = new JButton("Settings");
+		bSettings.addActionListener(this);
 		lTitle = new JLabel("Dungeon Crawlers", JLabel.CENTER);
 		lDifficulty = new JLabel("Difficulty", JLabel.CENTER);
 		bStart = new JButton("Start game");
+		bStart.addActionListener(this);
 		bExit = new JButton("Exit");
+		bExit.addActionListener(this);
+		bClose = new JButton("Exit without saving");
+		bClose.addActionListener(this);
+		bSave = new JButton("Save and exit");
+		bSave.addActionListener(this);
 		
 		
 		
@@ -98,28 +114,6 @@ public class Menu extends Controller{
 		lDifficultyc.fill = GridBagConstraints.BOTH;
 		
 		// Initialize Startbutton
-		bStart.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				// Start game, load dungeon
-				String diffString = null;
-				if (difficulty == 0)
-						diffString = "Easy";
-				else if (difficulty == 1)
-						diffString = "Hard";
-				System.out.println("Loading game...");
-				System.out.println("Difficulty: " + diffString);
-				
-				game = new Panel();
-				//System.out.println("" + a.geta().getPosX());
-				//System.out.println("" + a.geta().posX);
-				setVisible(false); // Hide Menu
-
-			}
-		});
-
 		// Shortcut: Alt+S
 		bStart.setMnemonic(KeyEvent.VK_S);
 
@@ -129,7 +123,7 @@ public class Menu extends Controller{
 		bStartc.fill = GridBagConstraints.HORIZONTAL;
 		bStartc.weightx = 1.0;
 		
-
+		// Initialize Settingsbutton
 		bSettingsc.gridx = 0;
 		bSettingsc.gridy = 3;
 		bSettingsc.fill = GridBagConstraints.HORIZONTAL;
@@ -144,95 +138,28 @@ public class Menu extends Controller{
 		rbHardc.gridx = 1;
 		rbHardc.gridy = 1;
 		
-		// Initialize Savebutton
-		bSave = new JButton("Save and exit");
-
-		bSave.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if(rbEasy.isSelected())
-					difficulty = 0;
-				else if(rbHard.isSelected())
-					difficulty = 1;
-				setVisible(false);
-				cp.removeAll();
-				cp.add(lTitle, lTitlec);
-				cp.add(bStart, bStartc);
-				cp.add(bSettings, bSettingsc);
-				cp.add(bExit, bExitc);
-				setVisible(true);
-
-			}
-		});
+		// Buttongroup
+		diffGroup = new ButtonGroup();
+		diffGroup.add(rbEasy);
+		diffGroup.add(rbHard);
 		
+		// Initialize Savebutton
 		bSavec.gridx = 0;
 		bSavec.gridy = 2;
 		bSavec.fill = GridBagConstraints.HORIZONTAL;
 		bSavec.weightx = 1.0;
 		
-		
 		// Initialize Closebutton
-		bClose = new JButton("Exit without saving");
-
-		bClose.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				setVisible(false);
-				cp.removeAll();
-				cp.add(lTitle, lTitlec);
-				cp.add(bStart, bStartc);
-				cp.add(bSettings, bSettingsc);
-				cp.add(bExit, bExitc);
-				setVisible(true);
-
-			}
-		});
-
 		bClosec.gridx = 1;
 		bClosec.gridy = 2;
 		bClosec.fill = GridBagConstraints.HORIZONTAL;
 		bClosec.weightx = 1.0;
 		
-
 		// Initialize Exitbutton
-
-		bExit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				System.exit(0);
-
-			}
-		});
-
 		bExitc.gridx = 0;
 		bExitc.gridy = 4;
 		bExitc.fill = GridBagConstraints.HORIZONTAL;
 		bExitc.weightx = 1.0;
-		
-		// Initialize Settingsbutton
-
-		bSettings.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				// open Settings
-				setVisible(false);
-				cp.removeAll();
-				cp.add(lDifficulty, lDifficultyc);
-				cp.add(rbEasy, rbEasyc);
-				cp.add(rbHard, rbHardc);
-				cp.add(bSave, bSavec);
-				cp.add(bClose, bClosec);
-				setVisible(true);
-			}
-		});
 
 		cp.setLayout(new GridBagLayout());
 
@@ -246,7 +173,7 @@ public class Menu extends Controller{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.pack();
-		this.setSize(400, 300);
+		this.setSize(xFrame, yFrame);
 //		this.setResizable(false);
 		
 		this.setVisible(true);
@@ -266,5 +193,134 @@ public class Menu extends Controller{
 		});
 
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource()==this.bStart)
+		{
+			this.startGame();
+			
+		}
+		if(e.getSource()==this.bExit)
+		{
+			System.exit(0);
+		}
+		if(e.getSource()==this.bSettings)
+		{
+			// open Settings
+			setVisible(false);
+			cp.removeAll();
+			cp.add(lDifficulty, lDifficultyc);
+			cp.add(rbEasy, rbEasyc);
+			cp.add(rbHard, rbHardc);
+			cp.add(bSave, bSavec);
+			cp.add(bClose, bClosec);
+			setVisible(true);
+		}
+		if(e.getSource()==this.bSave)
+		{
+			if(rbEasy.isSelected())
+				difficulty = 0;
+			else if(rbHard.isSelected())
+				difficulty = 1;
+			setVisible(false);
+			cp.removeAll();
+			cp.add(lTitle, lTitlec);
+			cp.add(bStart, bStartc);
+			cp.add(bSettings, bSettingsc);
+			cp.add(bExit, bExitc);
+			setVisible(true);
+		}
+		if(e.getSource()==this.bClose)
+		{
+			setVisible(false);
+			cp.removeAll();
+			cp.add(lTitle, lTitlec);
+			cp.add(bStart, bStartc);
+			cp.add(bSettings, bSettingsc);
+			cp.add(bExit, bExitc);
+			setVisible(true);
+		}
+		if(e.getSource()==this.bRestart)
+		{
+			this.remove(GameoverPanel);
+			this.initialize();
+		}
+		
+	}
+	
+	public void startGame()
+	{
+		// Start game, load dungeon
+		String diffString = null;
+		if (difficulty == 0)
+				diffString = "Easy";
+		else if (difficulty == 1)
+				diffString = "Hard";
+		System.out.println("Loading game...");
+		System.out.println("Difficulty: " + diffString);
+		
+		//Controller
+		controller = new Controller();
+		this.setFocusable(true);
+		this.addKeyListener(controller);
+
+		//Neues Layout, Map (ueber Game-stat)
+		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
+
+		//Erzeugt neues Spiel und startet es
+		game = new Game(this.cp, this);
+		thread = new Thread(game);
+		thread.start();
+	}
+	
+	public void win(boolean win) {
+		// Destroy myGame
+		game = null;
+
+		// Weiter-Menu
+		GameoverPanel = new JPanel();
+		GameoverPanel.setBounds(0, 0, 600, 600);
+		GameoverPanel.setLayout(new GridBagLayout());
+		JLabel lEnde = new JLabel("", JLabel.CENTER);
+		lEnde.setFont(new Font("Serif", Font.PLAIN, 25));
+		if(win){
+		lEnde.setText("You win!");
+		} else{
+		lEnde.setText("You lose!");
+		}
+		bRestart = new JButton("Hauptmenu");
+		bRestart.addActionListener(this);
+		bRestart.setDefaultCapable(true);
+		bRestartc.gridx = 0;
+		bRestartc.gridy = 1;
+		bRestartc.fill = GridBagConstraints.HORIZONTAL;
+		
+		lEndec.gridx = 0;
+		lEndec.gridy = 0;
+		lEndec.fill = GridBagConstraints.HORIZONTAL;
+		
+		bExitc2.gridx = 0;
+		bExitc2.gridy = 2;
+		bExitc2.fill = GridBagConstraints.HORIZONTAL;
+		bExitc2.weightx = 1.0;
+		
+		GameoverPanel.add(lEnde, lEndec);
+		GameoverPanel.add(bRestart, bRestartc);
+		GameoverPanel.add(bExit, bExitc2);
+
+		GameoverPanel.setVisible(true);
+
+
+		cp.add(GameoverPanel);
+
+
+		this.pack();
+		this.setSize(xFrame, yFrame);
+
+
+
+		}
 
 }

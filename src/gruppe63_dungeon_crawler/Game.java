@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable{
 
-private Main main;
+private Menu main;
 private Container container;
 private Player player;
 private Room room;
@@ -19,10 +19,10 @@ private int actualroom=1;
 private int endroom=3;
 
 
-public Game(Container container, Main main) {
+public Game(Container container, Menu menu) {
 
 this.container=container;
-this.main=main;
+this.main=menu;
 }
 
 public void run(){
