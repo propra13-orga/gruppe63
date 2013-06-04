@@ -1,6 +1,5 @@
 package gruppe63_dungeon_crawler;
 
-
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -31,7 +30,7 @@ public class Menu extends JFrame implements ActionListener{
 	
 	private JPanel GameoverPanel;
 	private Container cp;
-	int difficulty;
+	public static int difficulty; // Jan: Ich hab "int difficulty" auf "public static int difficulty" geaendert!
 	public Controller controller;
 	
 	private int xFrame=600;

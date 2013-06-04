@@ -5,10 +5,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 
+
 @SuppressWarnings({ "serial" })
 public class Player extends Elements {
 	private Room room;
-		
+
 	public Player(int x, int y, Room room){
 		//Groesse des Spielers
 		super(x,y,30,30);

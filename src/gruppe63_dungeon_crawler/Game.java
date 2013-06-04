@@ -15,7 +15,7 @@ private Room room;
 private Timer timer;
 
 
-private int actualroom=1;
+public int actualroom=1;
 private int endroom=3;
 
 
@@ -41,15 +41,26 @@ private void startRoom(){
 
 container.setBackground(Color.WHITE);
 container.removeAll();
-room = new Room(50,50, actualroom, this);
-player = new Player(150,150,room);
+room = new Room(50,50, actualroom, this); // (Elementwidth, Elementheight, Level, Game)
+player = new Player(Matrix.Spawny(actualroom)*Room.elementheight,Matrix.Spawnx(actualroom)*Room.elementwidth,room);
 room.add(player);
 main.controller.setPlayer(player);
 room.paintRoom();
 container.add(room);
 room.repaint(100);
 }
+private void startRoomRev(){
 
+container.setBackground(Color.WHITE);
+container.removeAll();
+room = new Room(50,50, actualroom, this); // (Elementwidth, Elementheight, Level, Game)
+player = new Player(Matrix.Downy(actualroom)*Room.elementheight,Matrix.Downx(actualroom)*Room.elementwidth,room);
+room.add(player);
+main.controller.setPlayer(player);
+room.paintRoom();
+container.add(room);
+room.repaint(100);
+}
 
 
 public void gameOver() {
@@ -60,6 +71,12 @@ room=null;
 main.win(false);
 }
 
+public void thisRoom() {
+room.removeAll();
+container.remove(room);
+room=null;
+startRoom();
+}
 
 public void nextRoom() {
 actualroom++;
@@ -81,7 +98,7 @@ actualroom--;
 room.removeAll();
 container.remove(room);
 room=null;
-startRoom();
+startRoomRev();
 }
 }
 

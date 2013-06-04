@@ -6,59 +6,19 @@ import javax.swing.JPanel;
 
 public class Room extends JPanel{
 
-private int elementwidth;
-private int elementheight;
-private int roomwidth=12;
-private int roomheight=12;
+public static int elementwidth = 50; // Breite der Matrixelemente. Jan: Alle vier auf static geaendert!
+public static int elementheight = 50; // Hoehe der Matrixelemente.
+public static int roomwidth=12; // Breite der Raeume als Anzahl von Matrixelementen.
+public static int roomheight=12; // Hoehe der Raeume als Anzahl von Matrixelementen.
 
-int[][] room = {
-		{1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,4,0,0,0,2,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,1,1,1,0,1,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,5,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1}
-		};
-		
-int[][] room2 = {
-		{1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,1,0,1,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,2,0,0,0,0,0,1},
-		{1,4,0,0,0,1,0,0,0,0,0,1},
-		{1,0,1,0,0,1,1,0,0,1,0,1},
-		{1,0,1,0,0,0,0,0,0,1,0,1},
-		{1,0,1,0,0,0,0,0,1,0,0,1},
-		{1,0,0,1,0,0,0,1,0,5,0,1},
-		{1,0,0,0,1,0,1,0,0,0,0,1},
-		{1,0,0,2,0,1,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1}
-		};
+int[][] room = Matrix.getMat("Room1.txt"); 
 
-int[][] room3 = {
-		{1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,1,0,0,0,1},
-		{1,0,0,0,0,0,0,1,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,1},
-		{1,4,0,0,0,0,0,0,0,0,0,1},
-		{1,0,1,0,0,0,0,0,0,0,0,1},
-		{1,0,1,0,0,0,0,0,0,0,0,1},
-		{1,0,1,0,0,0,0,0,1,0,0,1},
-		{1,0,0,1,0,0,0,0,0,5,0,1},
-		{1,0,0,0,1,0,0,0,0,0,0,1},
-		{1,0,0,0,0,1,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1}
-		};
+int[][] room2 = Matrix.getMat("Room2.txt");
+
+int[][] room3 = Matrix.getMat("Room3.txt");
 
 private Player player;
 private Game game;
-
 
 public Room(int elementwidth, int elementheigth, int level, Game game){
 super();
@@ -111,17 +71,17 @@ this.add(E1);
 }
 
 
-public int Environment(int x, int y, int sizeplx, int sizeply) {
+public int Environment(int x, int y, int sizeplx, int sizeply) { // Untersuche, was die vier Ecken des Spielfigurenbildes beruehren.
 
-int up = room[(int) (y/this.elementheight)][(int) (x/this.elementwidth)];
-int right = room[(int)(y/this.elementheight)][(int) ((x+sizeplx)/this.elementwidth)];
-int down = room[(int) ((y+sizeply)/this.elementheight)][(int) (x/this.elementwidth)];
-int left = room[(int) (y/this.elementheight)][(int) (x/this.elementwidth)];
+int upright = room[(int) (y/this.elementheight)][(int) ((x+sizeplx)/this.elementwidth)]; // Ecke oben Rechts.
+int downright = room[(int)((y+sizeply)/this.elementheight)][(int) ((x+sizeplx)/this.elementwidth)]; // Ecke unten Rechts.
+int downleft = room[(int) ((y+sizeply)/this.elementheight)][(int) (x/this.elementwidth)]; // Ecke unten Links.
+int upleft = room[(int) (y/this.elementheight)][(int) (x/this.elementwidth)]; // Ecke oben Links.
 
-if (up==2 || right==2 || down==2 || left==2) return 2;
-else if (up==1 || right==1 || down==1 || left==1) return 1;
-else if(up==4 || right==4 || down==4 || left==4) return 4;
-else if (up==5 || right==5 || down==5 || left==5) return 5;
+if (upright==2 || downright==2 || downleft==2 || upleft==2) return 2; // Es wird ausgegeben, was beruehrt wird.
+else if (upright==1 || downright==1 || downleft==1 || upleft==1) return 1;
+else if(upright==4 || downright==4 || downleft==4 || upleft==4) return 4;
+else if (upright==5 || downright==5 || downleft==5 || upleft==5) return 5;
 else return 0;
 }
 
@@ -134,8 +94,9 @@ return component;
 public void status() {
 int collision = Environment(player.x, player.y,player.xDim, player.yDim);
 switch(collision){
-case 2 :
-game.gameOver();
+case 2 : if (Menu.difficulty==0) {
+game.thisRoom();}
+else {game.gameOver();}
 break;
 case 5:
 game.nextRoom();
@@ -148,7 +109,6 @@ break;
 }
 
 }
-
 
 }
 
