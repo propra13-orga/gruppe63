@@ -1,0 +1,7 @@
+1: Wand, schwarz
+2: normaler Gegner, grau
+4: Eingang bzw hoch, grün
+5: Ausgang bzw runter, blau
+6: Bossgegner, rot
+7: npc, gelb
+(3: Held, Qualle)

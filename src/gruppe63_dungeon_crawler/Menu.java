@@ -30,7 +30,7 @@ public class Menu extends JFrame implements ActionListener{
 	
 	private JPanel GameoverPanel;
 	private Container cp;
-	public static int difficulty; // Jan: Ich hab "int difficulty" auf "public static int difficulty" geaendert!
+	static int difficulty; // Jan: ohne static geht es auch mit getter nicht.
 	public Controller controller;
 	
 	private int xFrame=600;
@@ -246,7 +246,7 @@ public class Menu extends JFrame implements ActionListener{
 			this.remove(GameoverPanel);
 			this.initialize();
 		}
-		
+				
 	}
 	
 	public void startGame()
@@ -322,4 +322,10 @@ public class Menu extends JFrame implements ActionListener{
 
 		}
 
+	
+public static int getDifficulty(){
+return difficulty;	
 }
+
+}
+

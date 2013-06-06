@@ -62,7 +62,7 @@ return matrix;
 }	
 	
 
-
+/*
 public static int Spawnx(int roomnumber) {
 
 int n = 0;
@@ -97,9 +97,9 @@ n = j;
 return n+1;
 }
 
+*/
 
-
-public static int Downx(int roomnumber) {
+public static int Downx(int roomnumber) { // Kommt auch irgendwann weg.
 
 int n = 0;
 
@@ -117,7 +117,7 @@ return n;
 
 
 
-public static int Downy(int roomnumber) {
+public static int Downy(int roomnumber) { // Kommt auch irgendwann weg.
 
 int n = 0;
 
