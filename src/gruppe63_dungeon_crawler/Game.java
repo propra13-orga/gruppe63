@@ -11,6 +11,8 @@ public class Game extends JPanel implements Runnable{
 private Menu main;
 private Container container;
 private Player player;
+private Enemy enemy;
+private Boss boss;
 private Room room;
 private Timer timer;
 
@@ -31,6 +33,8 @@ startRoom();
 TimerTask action = new TimerTask() {
 public void run() {
 player.move();
+//enemy.move(); // Bewegung der Gegner.
+//boss.move(); // Bewegung des Bossgegners.
 }
 };
 timer = new Timer();
@@ -42,14 +46,34 @@ private void startRoom(){
 container.setBackground(Color.WHITE);
 container.removeAll();
 room = new Room(50,50, actualroom, this); // (Elementwidth, Elementheight, Level, Game)
-player = new Player(Matrix.Spawny(actualroom)*Room.elementheight,Matrix.Spawnx(actualroom)*Room.elementwidth,room);
-room.add(player);
+
+int[][] Z = Matrix.playedRoom(actualroom);
+
+for (int i = 0; i < Z.length; i++) {
+for (int j = 0; j < Z[i].length; j++) {
+if(Z[i][j] == 4) {
+
+player = new Player((j+1)*Room.elementheight,i*Room.elementwidth,room);
+room.add(player);}
+
+if (Z[i][j] == 2) {
+
+enemy = new Enemy(j*Room.elementheight, i*Room.elementwidth, room);
+room.add(enemy);}
+
+if (Z[i][j] == 6) {
+	
+boss = new Boss(j*Room.elementheight, i*Room.elementwidth,room);
+room.add(boss);}
+}
+}
 main.controller.setPlayer(player);
 room.paintRoom();
 container.add(room);
 room.repaint(100);
 }
-private void startRoomRev(){
+
+private void startRoomRev(){ // Muss noch überarbeitet werden.
 
 container.setBackground(Color.WHITE);
 container.removeAll();
@@ -100,7 +124,10 @@ container.remove(room);
 room=null;
 startRoomRev();
 }
-}
 
 }
+
+
+}
+
 

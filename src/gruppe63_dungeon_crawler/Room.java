@@ -48,6 +48,8 @@ case 3: return new Elements (this.elementwidth, this.elementheight, number);
 case 4: return new Elements (this.elementwidth, this.elementheight, number);
 case 5: return new Elements (this.elementwidth, this.elementheight, number);
 case 2: return new Elements (this.elementwidth, this.elementheight, number);
+case 7: return new Elements (this.elementwidth, this.elementheight, number);
+case 6: return new Elements (this.elementwidth, this.elementheight, number);
 default: return null;
 }
 }
@@ -82,6 +84,8 @@ if (upright==2 || downright==2 || downleft==2 || upleft==2) return 2; // Es wird
 else if (upright==1 || downright==1 || downleft==1 || upleft==1) return 1;
 else if(upright==4 || downright==4 || downleft==4 || upleft==4) return 4;
 else if (upright==5 || downright==5 || downleft==5 || upleft==5) return 5;
+else if (upright==6 || downright==6 || downleft==6 || upleft==6) return 6;
+else if (upright==7 || downright==7 || downleft==7 || upleft==7) return 7;
 else return 0;
 }
 
@@ -94,7 +98,7 @@ return component;
 public void status() {
 int collision = Environment(player.x, player.y,player.xDim, player.yDim);
 switch(collision){
-case 2 : if (Menu.difficulty==0) {
+case 2 : if (Menu.getDifficulty()==0) {
 game.thisRoom();}
 else {game.gameOver();}
 break;
@@ -103,6 +107,12 @@ game.nextRoom();
 break;
 case 4 :
 game.lastRoom();
+break;
+case 7:
+//Menu.shop(); // Shopmenue.
+break;
+case 6:
+game.gameOver();
 break;
 default:
 break;

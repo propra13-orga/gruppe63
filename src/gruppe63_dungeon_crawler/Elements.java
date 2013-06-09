@@ -40,7 +40,7 @@ g.fillRect(0, 0, xDim, yDim);
 break;
 case 2:
 g.setColor(Color.gray);
-g.fillRect(0, 0, xDim, yDim);
+g.fillRect(0, 0, xDim, yDim);	
 break;
 case 4:
 g.setColor(Color.green);
@@ -53,6 +53,14 @@ g.finalize();
 break;
 case 5: 
 g.setColor(Color.blue);
+g.fillRect(0, 0, xDim, yDim);
+break;
+case 6:
+g.setColor(Color.red);
+g.fillRect(0, 0, xDim, yDim);	
+break;
+case 7: 
+g.setColor(Color.yellow);
 g.fillRect(0, 0, xDim, yDim);
 break;
 }
