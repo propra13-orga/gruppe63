@@ -62,6 +62,12 @@ case 5: return new Elements (this.elementwidth, this.elementheight, number);
 case 2: return new Elements (this.elementwidth, this.elementheight, number);
 case 7: return new Elements (this.elementwidth, this.elementheight, number);
 //case 6: return new Elements (this.elementwidth, this.elementheight, number);
+case 8: return new Elements (this.elementwidth, this.elementheight, number);
+case 9: return new Elements (this.elementwidth, this.elementheight, number);
+case 13: return new Elements (this.elementwidth, this.elementheight, number);
+case 12: return new Elements (this.elementwidth, this.elementheight, number);
+case 10: return new Elements (this.elementwidth, this.elementheight, number);
+case 11: return new Elements (this.elementwidth, this.elementheight, number);
 default: return null;
 }
 }
@@ -100,6 +106,12 @@ else if(upright==4 || downright==4 || downleft==4 || upleft==4) return 4;
 else if (upright==5 || downright==5 || downleft==5 || upleft==5) return 5;
 //else if (upright==6 || downright==6 || downleft==6 || upleft==6) return 6;
 else if (upright==7 || downright==7 || downleft==7 || upleft==7) return 7;
+else if (upright==8 || downright==8 || downleft==8 || upleft==8) return 8;
+else if (upright==9 || downright==9 || downleft==9 || upleft==9) return 9;
+else if (upright==13 || downright==13 || downleft==13 || upleft==13) return 13;
+else if (upright==12 || downright==12 || downleft==12 || upleft==12) return 12;
+else if (upright==10 || downright==10 || downleft==10 || upleft==10) return 10;
+else if (upright==11 || downright==11 || downleft==11 || upleft==11) return 11;
 else return 0;
 }
 
@@ -124,6 +136,25 @@ game.lastRoom();
 break;
 case 7:
 //Menu.shop(); // Shopmenue.
+break;
+case 8:
+	//bossgegner  
+break;
+case 9:
+	//bossgegner   
+break;
+case 13:  //Leben
+  player.getHealth();
+  //dispose();
+break;
+case 12:
+ //getitem(); //Waffe
+break;
+case 10:
+	//getitem(); //Rüstung
+break;
+case 11:
+	//getitem();  //Zauber
 break;
 //case 6:
 //break;

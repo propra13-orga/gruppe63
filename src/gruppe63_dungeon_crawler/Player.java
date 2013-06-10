@@ -10,7 +10,7 @@ import java.awt.Toolkit;
 public class Player extends Elements {
 	private Room room;
 	private int health=100;
-	private int damage=10;
+	private int damage=50;
 	private boolean attack=false;
 	private int hits=0;
 	

@@ -63,6 +63,22 @@ case 7:
 g.setColor(Color.yellow);
 g.fillRect(0, 0, xDim, yDim);
 break;
+case 13: 
+g.setColor(Color.pink);//Leben 
+g.fillRect(0, 0, xDim, yDim);
+break;
+case 12: 
+g.setColor(Color.red);//Waffe
+g.fillRect(0, 0, xDim, yDim);
+break;
+case 10: 
+g.setColor(Color.cyan); //Rüstung
+g.fillRect(0, 0, xDim, yDim);
+break;
+case 11: 
+g.setColor(Color.magenta);  //Zauber
+g.fillRect(0, 0, xDim, yDim);
+break;
 }
 
 }
