@@ -13,12 +13,16 @@ private Container container;
 private Player player;
 private Enemy enemy;
 private Boss boss;
+private Boss2 boss2;
+private Boss3 boss3;
 private Fireball fireball;
+
 private Room room;
 private Timer timer;
 private boolean ball;
 private boolean down=true;
 
+public static int lifes=5;
 
 public int actualroom=1;
 private int endroom=9;
@@ -31,27 +35,22 @@ this.main=menu;
 }
 int fireballtimer=0;
 int fireballcounter=0;
+
 public void run(){
 	
 startRoom();
 TimerTask action = new TimerTask() {
 public void run() {
+	
 if (player.getHealth()<=0) {gameOver();}
 
 fireballtimer++;
 
 player.move();
-//enemy.move(); // Bewegung der Gegner.
-if (actualroom==3 | actualroom==6 | actualroom==9) {down=false; if (fireballtimer % 1000==0) {fireball = new Fireball(boss.getPosX(),boss.getPosY(), room); room.add(fireball);ball=true;
 
-/*switch ((int) (Math.random()*4)) {
+// Anfang Bosskmapf 1.
+if (actualroom==3) {if (fireballtimer % 1000==0 & down==false) {fireball = new Fireball(boss.getPosX(),boss.getPosY(), room); room.add(fireball);ball=true;
 
-case 0: fireball.setMovX(1); break;
-case 1: fireball.setMovX(-1); break;
-case 2: fireball.setMovY(1); break;
-case 3: fireball.setMovY(-1); break;
-
-}*/
 fireballcounter++;}
 
 if (ball) {
@@ -64,16 +63,64 @@ if (fireballcounter % 4==0) {fireball.setMovY(1);}
 fireball.move();fireball.setMovX(0);fireball.setMovY(0);
  
  
-/*System.out.println(fireball.getCollision());*/  if (fireball.getCollision()==1) {room.remove(fireball);ball=false;}
+if (fireball.getCollision()==1) {room.remove(fireball);ball=false;}
 
 fireball.collision(player);}
 
 
-// Bewegung des Bossgegners.
 player.collision(boss);
 if (boss.getHealth()<=0) {room.remove(boss); down=true;}
 
 }
+// Ende Bosskampf 1.
+// Angfang Bosskampf 2.
+
+if (actualroom==6) {/*down=false*/; boss2.collision(player); player.collision2(boss2);
+if (boss2.getHealth()<=0) {room.remove(boss2); down=true;}
+
+}
+// Ende Bosskampf 2.
+// Anfang Bosskampf 3.
+if (actualroom==9) {
+
+if (fireballtimer % 1000==0 & down==false) {
+	
+fireball = new Fireball(400,50,room); room.add(fireball);
+
+ball=true;
+}
+
+if (fireballtimer % 1000==250) {
+	
+fireball = new Fireball(400,150,room); room.add(fireball);
+
+ball=true;
+}
+
+if (fireballtimer % 1000==500) {
+	
+fireball = new Fireball(400,250,room); room.add(fireball);
+
+ball=true;
+}
+
+if (fireballtimer % 1000==750) {
+	
+fireball = new Fireball(400,450,room); room.add(fireball);
+
+ball=true;
+}
+if (ball) {fireball.setMovX(-1); fireball.move();fireball.setMovX(0);
+
+if (fireball.getCollision()==1) {room.remove(fireball);ball=false;}
+
+fireball.collision(player);}
+
+boss3.collision(player); player.collision3(boss3);
+if (boss3.getHealth()<=0) {room.remove(boss3); down=true;}
+}
+// Ende Bosskmapf 3.
+
 }
 };
 timer = new Timer();
@@ -104,16 +151,18 @@ if (Z[i][j] == 6) {
 	
 boss = new Boss(j*Room.elementheight, i*Room.elementwidth,room);
 room.add(boss);
+down=false;
 }
 if (Z[i][j] == 8) {
 	
-boss = new Boss(j*Room.elementheight, i*Room.elementwidth,room);
-room.add(boss);
+boss2 = new Boss2(j*Room.elementheight, i*Room.elementwidth,room);
+room.add(boss2);
 }
 if (Z[i][j] == 9) {
 	
-boss = new Boss(j*Room.elementheight, i*Room.elementwidth,room);
-room.add(boss);
+boss3 = new Boss3(j*Room.elementheight, i*Room.elementwidth,room);
+room.add(boss3);
+down=false;
 }
 }
 }

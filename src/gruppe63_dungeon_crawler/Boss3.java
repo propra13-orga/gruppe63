@@ -2,20 +2,19 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.Rectangle;
 
-public class Fireball extends Elements {
+public class Boss3 extends Elements {
 
 	private Room room;
 	
-	private int collision=0; 
+	private int health=60;
+	private int damage=100;
+	private boolean attack=false;
 	private int hits=0;
 	
-	private int damage=50;
-	
-	
-	public Fireball(int x, int y, Room room){
+	public Boss3(int x, int y, Room room){
 		super(x,y,30,30);
 		this.room = room;
 	}
@@ -29,32 +28,13 @@ public class Fireball extends Elements {
 			this.setLocation(x,y);
 		}
 		
-		if (room.Environment(x+vx,y,xDim,yDim)==1) {collision=1;}
-		
 		if(room.Environment(x,y-vy,xDim,yDim)!=1){	
 			y = y-vy;
 			this.setLocation(x,y);
 		}
-		
-		if (room.Environment(x,y-vy,xDim,yDim)==1) {collision=1;}
-	
-		room.status();	
+		room.status();
 	}
 	
-	
-			
-	public void collision(Player player) {
-	Rectangle rf = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
-	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
-	if (rf.intersects(rh)) {
-		
-	if (hits % 150==0)	{player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
-	
-	hits++;}
-		
-	} 	
-		
-		
 	public void paintComponent(Graphics g){
 		Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
 		g.drawImage(img, 0, 0, this);
@@ -77,13 +57,39 @@ public class Fireball extends Elements {
 	public int getMovY() {
 		return vy;
 	}
-	public int getCollision() {
-		return collision;
-		
+	
+	public int getPosX() {
+		return this.getX();
+	}
+	public int getPosY() {
+		return this.getY();
+	}
+	public int getHealth(){
+		return this.health;
+	}
+	public void setHealth(int n){
+		this.health=n;
 	}
 	public int getDamage(){
 		return this.damage;
 	}
+	public boolean getAttack() {
+		return this.attack;
+	}
+	
+	public void setAttack(boolean b) {
+		this.attack=b;
+	}
+	
+	public void collision(Player player) {
+	Rectangle r = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
+	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
+	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
+	
+	hits++;}
+		
+	}
+	
 	public int getXmiddle() {
 		return getX()+15;
 	}
@@ -91,7 +97,6 @@ public class Fireball extends Elements {
 	public int getYmiddle() {
 		return getY()+15;
 	}
+	
 }
-
-
 

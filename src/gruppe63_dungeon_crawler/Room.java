@@ -125,7 +125,7 @@ public void status() {
 int collision = Environment(player.x, player.y,player.xDim, player.yDim);
 switch(collision){
 case 2 : if (Menu.getDifficulty()==0) {
-game.thisRoom();}
+Game.lifes--;System.out.println(Game.lifes);if (Game.lifes==0) {Game.lifes=5; game.gameOver();} else {game.thisRoom();}}
 else {game.gameOver();}
 break;
 case 5:

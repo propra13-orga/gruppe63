@@ -33,7 +33,7 @@ public class Controller extends KeyAdapter{
 	    if (key == KeyEvent.VK_DOWN) {
 	        player.setMovY(-1);
 	    }
-	    if (key == KeyEvent.VK_1) {
+	    if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 	    	player.setAttack(true);
 	    }
 	}
@@ -59,7 +59,7 @@ public class Controller extends KeyAdapter{
 	    	if(player.getMovY()==-1)
 	    		player.setMovY(0);	
 	    }
-	    if (key == KeyEvent.VK_1) {
+	    if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 	    	player.setAttack(false);
 	    }
 	}

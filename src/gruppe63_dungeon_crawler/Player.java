@@ -2,6 +2,7 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 
@@ -13,6 +14,7 @@ public class Player extends Elements {
 	private int damage=50;
 	private boolean attack=false;
 	private int hits=0;
+	
 	
 
 	public Player(int x, int y, Room room){
@@ -84,17 +86,49 @@ public class Player extends Elements {
 	}
 	
 	public void collision(Boss boss) {
-		x=this.getX();
-		y=this.getY();
+	Rectangle rh = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
+	Rectangle rb = new Rectangle(boss.getXmiddle(), boss.getYmiddle(), 30, 30);		
+	if (attack) {
 		
-	if (attack) {	
-	if (x-boss.getPosX()<100 & y-boss.getPosY()<100 & x-boss.getPosX()>0 & y-boss.getPosY()>0 |
-			boss.getPosX()-x<100 & boss.getPosY()-y<100 & boss.getPosX()-x>0 & boss.getPosY()-y>0) {
+		
+	if (rh.intersects(rb)) {
 		
 	if (hits % 20 ==0) {boss.setHealth(boss.getHealth()-getDamage());System.out.println(boss.getHealth());}
 	hits++;}
 	}	
 	}
+	
+	public void collision2(Boss2 boss2) {
+	Rectangle rh = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
+	Rectangle rb = new Rectangle(boss2.getXmiddle(), boss2.getYmiddle(), 30, 30);
+		
+	if (attack) {	
+	if (rh.intersects(rb)) {
+		
+	if (hits % 20 ==0) {boss2.setHealth(boss2.getHealth()-getDamage());System.out.println(boss2.getHealth());}
+	hits++;}
+	}	
+	}
+	
+	public void collision3(Boss3 boss3) {
+	Rectangle rh = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
+	Rectangle rb = new Rectangle(boss3.getXmiddle(), boss3.getYmiddle(), 30, 30);
+	
+	if (attack) {	
+	if (rh.intersects(rb)) {
+		
+	if (hits % 20 ==0) {boss3.setHealth(boss3.getHealth()-getDamage());System.out.println(boss3.getHealth());}
+	hits++;}
+	}	
+	}
+	
+	public int getXmiddle() {
+		return getX()+15;
+	}
+	
+	public int getYmiddle() {
+		return getY()+15;
+	}	
 	
 }
 
