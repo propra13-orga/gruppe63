@@ -17,6 +17,12 @@ public static int[][] playedRoom(int roomnumber) {
 if (roomnumber==1) {return getMat("Room1.txt");}
 if (roomnumber==2) {return getMat("Room2.txt");}
 if (roomnumber==3) {return getMat("Room3.txt");}
+if (roomnumber==4) {return getMat("Room4.txt");}
+if (roomnumber==5) {return getMat("Room5.txt");}
+if (roomnumber==6) {return getMat("Room6.txt");}
+if (roomnumber==7) {return getMat("Room7.txt");}
+if (roomnumber==8) {return getMat("Room8.txt");}
+if (roomnumber==9) {return getMat("Room9.txt");}
 else {return null;}
 }
 

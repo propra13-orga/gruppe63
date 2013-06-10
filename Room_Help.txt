@@ -5,3 +5,5 @@
 6: Bossgegner, rot
 7: npc, gelb
 (3: Held, Qualle)
+8: Bossgegner2
+9: Bossgebgner3

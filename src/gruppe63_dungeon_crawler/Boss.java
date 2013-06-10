@@ -1,9 +1,15 @@
 package gruppe63_dungeon_crawler;
 
-public class Boss extends Elements { // Einfache Kopie von der Klasse Player als Platzhalter.
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+public class Boss extends Elements {
 
 	private Room room;
-
+	
+	private int health=30;
+	
 	public Boss(int x, int y, Room room){
 		super(x,y,30,30);
 		this.room = room;
@@ -25,6 +31,13 @@ public class Boss extends Elements { // Einfache Kopie von der Klasse Player als
 		room.status();
 	}
 	
+	public void paintComponent(Graphics g){
+		Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+		g.drawImage(img, 0, 0, this);
+		Toolkit.getDefaultToolkit().sync();
+		g.dispose();
+		}
+	
 	public void setMovX(int vx) {
 		this.vx = vx;
 	}
@@ -41,6 +54,18 @@ public class Boss extends Elements { // Einfache Kopie von der Klasse Player als
 		return vy;
 	}
 	
+	public int getPosX() {
+		return this.getX();
+	}
+	public int getPosY() {
+		return this.getY();
+	}
+	public int getHealth(){
+		return this.health;
+	}
+	public void setHealth(int n){
+		this.health=n;
+	}
 }
 
 
