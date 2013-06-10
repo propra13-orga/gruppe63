@@ -66,6 +66,13 @@ public class Boss extends Elements {
 	public void setHealth(int n){
 		this.health=n;
 	}
+	public int getXmiddle() {
+		return getX()+15;
+	}
+	
+	public int getYmiddle() {
+		return getY()+15;
+	}
 }
 
 
