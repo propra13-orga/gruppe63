@@ -33,6 +33,9 @@ public class Controller extends KeyAdapter{
 	    if (key == KeyEvent.VK_DOWN) {
 	        player.setMovY(-1);
 	    }
+	    if (key == KeyEvent.VK_1) {
+	    	player.setAttack(true);
+	    }
 	}
 	public void keyReleased(KeyEvent e){
 		int key = e.getKeyCode();
@@ -55,6 +58,9 @@ public class Controller extends KeyAdapter{
 	    if (key == KeyEvent.VK_DOWN) {
 	    	if(player.getMovY()==-1)
 	    		player.setMovY(0);	
+	    }
+	    if (key == KeyEvent.VK_1) {
+	    	player.setAttack(false);
 	    }
 	}
 
