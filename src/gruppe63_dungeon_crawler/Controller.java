@@ -42,7 +42,7 @@ public class Controller extends KeyAdapter{
 	
 	    if (key == KeyEvent.VK_LEFT) {			// Wenn Taste losgelassen
 	        if(player.getMovX()==-1)
-	        	player.setMovX(0);					// dann setze Bewegungsbariablen zurück
+	        	player.setMovX(0);					// dann setze Bewegungsvariablen zurück
 	    }
 	
 	    if (key == KeyEvent.VK_RIGHT) {

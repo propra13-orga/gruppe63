@@ -2,15 +2,22 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable{
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 private Menu main;
 private Container container;
 private Player player;
+//private ArrayList<Elements> objects;
+//private ArrayList<Elements> remove;
 private Enemy enemy;
 private Boss boss;
 private Boss2 boss2;
@@ -28,10 +35,14 @@ public int actualroom=1;
 private int endroom=9;
 
 
+
+
 public Game(Container container, Menu menu) {
 
 this.container=container;
 this.main=menu;
+
+//objects.add(new Leben(..?..));?
 }
 int fireballtimer=0;
 int fireballcounter=0;
@@ -42,7 +53,7 @@ startRoom();
 TimerTask action = new TimerTask() {
 public void run() {
 	
-if (player.getHealth()<=0) {gameOver();}
+if (player.getCurrentHealth()<=0) {gameOver();}
 
 fireballtimer++;
 
@@ -146,6 +157,7 @@ if (Z[i][j] == 2) {
 
 enemy = new Enemy(j*Room.elementheight, i*Room.elementwidth, room);
 room.add(enemy);}
+
 
 if (Z[i][j] == 6) {
 	

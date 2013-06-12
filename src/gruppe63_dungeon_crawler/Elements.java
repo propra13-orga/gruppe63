@@ -8,6 +8,11 @@ import javax.swing.JComponent;
 
 public class Elements extends JComponent {
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 int x,y;
 
 int vx,vy;
@@ -16,11 +21,15 @@ int xDim,yDim ;
 
 int number;
 
+protected int type;
+protected boolean remove = false;
+
 public Elements(int x, int y, int xDim, int yDim){
 this.xDim = xDim;
 this.yDim = yDim;
 this.x=x;
 this.y=y;
+
 this.setBounds( x, y, xDim, yDim);
 }
 
@@ -29,6 +38,21 @@ this.number=number;
 this.xDim=xDim;
 this.yDim=yDim;
 this.setBounds(0,0,xDim,yDim);
+}
+
+public Elements(int x, int y, int xDim, int yDim, int type){
+this.type = type;
+this.xDim=xDim;
+this.yDim=yDim;
+this.setBounds(0,0,xDim,yDim);
+}
+
+
+public int getType(){
+	return type;
+}
+public boolean getRemove(){
+	return remove;
 }
 
 
@@ -63,7 +87,7 @@ case 7:
 g.setColor(Color.yellow);
 g.fillRect(0, 0, xDim, yDim);
 break;
-case 13: 
+/*case 13: 
 g.setColor(Color.pink);//Leben 
 g.fillRect(0, 0, xDim, yDim);
 break;
@@ -78,7 +102,7 @@ break;
 case 11: 
 g.setColor(Color.magenta);  //Zauber
 g.fillRect(0, 0, xDim, yDim);
-break;
+break;*/
 }
 
 }

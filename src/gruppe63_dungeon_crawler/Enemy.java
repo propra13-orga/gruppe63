@@ -2,6 +2,10 @@ package gruppe63_dungeon_crawler;
 
 public class Enemy extends Elements { // Einfache Kopie von der Klasse Player als Platzhalter.
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Room room;
 
 	public Enemy(int x, int y, Room room){

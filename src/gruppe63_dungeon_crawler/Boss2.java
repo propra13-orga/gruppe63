@@ -7,6 +7,11 @@ import java.awt.Rectangle;
 
 public class Boss2 extends Elements {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Room room;
 	
 	private int health=60;
@@ -84,7 +89,7 @@ public class Boss2 extends Elements {
 	public void collision(Player player) {
 	Rectangle rb = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
 	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
-	if (rb.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
+	if (rb.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getCurrentHealth()-getDamage());System.out.println(player.getCurrentHealth());}
 	
 	hits++;}
 		

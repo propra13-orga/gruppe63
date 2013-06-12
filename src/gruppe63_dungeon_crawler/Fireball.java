@@ -7,6 +7,11 @@ import java.awt.Toolkit;
 
 public class Fireball extends Elements {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Room room;
 	
 	private int collision=0; 
@@ -48,7 +53,7 @@ public class Fireball extends Elements {
 	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
 	if (rf.intersects(rh)) {
 		
-	if (hits % 150==0)	{player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
+	if (hits % 150==0)	{player.setHealth(player.getMaxHealth()-getDamage());System.out.println(player.getCurrentHealth());}
 	
 	hits++;}
 		

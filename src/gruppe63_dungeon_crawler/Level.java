@@ -17,7 +17,11 @@ import javax.swing.Timer;
 public class Level extends JPanel implements ActionListener {
 
 
-    // Instanzvariablen
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// Instanzvariablen
     private Image enemyImg;		// Gegnerbild
     private Image exitImg;		// Bild des Ziels
         
@@ -28,6 +32,7 @@ public class Level extends JPanel implements ActionListener {
     int[] entrancePos = new int[2];		// Startposition
     int[] exitPos = new int[2];			// Zielposition
     int[][] enemyPos = new int[3][2];	// Gegnerposition
+    //int [] healthPos = new int[13];   // Lebens-Item-Position
     
     //private int[][] matrix = new int[10][10];		//0 nichts 1 hindernis 2 feind 3 hero 4 türe runter(portal) 5 türe hoch(hero spawn) Startpunkt
     

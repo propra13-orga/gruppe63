@@ -108,10 +108,10 @@ else if (upright==5 || downright==5 || downleft==5 || upleft==5) return 5;
 else if (upright==7 || downright==7 || downleft==7 || upleft==7) return 7;
 else if (upright==8 || downright==8 || downleft==8 || upleft==8) return 8;
 else if (upright==9 || downright==9 || downleft==9 || upleft==9) return 9;
-else if (upright==13 || downright==13 || downleft==13 || upleft==13) return 13;
+/*else if (upright==13 || downright==13 || downleft==13 || upleft==13) return 13;
 else if (upright==12 || downright==12 || downleft==12 || upleft==12) return 12;
 else if (upright==10 || downright==10 || downleft==10 || upleft==10) return 10;
-else if (upright==11 || downright==11 || downleft==11 || upleft==11) return 11;
+else if (upright==11 || downright==11 || downleft==11 || upleft==11) return 11;*/
 else return 0;
 }
 
@@ -143,8 +143,9 @@ break;
 case 9:
 	//bossgegner   
 break;
-case 13:  //Leben
-  player.getHealth();
+/**case 13:    //Leben
+
+  
   //dispose();
 break;
 case 12:
@@ -155,7 +156,7 @@ case 10:
 break;
 case 11:
 	//getitem();  //Zauber
-break;
+break;**/
 //case 6:
 //break;
 default:

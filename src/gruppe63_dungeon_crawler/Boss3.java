@@ -84,7 +84,7 @@ public class Boss3 extends Elements {
 	public void collision(Player player) {
 	Rectangle r = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
 	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
-	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
+	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getMaxHealth()-getDamage());System.out.println(player.getCurrentHealth());}
 	
 	hits++;}
 		

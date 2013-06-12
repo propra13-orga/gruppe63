@@ -10,17 +10,56 @@ import java.awt.Toolkit;
 @SuppressWarnings({ "serial" })
 public class Player extends Elements {
 	private Room room;
-	private int health=100;
-	private int damage=50;
+	private int health/*=100*/; 
+	private int damage/*=50*/;
 	private boolean attack=false;
 	private int hits=0;
-	
+	private float level;
+	private float xp;
 	
 
 	public Player(int x, int y, Room room){
 		//Groesse des Spielers
 		super(x,y,30,30);
 		this.room = room;
+		level = 1;
+		xp= 0;
+		health = 100;
+		
+	}
+	
+	public int getLevel(){    //wann das Spielerlevel erhöht werden soll
+		return (int)(xp/50)+1;
+	}
+	public void addXp(float amt){ //amt = amount ... xp wird erhöht
+		xp += amt;
+		}
+	
+	public int getMaxHealth(){
+		
+		return getLevel() * 100;
+	}
+	
+	public int getCurrentHealth(){
+		int max= getMaxHealth();
+		if (health > max)
+			health = max;
+		return health;
+	}
+	
+	public float getStrengh(){
+		return getLevel()* 4f;
+	}
+	
+	public float getMagic(){
+		return getLevel() * 4f;
+	}
+	public void update(){      //Status wird in der Console angezeigt .... kann/wird später modifiziert werden und im Spielfeld angezeigt (werden)
+		System.out.println("Status: LEVEL: "+ getLevel()+ "MaxHP: "+ getMaxHealth()+ "HP: "+ getCurrentHealth()+ "Strengh: "+ getStrengh()+ "Magic: "+ getMagic());
+	}
+	
+	public void addItem(Item item){
+		System.out.println("Du hast gerade ein Leben eingesammelt");
 	}
 	
 	public void move(){
@@ -68,9 +107,9 @@ public class Player extends Elements {
 	public int getPosY() {
 		return this.getY();
 	}
-	public int getHealth(){
-		return this.health;
-	}
+	//public int getHealth(){      //oben health erneuert
+	//	return this.health;
+	//}
 	public void setHealth(int n){
 		this.health=n;
 	}
@@ -128,7 +167,8 @@ public class Player extends Elements {
 	
 	public int getYmiddle() {
 		return getY()+15;
-	}	
+	}
+	
 	
 }
 
