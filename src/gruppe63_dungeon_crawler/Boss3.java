@@ -7,6 +7,11 @@ import java.awt.Rectangle;
 
 public class Boss3 extends Elements {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Room room;
 	
 	private int health=60;

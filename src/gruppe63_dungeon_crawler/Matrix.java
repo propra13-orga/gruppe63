@@ -9,134 +9,133 @@ import java.util.StringTokenizer;
 import java.lang.Integer.*;
 
 public class Matrix {
-	
-	
-	
-public static int[][] playedRoom(int roomnumber) {
-	
-if (roomnumber==1) {return getMat("Room1.txt");}
-if (roomnumber==2) {return getMat("Room2.txt");}
-if (roomnumber==3) {return getMat("Room3.txt");}
-if (roomnumber==4) {return getMat("Room4.txt");}
-if (roomnumber==5) {return getMat("Room5.txt");}
-if (roomnumber==6) {return getMat("Room6.txt");}
-if (roomnumber==7) {return getMat("Room7.txt");}
-if (roomnumber==8) {return getMat("Room8.txt");}
-if (roomnumber==9) {return getMat("Room9.txt");}
-else {return null;}
-}
 
+	public static int[][] playedRoom(int roomnumber) {
 
+		if (roomnumber == 1) {
+			return getMat("Room1.txt");
+		}
+		if (roomnumber == 2) {
+			return getMat("Room2.txt");
+		}
+		if (roomnumber == 3) {
+			return getMat("Room3.txt");
+		}
+		if (roomnumber == 4) {
+			return getMat("Room4.txt");
+		}
+		if (roomnumber == 5) {
+			return getMat("Room5.txt");
+		}
+		if (roomnumber == 6) {
+			return getMat("Room6.txt");
+		}
+		if (roomnumber == 7) {
+			return getMat("Room7.txt");
+		}
+		if (roomnumber == 8) {
+			return getMat("Room8.txt");
+		}
+		if (roomnumber == 9) {
+			return getMat("Room9.txt");
+		} else {
+			return null;
+		}
+	}
 
-public static int[][] getMat(String file){ 
-		
-int [][] matrix;
+	public static int[][] getMat(String file) {
 
-String string;
+		int[][] matrix;
 
-matrix = new int [Room.roomheight][Room.roomwidth];
+		String string;
 
-try {
+		matrix = new int[Room.roomheight][Room.roomwidth];
 
-File fil = new File(file);
-FileInputStream fis = new FileInputStream(fil);
-InputStreamReader isr = new InputStreamReader(fis);
-BufferedReader br = new BufferedReader(isr); 
+		try {
 
-for (int i=0; i<12; i++) {
+			File fil = new File(file);
+			FileInputStream fis = new FileInputStream(fil);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader br = new BufferedReader(isr);
 
-string = br.readLine();
-StringTokenizer tokenisedstring = new StringTokenizer(string,","); 
+			for (int i = 0; i < 12; i++) {
 
-for (int j =0; j<12; j++) { 
+				string = br.readLine();
+				StringTokenizer tokenisedstring = new StringTokenizer(string,
+						",");
 
-matrix[i][j] = Integer.parseInt(tokenisedstring.nextToken());
-	
-} 
-} 
-}  
+				for (int j = 0; j < 12; j++) {
 
-catch (java.io.FileNotFoundException e) { 
-e.printStackTrace(); 
-} 
+					matrix[i][j] = Integer
+							.parseInt(tokenisedstring.nextToken());
 
-catch (java.io.IOException e) { 
-e.printStackTrace();
-} 
+				}
+			}
+		}
 
-return matrix;
-}	
-	
+		catch (java.io.FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
-/*
-public static int Spawnx(int roomnumber) {
+		catch (java.io.IOException e) {
+			e.printStackTrace();
+		}
 
-int n = 0;
+		return matrix;
+	}
 
-int[][] Z = playedRoom(roomnumber);
+	/*
+	 * public static int Spawnx(int roomnumber) {
+	 * 
+	 * int n = 0;
+	 * 
+	 * int[][] Z = playedRoom(roomnumber);
+	 * 
+	 * for (int i = 0; i < Z.length; i++) { for (int j = 0; j < Z[i].length;
+	 * j++) { if(Z[i][j] == 4) { n = i; } } } return n; }
+	 * 
+	 * 
+	 * 
+	 * public static int Spawny(int roomnumber) {
+	 * 
+	 * int n = 0;
+	 * 
+	 * int[][] Z = playedRoom(roomnumber);
+	 * 
+	 * for (int i = 0; i < Z.length; i++) { for (int j = 0; j < Z[i].length;
+	 * j++) { if(Z[i][j] == 4) { n = j; } } } return n+1; }
+	 */
 
-for (int i = 0; i < Z.length; i++) {
-for (int j = 0; j < Z[i].length; j++) {
-if(Z[i][j] == 4) {
-n = i;
-}
-}
-}
-return n;
-}
+	public static int Downx(int roomnumber) { // Kommt auch irgendwann weg.
 
+		int n = 0;
 
+		int[][] Z = playedRoom(roomnumber);
 
-public static int Spawny(int roomnumber) {
+		for (int i = 0; i < Z.length; i++) {
+			for (int j = 0; j < Z[i].length; j++) {
+				if (Z[i][j] == 5) {
+					n = i;
+				}
+			}
+		}
+		return n;
+	}
 
-int n = 0;
+	public static int Downy(int roomnumber) { // Kommt auch irgendwann weg.
 
-int[][] Z = playedRoom(roomnumber);
+		int n = 0;
 
-for (int i = 0; i < Z.length; i++) {
-for (int j = 0; j < Z[i].length; j++) {
-if(Z[i][j] == 4) {
-n = j;
-}
-}
-}
-return n+1;
-}
+		int[][] Z = playedRoom(roomnumber);
 
-*/
+		for (int i = 0; i < Z.length; i++) {
+			for (int j = 0; j < Z[i].length; j++) {
+				if (Z[i][j] == 5) {
+					n = j;
+				}
+			}
+		}
+		return n + 1;
+	}
 
-public static int Downx(int roomnumber) { // Kommt auch irgendwann weg.
-
-int n = 0;
-
-int[][] Z = playedRoom(roomnumber);
-
-for (int i = 0; i < Z.length; i++) {
-for (int j = 0; j < Z[i].length; j++) {
-if(Z[i][j] == 5) {
-n = i;
-}
-}
-}
-return n;
-}
-
-
-
-public static int Downy(int roomnumber) { // Kommt auch irgendwann weg.
-
-int n = 0;
-
-int[][] Z = playedRoom(roomnumber);
-
-for (int i = 0; i < Z.length; i++) {
-for (int j = 0; j < Z[i].length; j++) {
-if(Z[i][j] == 5) {
-n = j;
-}
-}
-}
-return n+1;
-}	
-	
 }

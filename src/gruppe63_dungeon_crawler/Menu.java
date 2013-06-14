@@ -20,30 +20,28 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-public class Menu extends JFrame implements ActionListener{
+public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
-	
+
 	// Game klasse?
 	private Game game;
-	
+
 	private JPanel GameoverPanel;
 	private Container cp;
 	static int difficulty; // Jan: ohne static geht es auch mit getter nicht.
 	public Controller controller;
-	
-	private int xFrame=600;
-	private int yFrame=700;
-	
+
+	private int xFrame = 600;
+	private int yFrame = 700;
 
 	public Menu() {
 
 		super("Menu");
-		
 
 	}
-	
+
 	JLabel lTitle;
 	JLabel lDifficulty;
 	JRadioButton rbEasy;
@@ -69,21 +67,16 @@ public class Menu extends JFrame implements ActionListener{
 	GridBagConstraints lEndec = new GridBagConstraints();
 
 	public void initialize() {
-		
+
 		cp = this.getContentPane();
-		
-		/* Prefixes:
-		 * Declarate Elements
+
+		/*
+		 * Prefixes: Declarate Elements
 		 * 
-		 * b = Button
-		 * rb = RadioButton
-		 * l = Label
+		 * b = Button rb = RadioButton l = Label
 		 * 
 		 * Initialize Elements, structure with Gridbagdesign
-		 * 
 		 */
-		
-		
 
 		bSettings = new JButton("Settings");
 		bSettings.addActionListener(this);
@@ -97,9 +90,7 @@ public class Menu extends JFrame implements ActionListener{
 		bClose.addActionListener(this);
 		bSave = new JButton("Save and exit");
 		bSave.addActionListener(this);
-		
-		
-		
+
 		// Initialize Titlelabel
 		lTitle.setFont(new Font("Serif", Font.PLAIN, 25));
 		lTitlec.gridx = 0;
@@ -111,7 +102,7 @@ public class Menu extends JFrame implements ActionListener{
 		lDifficultyc.gridy = 0;
 		lDifficultyc.gridwidth = 2;
 		lDifficultyc.fill = GridBagConstraints.BOTH;
-		
+
 		// Initialize Startbutton
 		// Shortcut: Alt+S
 		bStart.setMnemonic(KeyEvent.VK_S);
@@ -121,39 +112,39 @@ public class Menu extends JFrame implements ActionListener{
 		bStartc.gridwidth = 2;
 		bStartc.fill = GridBagConstraints.HORIZONTAL;
 		bStartc.weightx = 1.0;
-		
+
 		// Initialize Settingsbutton
 		bSettingsc.gridx = 0;
 		bSettingsc.gridy = 3;
 		bSettingsc.fill = GridBagConstraints.HORIZONTAL;
 		bSettingsc.weightx = 2.0;
-		
+
 		// Initialize Radiobuttons
 		rbEasy = new JRadioButton("easy");
 		rbEasyc.gridx = 0;
 		rbEasyc.gridy = 1;
-		
+
 		rbHard = new JRadioButton("hard");
 		rbHardc.gridx = 1;
 		rbHardc.gridy = 1;
-		
+
 		// Buttongroup
 		diffGroup = new ButtonGroup();
 		diffGroup.add(rbEasy);
 		diffGroup.add(rbHard);
-		
+
 		// Initialize Savebutton
 		bSavec.gridx = 0;
 		bSavec.gridy = 2;
 		bSavec.fill = GridBagConstraints.HORIZONTAL;
 		bSavec.weightx = 1.0;
-		
+
 		// Initialize Closebutton
 		bClosec.gridx = 1;
 		bClosec.gridy = 2;
 		bClosec.fill = GridBagConstraints.HORIZONTAL;
 		bClosec.weightx = 1.0;
-		
+
 		// Initialize Exitbutton
 		bExitc.gridx = 0;
 		bExitc.gridy = 4;
@@ -167,14 +158,13 @@ public class Menu extends JFrame implements ActionListener{
 		cp.add(bStart, bStartc);
 		cp.add(bSettings, bSettingsc);
 		cp.add(bExit, bExitc);
-		
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.pack();
 		this.setSize(xFrame, yFrame);
-//		this.setResizable(false);
-		
+		// this.setResizable(false);
+
 		this.setVisible(true);
 
 	}
@@ -194,19 +184,15 @@ public class Menu extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		if(e.getSource()==this.bStart)
-		{
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.bStart) {
 			this.startGame();
-			
+
 		}
-		if(e.getSource()==this.bExit)
-		{
+		if (e.getSource() == this.bExit) {
 			System.exit(0);
 		}
-		if(e.getSource()==this.bSettings)
-		{
+		if (e.getSource() == this.bSettings) {
 			// open Settings
 			setVisible(false);
 			cp.removeAll();
@@ -217,11 +203,10 @@ public class Menu extends JFrame implements ActionListener{
 			cp.add(bClose, bClosec);
 			setVisible(true);
 		}
-		if(e.getSource()==this.bSave)
-		{
-			if(rbEasy.isSelected())
+		if (e.getSource() == this.bSave) {
+			if (rbEasy.isSelected())
 				difficulty = 0;
-			else if(rbHard.isSelected())
+			else if (rbHard.isSelected())
 				difficulty = 1;
 			setVisible(false);
 			cp.removeAll();
@@ -231,8 +216,7 @@ public class Menu extends JFrame implements ActionListener{
 			cp.add(bExit, bExitc);
 			setVisible(true);
 		}
-		if(e.getSource()==this.bClose)
-		{
+		if (e.getSource() == this.bClose) {
 			setVisible(false);
 			cp.removeAll();
 			cp.add(lTitle, lTitlec);
@@ -241,39 +225,37 @@ public class Menu extends JFrame implements ActionListener{
 			cp.add(bExit, bExitc);
 			setVisible(true);
 		}
-		if(e.getSource()==this.bRestart)
-		{
+		if (e.getSource() == this.bRestart) {
 			this.remove(GameoverPanel);
 			this.initialize();
 		}
-				
+
 	}
-	
-	public void startGame()
-	{
+
+	public void startGame() {
 		// Start game, load dungeon
 		String diffString = null;
 		if (difficulty == 0)
-				diffString = "Easy";
+			diffString = "Easy";
 		else if (difficulty == 1)
-				diffString = "Hard";
+			diffString = "Hard";
 		System.out.println("Loading game...");
 		System.out.println("Difficulty: " + diffString);
-		
-		//Controller
+
+		// Controller
 		controller = new Controller();
 		this.setFocusable(true);
 		this.addKeyListener(controller);
 
-		//Neues Layout, Map (ueber Game-stat)
+		// Neues Layout, Map (ueber Game-stat)
 		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
-		//Erzeugt neues Spiel und startet es
+		// Erzeugt neues Spiel und startet es
 		game = new Game(this.cp, this);
 		thread = new Thread(game);
 		thread.start();
 	}
-	
+
 	public void win(boolean win) {
 		// Destroy myGame
 		game = null;
@@ -284,10 +266,10 @@ public class Menu extends JFrame implements ActionListener{
 		GameoverPanel.setLayout(new GridBagLayout());
 		JLabel lEnde = new JLabel("", JLabel.CENTER);
 		lEnde.setFont(new Font("Serif", Font.PLAIN, 25));
-		if(win){
-		lEnde.setText("You win!");
-		} else{
-		lEnde.setText("You lose!");
+		if (win) {
+			lEnde.setText("You win!");
+		} else {
+			lEnde.setText("You lose!");
 		}
 		bRestart = new JButton("Hauptmenu");
 		bRestart.addActionListener(this);
@@ -295,37 +277,31 @@ public class Menu extends JFrame implements ActionListener{
 		bRestartc.gridx = 0;
 		bRestartc.gridy = 1;
 		bRestartc.fill = GridBagConstraints.HORIZONTAL;
-		
+
 		lEndec.gridx = 0;
 		lEndec.gridy = 0;
 		lEndec.fill = GridBagConstraints.HORIZONTAL;
-		
+
 		bExitc2.gridx = 0;
 		bExitc2.gridy = 2;
 		bExitc2.fill = GridBagConstraints.HORIZONTAL;
 		bExitc2.weightx = 1.0;
-		
+
 		GameoverPanel.add(lEnde, lEndec);
 		GameoverPanel.add(bRestart, bRestartc);
 		GameoverPanel.add(bExit, bExitc2);
 
 		GameoverPanel.setVisible(true);
 
-
 		cp.add(GameoverPanel);
-
 
 		this.pack();
 		this.setSize(xFrame, yFrame);
 
+	}
 
-
-		}
-
-	
-public static int getDifficulty(){
-return difficulty;	
-}
+	public static int getDifficulty() {
+		return difficulty;
+	}
 
 }
-
