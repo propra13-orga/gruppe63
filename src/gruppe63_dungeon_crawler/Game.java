@@ -65,6 +65,7 @@ public class Game extends JPanel implements Runnable {
 				if (player.getHealth() <= 0) {
 				Game.lifes--;
 				System.out.println(Game.lifes);
+				startRoom();
 					
 				}
 				
@@ -354,11 +355,8 @@ public class Game extends JPanel implements Runnable {
 	        if (rp.intersects(re)) {
 	        	
 	        	if (playerdamaged % 100 == 0) {player.setHealth(player.getHealth()-e.getDamage());System.out.println(player.getHealth());}
-	        	
-	        	if (player.getHealth() <= 0) {
-					Game.lifes--;
-					System.out.println(Game.lifes);}
-	        	
+   	
+	
 	        	playerdamaged++;
 	        	player.collision(e);
 	          		        	

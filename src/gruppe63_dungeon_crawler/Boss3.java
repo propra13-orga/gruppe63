@@ -95,9 +95,9 @@ public void paintComponent(Graphics g) {
 		if (alive) {
 	Rectangle r = getBounds();
 	Rectangle rh = player.getBounds();
-	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getMaxHealth()-getDamage());System.out.println(player.getCurrentHealth());}
-	
-	hits++;}
+	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getHealth()-getDamage());System.out.println(player.getHealth());}
+	hits++;
+	}
 		
 	}}
 	

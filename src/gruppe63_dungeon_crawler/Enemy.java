@@ -17,7 +17,7 @@ public class Enemy extends Elements {
 	private int height;
 	private Image sprite;
 	
-	private int damage = 1;
+	private int damage = 10;
 	private int health=100;
 
 	public Enemy(int x, int y, Room room) {

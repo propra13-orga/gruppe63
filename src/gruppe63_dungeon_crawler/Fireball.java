@@ -60,13 +60,7 @@ public class Fireball extends Elements {
 			if (hits % 150 == 0) {
 				player.setHealth(player.getHealth() - getDamage());
 				System.out.println(player.getHealth());
-				if (player.getHealth() <= 0) {
-					Game.lifes--;
-					System.out.println(Game.lifes);
-					/*
-					 * if (Game.lifes==0) { Game.lifes=5; game.gameOver();} else
-					 * {game.thisRoom(); }}}
-					 */}
+				
 			}
 
 			hits++;
