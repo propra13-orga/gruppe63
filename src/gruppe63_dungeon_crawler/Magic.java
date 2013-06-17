@@ -11,6 +11,7 @@ public class Magic extends Elements {
 	private int width;
 	private int height;
 	private Image sprite;
+	private int damage=50;
 	
 	public Magic(int x, int y, Room room){
 		//Groesse des Spielers
@@ -98,7 +99,9 @@ public class Magic extends Elements {
 	public void setDirY(int movDirY) {
 		this.vy = movDirY;
 	}
-	
+	public int getDamage(){
+	return this.damage;		
+	}
 
 }
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @SuppressWarnings({ "serial" })
 public class Player extends Elements {
 	private Room room;
-	static int health/* =100 */;
+	private int health =100;
 	private int damage = 50;
 	private boolean attack = false;
 	private int hits = 0;
@@ -17,7 +17,7 @@ public class Player extends Elements {
 	private float xp;
 	Game game;
 	
-	
+	private int money;
 	int width;
 	int height;
 	private Image sprite;
@@ -130,7 +130,7 @@ public class Player extends Elements {
 	}
 
 	public void setHealth(int n) {
-		Player.health = n;
+		this.health = n;
 	}
 
 	public int getDamage() {
@@ -145,66 +145,24 @@ public class Player extends Elements {
 		this.attack = b;
 	}
 
-	public void collision(Boss boss) {
-		Rectangle rh = new Rectangle(getXmiddle(), getYmiddle(), 30, 30);
-		Rectangle rb = new Rectangle(boss.getXmiddle(), boss.getYmiddle(), 30,
-				30);
+	public void collision(Elements element) {
+		Rectangle rh = getBounds();
+		Rectangle rb = element.getBounds();
 		if (attack) {
 
 			if (rh.intersects(rb)) {
 
 				if (hits % 20 == 0) {
-					boss.setHealth(boss.getHealth() - getDamage());
-					System.out.println(boss.getHealth());
-					hits++;
-				}
+					element.setHealth(element.getHealth() - getDamage());
+					System.out.println(element.getHealth());
+					
+				}hits++;
 			}
 		}
 
 	}
+		
 
-	public void collision2(Boss2 boss2) {
-		Rectangle rh = new Rectangle(getXmiddle(), getYmiddle(), 30, 30);
-		Rectangle rb = new Rectangle(boss2.getXmiddle(), boss2.getYmiddle(),
-				30, 30);
-
-		if (attack) {
-			if (rh.intersects(rb)) {
-
-				if (hits % 20 == 0) {
-					boss2.setHealth(boss2.getHealth() - getDamage());
-					System.out.println(boss2.getHealth());
-				}
-				hits++;
-			}
-		}
-	}
-
-	public void collision3(Boss3 boss3) {
-		Rectangle rh = new Rectangle(getXmiddle(), getYmiddle(), 30, 30);
-		Rectangle rb = new Rectangle(boss3.getXmiddle(), boss3.getYmiddle(),
-				30, 30);
-
-		if (attack) {
-			if (rh.intersects(rb)) {
-
-				if (hits % 20 == 0) {
-					boss3.setHealth(boss3.getHealth() - getDamage());
-					System.out.println(boss3.getHealth());
-				}
-				hits++;
-			}
-		}
-	}
-
-	public int getXmiddle() {
-		return getX() + 15;
-	}
-
-	public int getYmiddle() {
-		return getY() + 15;
-	}
-	
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
@@ -227,5 +185,13 @@ public class Player extends Elements {
 		Weapon arrow = new Weapon(x,y,room);
 		weapon.add(arrow);
 	}
+
+	public int getMoney() {
+	return money;
+	}
+	
+	public void setMoney(int n) {
+	this.money=n;		
+	} 
 
 }

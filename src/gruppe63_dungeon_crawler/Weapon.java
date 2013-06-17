@@ -11,6 +11,7 @@ public class Weapon extends Elements {
 	private int width;
 	private int height;
 	private Image sprite;
+	private int damage=20;
 	
 	public Weapon(int x, int y, Room room){
 		//Groesse des Spielers
@@ -90,6 +91,9 @@ public class Weapon extends Elements {
 
 	public Image getSprite() {
 		return sprite;
+	}
+	public int getDamage(){
+		return this.damage;
 	}
 	
 

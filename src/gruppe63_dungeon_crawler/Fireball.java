@@ -13,6 +13,8 @@ public class Fireball extends Elements {
 	private static final long serialVersionUID = 1L;
 
 	private Room room;
+	private int width=30;
+	private int heigth=30;
 
 	private int collision = 0;
 	private int hits = 0;
@@ -51,15 +53,14 @@ public class Fireball extends Elements {
 	}
 
 	public void collision(Player player) {
-		Rectangle rf = new Rectangle(getXmiddle(), getYmiddle(), 30, 30);
-		Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(),
-				30, 30);
+		Rectangle rf = getBounds();
+		Rectangle rh = player.getBounds();
 		if (rf.intersects(rh)) {
 
 			if (hits % 150 == 0) {
-				player.setHealth(player.getCurrentHealth() - getDamage());
-				System.out.println(player.getCurrentHealth());
-				if (player.getCurrentHealth() <= 0) {
+				player.setHealth(player.getHealth() - getDamage());
+				System.out.println(player.getHealth());
+				if (player.getHealth() <= 0) {
 					Game.lifes--;
 					System.out.println(Game.lifes);
 					/*
@@ -104,12 +105,9 @@ public class Fireball extends Elements {
 	public int getDamage() {
 		return this.damage;
 	}
+	
+	public Rectangle getBounds() {
+        return new Rectangle(x, y, width, heigth);
+    }
 
-	public int getXmiddle() {
-		return getX() + 15;
-	}
-
-	public int getYmiddle() {
-		return getY() + 15;
-	}
 }

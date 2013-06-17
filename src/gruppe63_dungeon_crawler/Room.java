@@ -196,32 +196,14 @@ public class Room extends JPanel {
 		int collision = Environment(player.x, player.y, player.xDim,
 				player.yDim);
 		switch (collision) {
-		case 2:
-			if (Menu.getDifficulty() == 0) {
-				player.setHealth(player.getHealth() - enemy.getDamage());
-				System.out.println(Player.health);
-				if (Player.health <= 0) {
-					Game.lifes--;
-					System.out.println(Game.lifes);
-					if (Game.lifes == 0) {
-						Game.lifes = 5;
-						game.gameOver();
-					} else {
-						game.thisRoom();
-					}
-				}
-			}
-			// Game.lifes--;System.out.println(Game.lifes);if (Game.lifes==0)
-			// {Game.lifes=5; game.gameOver();} else {game.thisRoom();}}
-			// else {game.gameOver();}
-			break;
+		
 		case 5:
 			if (game.getDown()) {
 				game.nextRoom();
 			}
 			break;
 		case 4:
-			game.lastRoom();
+			//game.lastRoom(); // Jan: Dass man wieder nach oben gehen kann habe ich erstmal rausgenommen!
 			break;
 		case 7:
 			// Menu.shop(); // Shopmenue.

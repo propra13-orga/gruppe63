@@ -25,6 +25,11 @@ public class Game extends JPanel implements Runnable {
 	private Boss3 boss3;
 	private Fireball fireball;
 	
+	private int saveHealth=100;
+	private int saveMoney;
+	
+	private int playerdamaged=0;
+	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Magic> fireballs;
 	private ArrayList<Weapon> arrows;
@@ -57,8 +62,10 @@ public class Game extends JPanel implements Runnable {
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
-				if (player.getCurrentHealth() <= 0) {
-					gameOver();
+				if (player.getHealth() <= 0) {
+				Game.lifes--;
+				System.out.println(Game.lifes);
+					
 				}
 				
 				// Gegner				
@@ -153,12 +160,25 @@ public class Game extends JPanel implements Runnable {
 				// Ende Bosskampf 1.
 				// Angfang Bosskampf 2.
 
-				if (actualroom == 6) {/* down=false */
-					;
+				if (actualroom == 6) {down=false;
+					
+					for (int k = 0; k<fireballs.size(); k++) {
+			        	Magic m = (Magic) fireballs.get(k);
+			        	Rectangle rm = m.getBounds();
+			        	Rectangle rb = boss2.getBounds();
+			        	if(rm.intersects(rb)) {
+			        		m.setVisible(false);
+			        		boss2.setHealth(boss2.getHealth()-50);
+			        		System.out.println(boss2.getHealth());
+			        		}
+					}
+					
 					boss2.collision(player);
-					player.collision2(boss2);
+					player.collision(boss2);
 					if (boss2.getHealth() <= 0) {
+						boss2.setVisible(false);
 						room.remove(boss2);
+						boss2.setDead();
 						down = true;
 					}
 
@@ -166,6 +186,9 @@ public class Game extends JPanel implements Runnable {
 				// Ende Bosskampf 2.
 				// Anfang Bosskampf 3.
 				if (actualroom == 9) {
+					
+					
+					
 
 					if (fireballtimer % 1000 == 0 & down == false) {
 
@@ -210,11 +233,24 @@ public class Game extends JPanel implements Runnable {
 
 						fireball.collision(player);
 					}
+					
+					for (int k = 0; k<fireballs.size(); k++) {
+			        	Magic m = (Magic) fireballs.get(k);
+			        	Rectangle rm = m.getBounds();
+			        	Rectangle rb = boss3.getBounds();
+			        	if(rm.intersects(rb)) {
+			        		m.setVisible(false);
+			        		boss3.setHealth(boss3.getHealth()-50);
+			        		System.out.println(boss3.getHealth());
+			        		}
+					}
 
 					boss3.collision(player);
-					player.collision3(boss3);
+					player.collision(boss3);
 					if (boss3.getHealth() <= 0) {
+						boss3.setVisible(false);
 						room.remove(boss3);
+						boss3.setDead();
 						down = true;
 					}
 				}
@@ -237,7 +273,7 @@ public class Game extends JPanel implements Runnable {
 		enemies = new ArrayList<Enemy>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
-
+		
 		int[][] Z = Matrix.playedRoom(actualroom);
 
 		for (int i = 0; i < Z.length; i++) {
@@ -283,6 +319,10 @@ public class Game extends JPanel implements Runnable {
 		room.paintRoom();
 		container.add(room);
 		room.repaint(100);
+		player.setHealth(saveHealth);
+		player.setMoney(saveMoney);
+		
+		
 	}
 
 	private void startRoomRev() { // Muss noch überarbeitet werden.
@@ -312,8 +352,20 @@ public class Game extends JPanel implements Runnable {
 	        Rectangle re = e.getBounds();
 
 	        if (rp.intersects(re)) {
-	            e.setVisible(false);
-	        }
+	        	
+	        	if (playerdamaged % 100 == 0) {player.setHealth(player.getHealth()-e.getDamage());System.out.println(player.getHealth());}
+	        	
+	        	if (player.getHealth() <= 0) {
+					Game.lifes--;
+					System.out.println(Game.lifes);}
+	        	
+	        	playerdamaged++;
+	        	player.collision(e);
+	          		        	
+	        	}
+	        	
+	        	
+	        
 	        
 	        for (int k = 0; k<fireballs.size(); k++) {
 	        	Magic m = (Magic) fireballs.get(k);
@@ -321,19 +373,21 @@ public class Game extends JPanel implements Runnable {
 	        	
 	        	if(rm.intersects(re)) {
 	        		m.setVisible(false);
-	        		e.setVisible(false);
+	        			        		
+	        		e.setHealth(e.getHealth() - m.getDamage());
+					System.out.println(e.getHealth());
 	        	}
 	        	
 	        	
 	        }
 	        
-	        for (int k = 0; k<fireballs.size(); k++) {
+	      /*  for (int k = 0; k<fireballs.size(); k++) {
 	        	Magic m = (Magic) fireballs.get(k);
 	        	Rectangle rm = m.getBounds();
 	        	Rectangle b2 = boss2.getBounds();
 	        
 	       if(rm.intersects(b2)) {System.out.println("test");room.remove(boss2);}
-	        }
+	        }*/
 	        
 	        for (int k = 0; k<arrows.size(); k++) {
 	        	Weapon w = (Weapon) arrows.get(k);
@@ -341,9 +395,14 @@ public class Game extends JPanel implements Runnable {
 	        	
 	        	if(rw.intersects(re)) {
 	        		w.setVisible(false);
-	        		e.setVisible(false);
+	        		e.setHealth(e.getHealth() - w.getDamage());
+					System.out.println(e.getHealth());
 	        	}
 	        }
+	        
+	        if(e.getHealth()<=0)
+            {	System.out.println("getoetet");
+        		e.setVisible(false);}
 	    }
 	    
 	}
@@ -387,7 +446,7 @@ public class Game extends JPanel implements Runnable {
 
 	public void nextRoom() {
 		actualroom++;
-		room.removeAll();
+		//room.removeAll();
 		container.remove(room);
 		room = null;
 		if (actualroom > endroom) {
@@ -395,6 +454,8 @@ public class Game extends JPanel implements Runnable {
 			timer.purge();
 			main.win(true);
 		} else {
+			setsaveMoney(player.getMoney());
+			setsaveHealth(player.getHealth());
 			startRoom();
 		}
 	}
@@ -413,4 +474,14 @@ public class Game extends JPanel implements Runnable {
 	public boolean getDown() {
 		return this.down;
 	}
+	
+	public void setsaveMoney(int n){
+	this.saveMoney=n;	
+	}
+		
+	public void setsaveHealth(int n){
+	this.saveHealth=n;	
+	}
+	
+	
 }

@@ -2,6 +2,7 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 public class Boss extends Elements {
@@ -14,6 +15,9 @@ public class Boss extends Elements {
 	private Room room;
 
 	private int health = 30;
+	
+	private int width=50;
+	private int height=50;
 
 	public Boss(int x, int y, Room room) {
 		super(x, y, 30, 30);
@@ -75,11 +79,7 @@ public class Boss extends Elements {
 		this.health = n;
 	}
 
-	public int getXmiddle() {
-		return getX() + 15;
-	}
-
-	public int getYmiddle() {
-		return getY() + 15;
-	}
+	public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
 }

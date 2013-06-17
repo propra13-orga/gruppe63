@@ -11,3 +11,5 @@
 11: Zauber
 12: Waffe
 13: Leben
+
+Gegner sollten nich direkt an einer Wand stehen, das führt zu Problemen bei der Kollision.

@@ -5,18 +5,20 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-public class Enemy extends Elements { // Einfache Kopie von der Klasse Player
-										// als Platzhalter.
+public class Enemy extends Elements {										
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Room room;
+	
 	private int width;
 	private int height;
 	private Image sprite;
+	
 	private int damage = 1;
+	private int health=100;
 
 	public Enemy(int x, int y, Room room) {
 		super(x,y,48,48);
@@ -33,7 +35,7 @@ public class Enemy extends Elements { // Einfache Kopie von der Klasse Player
 		x = this.getX();
 		y = this.getY();
 
-		if (room.Environment(x + vx, y, xDim, yDim) != 1) {
+		if (room.Environment(x + vx, y, xDim, yDim) != 1 & room.Environment(x + vx, y, xDim, yDim) != 4 & room.Environment(x + vx, y, xDim, yDim) != 5) {
 			x = x + vx;
 			this.setLocation(x, y);
 		}
@@ -43,7 +45,7 @@ public class Enemy extends Elements { // Einfache Kopie von der Klasse Player
 			x = x+vx;
 		}
 
-		if (room.Environment(x, y - vy, xDim, yDim) != 1) {
+		if (room.Environment(x, y - vy, xDim, yDim) != 1 & room.Environment(x, y - vy, xDim, yDim) != 4 & room.Environment(x, y - vy, xDim, yDim) != 5) {
 			y = y - vy;
 			this.setLocation(x, y);
 		}
@@ -104,6 +106,14 @@ public class Enemy extends Elements { // Einfache Kopie von der Klasse Player
 
 	public Image getSprite() {
 		return sprite;
+	}
+	
+	public int getHealth() {
+		return this.health;
+	}
+
+	public void setHealth(int n) {
+		this.health = n;
 	}
 
 }

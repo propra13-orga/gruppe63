@@ -3,6 +3,7 @@ package gruppe63_dungeon_crawler;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
 
@@ -13,6 +14,11 @@ public class Elements extends JComponent {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private int width;
+	private int heigth;
+	private int health;
+	private int damage;
+	
 	int x, y;
 
 	int vx, vy;
@@ -61,10 +67,10 @@ public class Elements extends JComponent {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, xDim, yDim);
 			break;
-		case 2:
-			g.setColor(Color.gray);
-			g.fillRect(0, 0, xDim, yDim);
-			break;
+		//case 2:
+			//g.setColor(Color.gray);
+			//g.fillRect(0, 0, xDim, yDim);
+			//break;
 		case 4:
 			g.setColor(Color.green);
 			g.fillRect(0, 0, xDim, yDim);
@@ -103,4 +109,19 @@ public class Elements extends JComponent {
 		}
 
 	}
+	
+	public Rectangle getBounds() {
+        return new Rectangle(x, y, width, heigth);
+    }
+	public int getHealth() {
+		return this.health;
+	}
+
+	public void setHealth(int n) {
+		this.health = n;
+	}
+
+	public int getDamage() {
+		return this.damage;
+}
 }

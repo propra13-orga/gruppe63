@@ -13,15 +13,21 @@ public class Boss3 extends Elements {
 	private static final long serialVersionUID = 1L;
 
 	private Room room;
-	
+	private int width;
+	private int height;
 	private int health=60;
 	private int damage=100;
 	private boolean attack=false;
 	private int hits=0;
+	private Image sprite;
+	private boolean alive=true;
 	
 	public Boss3(int x, int y, Room room){
-		super(x,y,30,30);
+		super(x, y, 30, 30);
 		this.room = room;
+		sprite = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+		width = sprite.getWidth(null);
+	    height = sprite.getHeight(null);
 	}
 	
 	public void move(){
@@ -40,12 +46,11 @@ public class Boss3 extends Elements {
 		room.status();
 	}
 	
-	public void paintComponent(Graphics g){
-		Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
-		g.drawImage(img, 0, 0, this);
-		Toolkit.getDefaultToolkit().sync();
-		g.dispose();
-		}
+public void paintComponent(Graphics g) {
+		
+		g.drawImage(sprite, 0, 0, this);
+		
+	}
 	
 	public void setMovX(int vx) {
 		this.vx = vx;
@@ -87,20 +92,21 @@ public class Boss3 extends Elements {
 	}
 	
 	public void collision(Player player) {
-	Rectangle r = new Rectangle(getXmiddle(),getYmiddle(), 30, 30);
-	Rectangle rh = new Rectangle(player.getXmiddle(), player.getYmiddle(), 30, 30);
+		if (alive) {
+	Rectangle r = getBounds();
+	Rectangle rh = player.getBounds();
 	if (r.intersects(rh))	{if (hits % 1000==0)	{System.out.println("schaden");player.setHealth(player.getMaxHealth()-getDamage());System.out.println(player.getCurrentHealth());}
 	
 	hits++;}
 		
-	}
+	}}
 	
-	public int getXmiddle() {
-		return getX()+15;
-	}
+	public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
+    }
 	
-	public int getYmiddle() {
-		return getY()+15;
+	public void setDead(){
+		this.alive=false;
 	}
 	
 }
