@@ -30,8 +30,8 @@ public class Geld extends Elements {
 		super(x, y, 30, 30);
 		this.room = room;
 		sprite = Toolkit.getDefaultToolkit().getImage("geld.gif");
-		width = sprite.getWidth(null);
-	    height = sprite.getHeight(null);
+		width = 30;
+	    height = 30;
 	    
 	}
 

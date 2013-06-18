@@ -48,6 +48,11 @@ public class Game extends JPanel implements Runnable {
 	private Timer timer;
 	private boolean ball;
 	private boolean down = true;
+	
+	private boolean isleben;
+	private boolean ismana;
+	private boolean isarmor;
+	private boolean ismoney;
 
 	public static int lifes = 5;
 	int[][] Z;
@@ -274,8 +279,8 @@ public class Game extends JPanel implements Runnable {
 	}
 
 	private void startRoom() {
-
-		container.setBackground(Color.WHITE);
+		
+				container.setBackground(Color.WHITE);
 		container.removeAll();
 		room = new Room(50, 50, actualroom, this); // (Elementwidth,
 													// Elementheight, Level,
@@ -284,6 +289,11 @@ public class Game extends JPanel implements Runnable {
 		enemies = new ArrayList<Enemy>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
+		
+		isleben=false;
+		isarmor=false;
+		ismana=false;
+		ismoney=false;
 		
 		int[][] Z = Matrix.playedRoom(actualroom);
 
@@ -329,24 +339,28 @@ public class Game extends JPanel implements Runnable {
 	                   leben = new Leben(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(leben);
+	                                  isleben=true;
 	                          }
 				if (Z[i][j] == 10) {
 
 	                   armor = new Armor(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(armor);
+	                                  isarmor=true;
 	                          }
 				if (Z[i][j] == 11) {
 
 	                   mana = new Mana(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(mana);
+	                                  ismana=true;
 	                          }
 				if (Z[i][j] == 15) {
 
 	                   money = new Geld(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(money);
+	                                  ismoney=true;
 	                          }
 			}
 		}
@@ -687,43 +701,11 @@ public class Game extends JPanel implements Runnable {
 	
 	public void collision() {
 		Rectangle rp = player.getBounds();
-		Rectangle l = leben.getBounds();
-		Rectangle ma = mana.getBounds();
-		Rectangle g = money.getBounds();
-		Rectangle a = armor.getBounds();
 		
-         if (rp.intersects(ma)) {
-	        
-        	if (player.getMana() != 100)
- 			{
- 				if (player.getMana()+this.manaAmount < 100)
- 				{
- 					player.setMana(player.getMana()+this.manaAmount);
- 				}
- 				else
- 				{
- 					player.setMana(100);
- 				}
- 			}
-        	manaAmount = 0;
-        	mana.setVisible(false);
-	        room.remove(mana);			            
-        }
-        if (rp.intersects(g)) {
-	        
-        	player.setMoney(player.getMoney()+this.moneyAmount);
-        	moneyAmount = 0;
-        	money.setVisible(false);
-	        room.remove(money);			            
-        }
-        if (rp.intersects(a)) {
-	        
-        	player.setHatRuestung(player.getHatRuestung());
-        	armor.setVisible(false);
-	        room.remove(armor);			            
-        }
-  
-		if (rp.intersects(l)) {
+		if (isleben) {
+		Rectangle l = leben.getBounds();
+		
+if (rp.intersects(l)) {
 	        
 			if (player.getHealth() != 100)
 			{
@@ -740,8 +722,59 @@ public class Game extends JPanel implements Runnable {
         	leben.setVisible(false);
 	        room.remove(leben);			            
         }
-
-	    for (int j = 0; j<enemies.size(); j++) {
+		}
+		
+		if (isarmor) {
+			
+			Rectangle a = armor.getBounds();
+			
+			 if (rp.intersects(a)) {
+			        
+		        	player.setHatRuestung(player.getHatRuestung());
+		        	armor.setVisible(false);
+			        room.remove(armor);			            
+		        }
+		}		
+	
+		if (ismana) {
+			
+			Rectangle ma = mana.getBounds();
+			
+			  if (rp.intersects(ma)) {
+			        
+		        	if (player.getMana() != 100)
+		 			{
+		 				if (player.getMana()+this.manaAmount < 100)
+		 				{
+		 					player.setMana(player.getMana()+this.manaAmount);
+		 				}
+		 				else
+		 				{
+		 					player.setMana(100);
+		 				}
+		 			}
+		        	manaAmount = 0;
+		        	mana.setVisible(false);
+			        room.remove(mana);			            
+		        }
+		}
+		
+		
+		if (ismoney){
+			
+			Rectangle g = money.getBounds();
+			
+			if (rp.intersects(g)) {
+		        
+	        	player.setMoney(player.getMoney()+this.moneyAmount);
+	        	moneyAmount = 0;
+	        	money.setVisible(false);
+		        room.remove(money);			            
+	        }
+			
+		}       
+  
+		for (int j = 0; j<enemies.size(); j++) {
 	        Enemy e = (Enemy) enemies.get(j);
 	        Rectangle re = e.getBounds();
 
