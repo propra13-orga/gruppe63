@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Player extends Elements {
 	private Room room;
 	private int health =100;
+	private int mana = 100;
 	private int damage = 50;
 	private boolean attack = false;
 	private int hits = 0;
@@ -18,11 +19,14 @@ public class Player extends Elements {
 	Game game;
 	
 	private int money;
+	private int healthpotions=0;
+	private int manapotions=0;
 	int width;
 	int height;
 	private Image sprite;
 	private ArrayList<Magic> magic;
 	private ArrayList<Weapon> weapon;
+	private boolean hatRuestung;
 
 	public Player(int x, int y, Room room) {
 		// Groesse des Spielers
@@ -193,5 +197,45 @@ public class Player extends Elements {
 	public void setMoney(int n) {
 	this.money=n;		
 	} 
+	
+	public int getHealthpotions()
+	{
+		return healthpotions;
+	}
+	
+	public void setHealthpotions(int h)
+	{
+		healthpotions = h;
+	}
+	
+	public void setHatRuestung(boolean b)
+	{
+		hatRuestung = b;
+	}
+	
+	public boolean getHatRuestung()
+	{
+		return hatRuestung;
+	}
+	
+	public void setMana(int m)
+	{
+		this.mana = m;
+	}
+	
+	public int getMana()
+	{
+		return mana;
+	}
+	
+	public int getManapotions()
+	{
+		return manapotions;
+	}
+	
+	public void setManapotions(int m)
+	{
+		manapotions = m;
+	}
 
 }

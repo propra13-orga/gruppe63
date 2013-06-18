@@ -3,7 +3,7 @@
 4: Eingang bzw hoch, grün
 5: Ausgang bzw runter, blau
 6: Bossgegner, rot
-7: npc, gelb
+7: shop, gelb
 (3: Held, Qualle)
 8: Bossgegner2
 9: Bossgebgner3
@@ -11,5 +11,6 @@
 11: Zauber
 12: Waffe
 13: Leben
+14: npc, 
 
 Gegner sollten nich direkt an einer Wand stehen, das führt zu Problemen bei der Kollision.

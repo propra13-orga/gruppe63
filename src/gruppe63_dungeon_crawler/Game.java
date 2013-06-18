@@ -24,9 +24,12 @@ public class Game extends JPanel implements Runnable {
 	private Boss2 boss2;
 	private Boss3 boss3;
 	private Fireball fireball;
+	private Infobar infobar;
 	
 	private int saveHealth=100;
-	private int saveMoney;
+	private int saveMoney=100;
+	private int saveHealthpotions=0;
+	private int saveMana=100;
 	
 	private int playerdamaged=0;
 	
@@ -63,6 +66,7 @@ public class Game extends JPanel implements Runnable {
 			public void run() {
 				
 				if (player.getHealth() <= 0) {
+				saveHealth = 100;
 				Game.lifes--;
 				System.out.println(Game.lifes);
 				startRoom();
@@ -78,6 +82,7 @@ public class Game extends JPanel implements Runnable {
 				}
 				// Spieler
 				player.move();
+				infobar.repaint();
 				
 				// Feuerbaelle Diana
 				fireballs = player.getMagic();
@@ -316,12 +321,289 @@ public class Game extends JPanel implements Runnable {
 				}
 			}
 		}
+		player.setHealth(saveHealth);
+		player.setMana(saveMana);
+		player.setMoney(saveMoney);
+		player.setHealthpotions(saveHealthpotions);
+		infobar = new Infobar(50,600,room,player, this);
+		room.add(infobar);
 		main.controller.setPlayer(player);
 		room.paintRoom();
 		container.add(room);
 		room.repaint(100);
-		player.setHealth(saveHealth);
-		player.setMoney(saveMoney);
+		
+		
+	}
+	
+	
+	public void continueGame() {
+
+		continueRoom();
+		TimerTask action = new TimerTask() {
+			public void run() {
+				
+				if (player.getHealth() <= 0) {
+				Game.lifes--;
+				System.out.println(Game.lifes);
+				startRoom();
+					
+				}
+				
+				// Gegner				
+				for (int i = 0; i < enemies.size(); i++) {
+				    Enemy e = (Enemy) enemies.get(i);
+				    if (e.isVisible())
+				        e.move();
+				    else enemies.remove(i);
+				}
+				// Spieler
+				player.move();
+				infobar.repaint();
+				
+				// Feuerbaelle Diana
+				fireballs = player.getMagic();
+				
+				for(int k=0;k<fireballs.size();k++) {
+					Magic m = (Magic) fireballs.get(k);
+					room.add(m);		
+				}
+
+				for (int i = 0; i < fireballs.size(); i++) {
+				    Magic m = (Magic) fireballs.get(i);
+				    if (m.isVisible())
+				        m.move();
+				    else fireballs.remove(i);
+				}
+				
+				// Pfeile
+				arrows = player.getWeapon();
+				
+				for(int k=0;k<arrows.size();k++) {
+					Weapon w = (Weapon) arrows.get(k);
+					room.add(w);		
+				}
+				
+				for (int i = 0; i < arrows.size(); i++) {
+				    Weapon w = (Weapon) arrows.get(i);
+				    if (w.isVisible())
+				        w.move();
+				    else arrows.remove(i);
+				}
+				
+				collision();
+
+				fireballtimer++;
+
+				// Anfang Bosskmapf 1.
+				if (actualroom == 3) {
+					if (fireballtimer % 1000 == 0 & down == false) {
+						fireball = new Fireball(boss.getPosX(), boss.getPosY(),
+								room);
+						room.add(fireball);
+						ball = true;
+
+						fireballcounter++;
+					}
+
+					if (ball) {
+
+						if (fireballcounter % 4 == 1) {
+							fireball.setMovX(-1);
+						}
+						if (fireballcounter % 4 == 2) {
+							fireball.setMovY(-1);
+						}
+						if (fireballcounter % 4 == 3) {
+							fireball.setMovX(1);
+						}
+						if (fireballcounter % 4 == 0) {
+							fireball.setMovY(1);
+						}
+
+						fireball.move();
+						fireball.setMovX(0);
+						fireball.setMovY(0);
+
+						if (fireball.getCollision() == 1) {
+							room.remove(fireball);
+							ball = false;
+						}
+
+						fireball.collision(player);
+					}
+
+					player.collision(boss);
+					if (boss.getHealth() <= 0) {
+						room.remove(boss);
+						down = true;
+					}
+
+				}
+				// Ende Bosskampf 1.
+				// Angfang Bosskampf 2.
+
+				if (actualroom == 6) {down=false;
+					
+					for (int k = 0; k<fireballs.size(); k++) {
+			        	Magic m = (Magic) fireballs.get(k);
+			        	Rectangle rm = m.getBounds();
+			        	Rectangle rb = boss2.getBounds();
+			        	if(rm.intersects(rb)) {
+			        		m.setVisible(false);
+			        		boss2.setHealth(boss2.getHealth()-50);
+			        		System.out.println(boss2.getHealth());
+			        		}
+					}
+					
+					boss2.collision(player);
+					player.collision(boss2);
+					if (boss2.getHealth() <= 0) {
+						boss2.setVisible(false);
+						room.remove(boss2);
+						boss2.setDead();
+						down = true;
+					}
+
+				}
+				// Ende Bosskampf 2.
+				// Anfang Bosskampf 3.
+				if (actualroom == 9) {
+					
+					
+					
+
+					if (fireballtimer % 1000 == 0 & down == false) {
+
+						fireball = new Fireball(400, 50, room);
+						room.add(fireball);
+
+						ball = true;
+					}
+
+					if (fireballtimer % 1000 == 250) {
+
+						fireball = new Fireball(400, 150, room);
+						room.add(fireball);
+
+						ball = true;
+					}
+
+					if (fireballtimer % 1000 == 500) {
+
+						fireball = new Fireball(400, 250, room);
+						room.add(fireball);
+
+						ball = true;
+					}
+
+					if (fireballtimer % 1000 == 750) {
+
+						fireball = new Fireball(400, 450, room);
+						room.add(fireball);
+
+						ball = true;
+					}
+					if (ball) {
+						fireball.setMovX(-1);
+						fireball.move();
+						fireball.setMovX(0);
+
+						if (fireball.getCollision() == 1) {
+							room.remove(fireball);
+							ball = false;
+						}
+
+						fireball.collision(player);
+					}
+					
+					for (int k = 0; k<fireballs.size(); k++) {
+			        	Magic m = (Magic) fireballs.get(k);
+			        	Rectangle rm = m.getBounds();
+			        	Rectangle rb = boss3.getBounds();
+			        	if(rm.intersects(rb)) {
+			        		m.setVisible(false);
+			        		boss3.setHealth(boss3.getHealth()-50);
+			        		System.out.println(boss3.getHealth());
+			        		}
+					}
+
+					boss3.collision(player);
+					player.collision(boss3);
+					if (boss3.getHealth() <= 0) {
+						boss3.setVisible(false);
+						room.remove(boss3);
+						boss3.setDead();
+						down = true;
+					}
+				}
+				// Ende Bosskmapf 3.
+
+			}
+		};
+		timer = new Timer();
+		timer.schedule(action, 0, 5);
+	}
+	
+	public void continueRoom() {
+
+		container.setBackground(Color.WHITE);
+		container.removeAll();
+		room = new Room(50, 50, actualroom, this); // (Elementwidth,
+													// Elementheight, Level,
+													// Game)
+		
+		enemies = new ArrayList<Enemy>();
+		fireballs = new ArrayList<Magic>();
+		arrows = new ArrayList<Weapon>();
+		
+		int[][] Z = Matrix.playedRoom(actualroom);
+
+		for (int i = 0; i < Z.length; i++) {
+			for (int j = 0; j < Z[i].length; j++) {
+				if (Z[i][j] == 4) {
+
+					player.setLocation((j + 1) * Room.elementheight, i * Room.elementwidth);
+					room.add(player);
+				}
+
+				if (Z[i][j] == 2) {
+
+					enemy = new Enemy(j * Room.elementheight, i
+							* Room.elementwidth, room);
+					enemies.add(enemy);
+					room.add(enemy);
+				}
+
+				if (Z[i][j] == 6) {
+
+					boss = new Boss(j * Room.elementheight, i
+							* Room.elementwidth, room);
+					room.add(boss);
+					down = false;
+				}
+				if (Z[i][j] == 8) {
+
+					boss2 = new Boss2(j * Room.elementheight, i
+							* Room.elementwidth, room);
+					room.add(boss2);
+				}
+				if (Z[i][j] == 9) {
+
+					boss3 = new Boss3(j * Room.elementheight, i
+							* Room.elementwidth, room);
+					room.add(boss3);
+					down = false;
+				}
+			}
+		}
+		infobar = new Infobar(50,600,room,player, this);
+		room.add(infobar);
+		main.controller.setPlayer(player);
+		room.paintRoom();
+		container.add(room);
+		room.repaint(100);
+		//player.setHealth(saveHealth);
+		//player.setMoney(saveMoney);
 		
 		
 	}
@@ -354,7 +636,18 @@ public class Game extends JPanel implements Runnable {
 
 	        if (rp.intersects(re)) {
 	        	
-	        	if (playerdamaged % 100 == 0) {player.setHealth(player.getHealth()-e.getDamage());System.out.println(player.getHealth());}
+	        	if (playerdamaged % 100 == 0) 
+	        	{
+	        		if (player.getHatRuestung())
+	        		{
+	        			player.setHealth(player.getHealth()-(e.getDamage()/2));
+	        		}
+	        		else
+	        		{
+	        			player.setHealth(player.getHealth()-e.getDamage());
+	        		}
+	        		System.out.println(player.getHealth());
+	        	}
    	
 	
 	        	playerdamaged++;
@@ -454,6 +747,8 @@ public class Game extends JPanel implements Runnable {
 		} else {
 			setsaveMoney(player.getMoney());
 			setsaveHealth(player.getHealth());
+			setsaveMana(player.getMana());
+			setsaveHealthpotions(player.getHealthpotions());
 			startRoom();
 		}
 	}
@@ -479,6 +774,30 @@ public class Game extends JPanel implements Runnable {
 		
 	public void setsaveHealth(int n){
 	this.saveHealth=n;	
+	}
+	
+	public void setsaveHealthpotions(int h)
+	{
+		this.saveHealthpotions = h;
+	}
+	
+	public void setsaveMana(int m)
+	{
+		this.saveMana = m;
+	}
+	
+	public void story()
+	{
+		timer.cancel();
+		//container.remove(room);
+		main.NPCstory();
+	}
+
+	public void shop()
+	{
+		timer.cancel();
+		//container.remove(room);
+		main.shop(player);
 	}
 	
 	

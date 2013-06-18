@@ -100,6 +100,10 @@ public class Elements extends JComponent {
 			// g.setColor(Color.pink);//Leben
 			// g.fillRect(0, 0, xDim, yDim);
 			break;
+		case 14:
+			g.setColor(Color.ORANGE);
+			g.fillRect(0, 0, xDim, yDim);
+			break;
 		/*
 		 * case 12: g.setColor(Color.red);//Waffe g.fillRect(0, 0, xDim, yDim);
 		 * break; case 10: g.setColor(Color.cyan); //Rüstung g.fillRect(0, 0,

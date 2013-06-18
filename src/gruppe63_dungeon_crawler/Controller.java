@@ -38,9 +38,51 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 			player.setAttack(true);
 		}
+		if (key == KeyEvent.VK_2)
+		{
+			if (player.getHealth() != 100)
+			{
+				if (player.getHealthpotions() > 0)
+				{
+					if (player.getHealth()+10 < 100)
+					{
+						player.setHealth(player.getHealth()+10);
+						player.setHealthpotions(player.getHealthpotions()-1);
+					}
+					else
+					{
+						player.setHealth(100);
+						player.setHealthpotions(player.getHealthpotions()-1);
+					}
+				}
+			}
+		}
+		if (key == KeyEvent.VK_3)
+		{
+			if (player.getMana() != 100)
+			{
+				if (player.getManapotions() > 0)
+				{
+					if (player.getMana()+10 < 100)
+					{
+						player.setMana(player.getMana()+10);
+						player.setManapotions(player.getManapotions()-1);
+					}
+					else
+					{
+						player.setMana(100);
+						player.setManapotions(player.getManapotions()-1);
+					}
+				}
+			}
+		}
 		
 		if (key == KeyEvent.VK_ENTER) {
+			if(player.getMana()>=5)
+			{
 		    	player.castMagic();
+		    	player.setMana(player.getMana()-5);
+			}
 		}
 		    
 		if (key == KeyEvent.VK_SHIFT) {

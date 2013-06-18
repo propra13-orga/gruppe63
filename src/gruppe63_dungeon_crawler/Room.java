@@ -39,7 +39,7 @@ public class Room extends JPanel {
 		super();
 		Room.elementwidth = elementwidth;
 		Room.elementheight = elementheigth;
-		this.setBounds(0, 0, 600, 600);
+		this.setBounds(0, 0, 600, 650);
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		this.setVisible(true);
@@ -106,6 +106,8 @@ public class Room extends JPanel {
 		case 10:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 11:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 14:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		default:
 			return null;
@@ -182,6 +184,9 @@ public class Room extends JPanel {
 		else if (upright == 11 || downright == 11 || downleft == 11
 				|| upleft == 11)
 			return 11;
+		else if (upright == 14 || downright == 14 || downleft == 14
+				|| upleft == 14)
+			return 14;
 		else
 			return 0;
 	}
@@ -206,7 +211,7 @@ public class Room extends JPanel {
 			//game.lastRoom(); // Jan: Dass man wieder nach oben gehen kann habe ich erstmal rausgenommen!
 			break;
 		case 7:
-			// Menu.shop(); // Shopmenue.
+			game.shop(); // Shopmenue.
 			break;
 		case 8:
 			// bossgegner
@@ -228,6 +233,9 @@ public class Room extends JPanel {
 		 */
 		// case 6:
 		// break;
+		case 14:
+			// NPC
+			game.story();
 		default:
 			break;
 		}
