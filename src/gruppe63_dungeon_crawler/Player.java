@@ -14,9 +14,12 @@ public class Player extends Elements {
 	private int damage = 50;
 	private boolean attack = false;
 	private int hits = 0;
-	private float level;
-	private float xp;
+	private int maxHealth =100;
+	//private float level;
+	//private float xp;
 	Game game;
+	//Leben leben;
+	//Armor armor;
 	
 	private int money;
 	private int healthpotions=0;
@@ -32,8 +35,8 @@ public class Player extends Elements {
 		// Groesse des Spielers
 		super(x, y, 30, 30);
 		this.room = room;
-		level = 1;
-		xp = 0;
+		//level = 1;
+		//xp = 0;
 		health = 100;
 				
 		magic = new ArrayList<Magic>();
@@ -44,17 +47,17 @@ public class Player extends Elements {
 
 	}
 
-	public int getLevel() { // wann das Spielerlevel erhöht werden soll
+	/*public int getLevel() { // wann das Spielerlevel erhöht werden soll
 		return (int) (xp / 50) + 1;
 	}
 
 	public void addXp(float amt) { // amt = amount ... xp wird erhöht
 		xp += amt;
-	}
+	}*/
 
 	public int getMaxHealth() {
 
-		return getLevel() * 100;
+		return maxHealth;
 	}
 
 	public int getCurrentHealth() {
@@ -64,7 +67,7 @@ public class Player extends Elements {
 		return health;
 	}
 
-	public float getStrengh() {
+	/*public float getStrengh() {
 		return getLevel() * 4f;
 	}
 
@@ -72,18 +75,6 @@ public class Player extends Elements {
 		return getLevel() * 4f;
 	}*/
 
-	public void update() { // Status wird in der Console angezeigt ....
-							// kann/wird später modifiziert werden und im
-							// Spielfeld angezeigt (werden)
-		System.out.println("Status: LEVEL: " + getLevel() + "MaxHP: "
-				+ getMaxHealth() + "HP: " + getCurrentHealth() + "Strengh: "
-				+ getStrengh() + "Magic: " + getMagic());
-
-	}
-
-	public void addItem(Item item) {
-		System.out.println("Du hast gerade ein Leben eingesammelt");
-	}
 
 	public void move() {
 		x = this.getX();
@@ -129,7 +120,7 @@ public class Player extends Elements {
 		return this.getY();
 	}
 
-	public int getHealth() { // oben health erneuert
+	public int getHealth() { 
 		return this.health;
 	}
 
@@ -193,7 +184,7 @@ public class Player extends Elements {
 	public int getMoney() {
 	return money;
 	}
-	
+		
 	public void setMoney(int n) {
 	this.money=n;		
 	} 

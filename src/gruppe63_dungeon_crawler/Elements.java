@@ -89,20 +89,24 @@ public class Elements extends JComponent {
 		// g.fillRect(0, 0, xDim, yDim);
 		// break;
 		case 7:
-			g.setColor(Color.yellow);
-			g.fillRect(0, 0, xDim, yDim);
-			break;
-		case 13:
-			Image img2 = Toolkit.getDefaultToolkit().getImage("leben.png");
+			Image img2 = Toolkit.getDefaultToolkit().getImage("shop.png");
 			g.drawImage(img2, 0, 0, this);
-			g.dispose();
+			//g.setColor(Color.yellow);
+			//g.fillRect(0, 0, xDim, yDim);
+			break;
+		//case 13:
+			/**Image img2 = Toolkit.getDefaultToolkit().getImage("leben.png");
+			g.drawImage(img2, 0, 0, this);
+			g.dispose();**/
 
 			// g.setColor(Color.pink);//Leben
 			// g.fillRect(0, 0, xDim, yDim);
-			break;
+			//break;
 		case 14:
-			g.setColor(Color.ORANGE);
-			g.fillRect(0, 0, xDim, yDim);
+			Image img3 = Toolkit.getDefaultToolkit().getImage("Frosch.gif");
+			g.drawImage(img3, 0, 0, this);
+			//g.setColor(Color.ORANGE);
+			//g.fillRect(0, 0, xDim, yDim);
 			break;
 		/*
 		 * case 12: g.setColor(Color.red);//Waffe g.fillRect(0, 0, xDim, yDim);

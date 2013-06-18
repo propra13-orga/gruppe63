@@ -33,6 +33,9 @@ public class Room extends JPanel {
 	private Player player;
 	private Game game;
 	private Leben leben;
+	//private Mana mana;
+	//private Money money;
+	//private Armor armor;
 	private Enemy enemy = new Enemy(1, 1, null);
 
 	public Room(int elementwidth, int elementheigth, int level, Game game) {
@@ -108,6 +111,8 @@ public class Room extends JPanel {
 		case 11:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 14:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 15:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		default:
 			return null;
@@ -187,6 +192,9 @@ public class Room extends JPanel {
 		else if (upright == 14 || downright == 14 || downleft == 14
 				|| upleft == 14)
 			return 14;
+		else if (upright == 15 || downright == 15 || downleft == 15
+				|| upleft == 15)
+			return 15;
 		else
 			return 0;
 	}
@@ -219,17 +227,19 @@ public class Room extends JPanel {
 		case 9:
 			// bossgegner
 			break;
-		case 13: // Leben
-			// Leben.pickUp();
-			// System.out.println("Du hast ein "+ Leben.name +"erhalten!");
-			player.addItem(null);
-			Player.remove = true;
-			Game.lifes++;
-			System.out.println(Game.lifes);
-			break;
+		//case 13:
+			// Leben			
+			//break;
 		/*
-		 * case 12: //getitem(); //Waffe break; case 10: //getitem(); //Rüstung
-		 * break; case 11: //getitem(); //Zauber break;*
+		 * case 12: 
+		 * //getitem(); //Waffe
+		 *  break;
+		 * case 10: 
+		 * //getitem(); //Rüstung
+		 * break;
+		 * case 11: 
+		 * //getitem(); //Zauber 
+		 * break;*
 		 */
 		// case 6:
 		// break;
