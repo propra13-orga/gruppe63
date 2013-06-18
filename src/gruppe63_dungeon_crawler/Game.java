@@ -656,14 +656,14 @@ public class Game extends JPanel implements Runnable {
 	public void collision() {
 		Rectangle rp = player.getBounds();
 		Rectangle l = leben.getBounds();
-		//Rectangle ma = mana.getBounds();
-		//Rectangle g = geld.getBounds();
-		//Rectangle a = armor.getBounds();
+		Rectangle ma = mana.getBounds();
+		Rectangle g = money.getBounds();
+		Rectangle a = armor.getBounds();
 		
          /*if (rp.intersects(ma)) {
 	        
         	player.setMana(player.getMana()+10);
-        	if (player.getCurrentMana()> 100){
+        	if (player.getMana()> 100){
         		player.setMana(player.getMana()-1);
         	}
         	mana.setVisible(false);
@@ -672,22 +672,13 @@ public class Game extends JPanel implements Runnable {
         if (rp.intersects(g)) {
 	        
         	player.setMoney(player.getMoney()+10);
-        	if (player.getCurrentMoney()> 100){
-        		player.setMoney(player.getMoney()-1);
-        	}
         	money.setVisible(false);
 	        room.remove(money);			            
         }
         if (rp.intersects(a)) {
 	        
         	player.setHatRuestung(player.getHatRuestung());
-        	/**if (player.getCurrentHealth()> 200){
-        		player.setHealth(player.getHealth()-1);
-        	}
-        	if (player.getCurrentHealth()<= 100){
-        	    player.setHealth(player.getHealth()+1);
-        	    }**/
-        	/*armor.setVisible(false);
+        	armor.setVisible(false);
 	        room.remove(armor);			            
         }*/
   
