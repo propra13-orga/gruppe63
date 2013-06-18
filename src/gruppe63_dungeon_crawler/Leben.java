@@ -159,52 +159,10 @@ public class Leben extends Elements {
 	//private int damage = 100;
 	Game game;
 
-
-
-	public void move() {
-		x = this.getX();
-		y = this.getY();
-
-		if (room.Environment(x + vx, y, xDim, yDim) != 1) {
-			x = x + vx;
-			this.setLocation(x, y);
-		}
-
-		if (room.Environment(x + vx, y, xDim, yDim) == 1) {
-			collision = 1;
-		}
-
-		if (room.Environment(x, y - vy, xDim, yDim) != 1) {
-			y = y - vy;
-			this.setLocation(x, y);
-		}
-
-		if (room.Environment(x, y - vy, xDim, yDim) == 1) {
-			collision = 1;
-		}
-
-		room.status();
-	}
-
     public void paintComponent(Graphics g) {
 		
 		g.drawImage(sprite, 0, 0, this);
     }
-	public void setMovX(int vx) {
-		this.vx = vx;
-	}
-
-	public void setMovY(int vy) {
-		this.vy = vy;
-	}
-
-	public int getMovX() {
-		return vx;
-	}
-
-	public int getMovY() {
-		return vy;
-	}
 
 	public int getCollision() {
 		return collision;

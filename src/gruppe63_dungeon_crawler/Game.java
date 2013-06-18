@@ -33,6 +33,7 @@ public class Game extends JPanel implements Runnable {
 	private int saveHealthpotions=0;
 	private int saveManapotions=0;
 	private int saveMana=100;
+	private boolean saveHatRuestung;
 	
 	private int playerdamaged=0;
 	
@@ -351,6 +352,7 @@ public class Game extends JPanel implements Runnable {
 		player.setMoney(saveMoney);
 		player.setHealthpotions(saveHealthpotions);
 		player.setManapotions(saveManapotions);
+		player.setHatRuestung(saveHatRuestung);
 		infobar = new Infobar(50,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
@@ -811,6 +813,8 @@ public class Game extends JPanel implements Runnable {
 			setsaveHealth(player.getHealth());
 			setsaveMana(player.getMana());
 			setsaveHealthpotions(player.getHealthpotions());
+			setsaveManapotions(player.getManapotions());
+			setsaveHatRuestung(player.getHatRuestung());
 			startRoom();
 		}
 	}
@@ -851,6 +855,11 @@ public class Game extends JPanel implements Runnable {
 	public void setsaveMana(int m)
 	{
 		this.saveMana = m;
+	}
+	
+	public void setsaveHatRuestung(boolean r)
+	{
+		this.saveHatRuestung = r;
 	}
 	
 	public void story()
