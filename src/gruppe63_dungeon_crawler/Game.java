@@ -37,6 +37,8 @@ public class Game extends JPanel implements Runnable {
 	
 	private int playerdamaged=0;
 	private int moneyAmount=10;
+	private int healAmount=10;
+	private int manaAmount=10;
 	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Magic> fireballs;
@@ -355,6 +357,8 @@ public class Game extends JPanel implements Runnable {
 		player.setManapotions(saveManapotions);
 		player.setHatRuestung(saveHatRuestung);
 		moneyAmount = 10;
+		manaAmount = 10;
+		healAmount = 10;
 		infobar = new Infobar(50,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
@@ -692,18 +696,16 @@ public class Game extends JPanel implements Runnable {
 	        
         	if (player.getMana() != 100)
  			{
- 				if (player.getManapotions() > 0)
+ 				if (player.getMana()+this.manaAmount < 100)
  				{
- 					if (player.getMana()+10 < 100)
- 					{
- 						player.setMana(player.getMana()+10);
- 					}
- 					else
- 					{
- 						player.setMana(100);
- 					}
+ 					player.setMana(player.getMana()+this.manaAmount);
+ 				}
+ 				else
+ 				{
+ 					player.setMana(100);
  				}
  			}
+        	manaAmount = 0;
         	mana.setVisible(false);
 	        room.remove(mana);			            
         }
@@ -725,18 +727,16 @@ public class Game extends JPanel implements Runnable {
 	        
 			if (player.getHealth() != 100)
 			{
-				if (player.getHealthpotions() > 0)
+				if (player.getHealth()+this.healAmount < 100)
 				{
-					if (player.getHealth()+10 < 100)
-					{
-						player.setHealth(player.getHealth()+10);
-					}
-					else
-					{
-						player.setHealth(100);
-					}
+					player.setHealth(player.getHealth()+this.healAmount);
+				}
+				else
+				{
+					player.setHealth(100);
 				}
 			}
+			healAmount = 0;
         	leben.setVisible(false);
 	        room.remove(leben);			            
         }
