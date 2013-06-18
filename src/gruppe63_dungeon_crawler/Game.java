@@ -36,6 +36,7 @@ public class Game extends JPanel implements Runnable {
 	private boolean saveHatRuestung;
 	
 	private int playerdamaged=0;
+	private int moneyAmount=10;
 	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Magic> fireballs;
@@ -353,6 +354,7 @@ public class Game extends JPanel implements Runnable {
 		player.setHealthpotions(saveHealthpotions);
 		player.setManapotions(saveManapotions);
 		player.setHatRuestung(saveHatRuestung);
+		moneyAmount = 10;
 		infobar = new Infobar(50,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
@@ -622,6 +624,30 @@ public class Game extends JPanel implements Runnable {
 					room.add(boss3);
 					down = false;
 				}
+				if (Z[i][j] == 13) {
+
+	                   leben = new Leben(j * Room.elementheight, i
+	                                   * Room.elementwidth, room);
+	                                  room.add(leben);
+	                          }
+				if (Z[i][j] == 10) {
+
+	                   armor = new Armor(j * Room.elementheight, i
+	                                   * Room.elementwidth, room);
+	                                  room.add(armor);
+	                          }
+				if (Z[i][j] == 11) {
+
+	                   mana = new Mana(j * Room.elementheight, i
+	                                   * Room.elementwidth, room);
+	                                  room.add(mana);
+	                          }
+				if (Z[i][j] == 15) {
+
+	                   money = new Geld(j * Room.elementheight, i
+	                                   * Room.elementwidth, room);
+	                                  room.add(money);
+	                          }
 			}
 		}
 		infobar = new Infobar(50,600,room,player, this);
@@ -662,18 +688,29 @@ public class Game extends JPanel implements Runnable {
 		Rectangle g = money.getBounds();
 		Rectangle a = armor.getBounds();
 		
-         /*if (rp.intersects(ma)) {
+         if (rp.intersects(ma)) {
 	        
-        	player.setMana(player.getMana()+10);
-        	if (player.getMana()> 100){
-        		player.setMana(player.getMana()-1);
-        	}
+        	if (player.getMana() != 100)
+ 			{
+ 				if (player.getManapotions() > 0)
+ 				{
+ 					if (player.getMana()+10 < 100)
+ 					{
+ 						player.setMana(player.getMana()+10);
+ 					}
+ 					else
+ 					{
+ 						player.setMana(100);
+ 					}
+ 				}
+ 			}
         	mana.setVisible(false);
 	        room.remove(mana);			            
         }
         if (rp.intersects(g)) {
 	        
-        	player.setMoney(player.getMoney()+10);
+        	player.setMoney(player.getMoney()+this.moneyAmount);
+        	moneyAmount = 0;
         	money.setVisible(false);
 	        room.remove(money);			            
         }
@@ -682,14 +719,24 @@ public class Game extends JPanel implements Runnable {
         	player.setHatRuestung(player.getHatRuestung());
         	armor.setVisible(false);
 	        room.remove(armor);			            
-        }*/
+        }
   
 		if (rp.intersects(l)) {
 	        
-        	player.setHealth(player.getHealth()+10);
-        	if (player.getCurrentHealth()> 100){
-        		player.setHealth(player.getHealth()-1);
-        	}
+			if (player.getHealth() != 100)
+			{
+				if (player.getHealthpotions() > 0)
+				{
+					if (player.getHealth()+10 < 100)
+					{
+						player.setHealth(player.getHealth()+10);
+					}
+					else
+					{
+						player.setHealth(100);
+					}
+				}
+			}
         	leben.setVisible(false);
 	        room.remove(leben);			            
         }
