@@ -352,10 +352,6 @@ public class Menu extends JFrame implements ActionListener{
 			}
 			else if(storysite==5)
 			{
-				lStory.setText("<html><body>Ebenfalls steht dir ein Shop zur Verfügung, in dem du Heil- und Manatränke <br>" +
-						"sowie eine Rüstung kaufen kannst (Vermindert nur den Nahkampfschaden durch Gegner!).<br>" +
-						"Heiltrank benutzen: Drücke 2 (heilt 20 Lebenspunkte)<br>" +
-						"Manatrank benutzen: Drücke 3 (stellt 10 Mana wieder her).</body></html>");
 				game.continueGame();
 			}
 		}

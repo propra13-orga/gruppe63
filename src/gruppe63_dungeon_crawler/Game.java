@@ -72,6 +72,7 @@ public class Game extends JPanel implements Runnable {
 	public void run() {
 
 		startRoom();
+		Game.lifes=5;
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
@@ -730,7 +731,7 @@ if (rp.intersects(l)) {
 			
 			 if (rp.intersects(a)) {
 			        
-		        	player.setHatRuestung(player.getHatRuestung());
+		        	player.setHatRuestung(true);
 		        	armor.setVisible(false);
 			        room.remove(armor);			            
 		        }
