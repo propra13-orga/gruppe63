@@ -33,6 +33,7 @@ public class Game extends JPanel implements Runnable {
 	private int saveHealthpotions=0;
 	private int saveManapotions=0;
 	private int saveMana=100;
+	private int saveMaxHealth=100;
 	private boolean saveHatRuestung;
 	
 	private int playerdamaged=0;
@@ -89,7 +90,11 @@ public class Game extends JPanel implements Runnable {
 				    Enemy e = (Enemy) enemies.get(i);
 				    if (e.isVisible())
 				        e.move();
-				    else enemies.remove(i);
+				    else 
+				    {
+				    	enemies.remove(i);
+				    	playerLevelUp();
+				    }
 				}
 				// Spieler
 				player.move();
@@ -371,6 +376,7 @@ public class Game extends JPanel implements Runnable {
 		player.setHealthpotions(saveHealthpotions);
 		player.setManapotions(saveManapotions);
 		player.setHatRuestung(saveHatRuestung);
+		player.setMaxHealth(saveMaxHealth);
 		moneyAmount = 10;
 		manaAmount = 10;
 		healAmount = 10;
@@ -403,7 +409,11 @@ public class Game extends JPanel implements Runnable {
 				    Enemy e = (Enemy) enemies.get(i);
 				    if (e.isVisible())
 				        e.move();
-				    else enemies.remove(i);
+				    else 
+				    {
+				    	enemies.remove(i);
+				    	playerLevelUp();
+				    }
 				}
 				// Spieler
 				player.move();
@@ -708,15 +718,15 @@ public class Game extends JPanel implements Runnable {
 		
 if (rp.intersects(l)) {
 	        
-			if (player.getHealth() != 100)
+			if (player.getHealth() != player.getMaxHealth())
 			{
-				if (player.getHealth()+this.healAmount < 100)
+				if (player.getHealth()+this.healAmount < player.getMaxHealth())
 				{
 					player.setHealth(player.getHealth()+this.healAmount);
 				}
 				else
 				{
-					player.setHealth(100);
+					player.setHealth(player.getMaxHealth());
 				}
 			}
 			healAmount = 0;
@@ -896,6 +906,7 @@ if (rp.intersects(l)) {
 			setsaveHealthpotions(player.getHealthpotions());
 			setsaveManapotions(player.getManapotions());
 			setsaveHatRuestung(player.getHatRuestung());
+			setsaveMaxHealth(player.getMaxHealth());
 			startRoom();
 		}
 	}
@@ -943,6 +954,11 @@ if (rp.intersects(l)) {
 		this.saveHatRuestung = r;
 	}
 	
+	public void setsaveMaxHealth(int mh)
+	{
+		saveMaxHealth = mh;
+	}
+	
 	public void story()
 	{
 		timer.cancel();
@@ -955,6 +971,12 @@ if (rp.intersects(l)) {
 		timer.cancel();
 		//container.remove(room);
 		main.shop(player);
+	}
+	
+	public void playerLevelUp()
+	{
+		timer.cancel();
+		main.playerLevelUp(player);
 	}
 	
 	

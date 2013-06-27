@@ -57,7 +57,12 @@ public class Player extends Elements {
 
 	public int getMaxHealth() {
 
-		return maxHealth;
+		return this.maxHealth;
+	}
+	
+	public void setMaxHealth(int mh)
+	{
+		maxHealth = mh;
 	}
 
 	public int getCurrentHealth() {

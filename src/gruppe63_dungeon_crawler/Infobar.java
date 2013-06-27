@@ -26,6 +26,8 @@ public class Infobar extends Elements {
 		g.drawString("Healthpotions: " + player.getHealthpotions(), 200, 40);
 		g.drawString("Leben: " + game.lifes, 350, 20);
 		g.drawString("Manapotions: " + player.getManapotions(), 350, 40);
+		g.drawString("MaxHealth: " + player.getMaxHealth(), 20, 30);
+		
 	//g.dispose();
 	}
 	

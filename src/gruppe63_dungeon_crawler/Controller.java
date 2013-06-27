@@ -40,18 +40,18 @@ public class Controller extends KeyAdapter {
 		}
 		if (key == KeyEvent.VK_2)
 		{
-			if (player.getHealth() != 100)
+			if (player.getHealth() != player.getMaxHealth())
 			{
 				if (player.getHealthpotions() > 0)
 				{
-					if (player.getHealth()+10 < 100)
+					if (player.getHealth()+10 < player.getMaxHealth())
 					{
 						player.setHealth(player.getHealth()+10);
 						player.setHealthpotions(player.getHealthpotions()-1);
 					}
 					else
 					{
-						player.setHealth(100);
+						player.setHealth(player.getMaxHealth());
 						player.setHealthpotions(player.getHealthpotions()-1);
 					}
 				}

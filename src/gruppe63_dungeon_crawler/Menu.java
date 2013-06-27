@@ -32,6 +32,7 @@ public class Menu extends JFrame implements ActionListener{
 	private JPanel GameoverPanel;
 	private JPanel shopPanel;
 	private JPanel storyPanel;
+	private JPanel LevelUpPanel;
 	private Container cp;
 	int difficulty;
 	public Controller controller;
@@ -92,6 +93,12 @@ public class Menu extends JFrame implements ActionListener{
 	JButton bNext;
 	GridBagConstraints lStoryc = new GridBagConstraints();
 	GridBagConstraints bNextc = new GridBagConstraints();
+	
+	// Playerlevelup-elements
+	JLabel lLevelup;
+	JButton bLevelupMaxHealth;
+	GridBagConstraints lLevelupc = new GridBagConstraints();
+	GridBagConstraints bLevelupMaxHealthc = new GridBagConstraints();
 
 	public void initialize() {
 		
@@ -355,6 +362,10 @@ public class Menu extends JFrame implements ActionListener{
 				game.continueGame();
 			}
 		}
+		if(e.getSource()==bLevelupMaxHealth)
+		{
+			player.setMaxHealth(player.getMaxHealth() + 10);
+		}
 		
 	}
 	
@@ -522,6 +533,46 @@ public class Menu extends JFrame implements ActionListener{
 		storyPanel.setVisible(true);
 		
 		cp.add(storyPanel);
+		
+		this.pack();
+		this.setSize(xFrame, yFrame);
+	}
+
+	public void playerLevelUp(Player p)
+	{
+		this.player = p;
+		LevelUpPanel = new JPanel();
+		LevelUpPanel.setBounds(0, 0, 600, 600);
+		LevelUpPanel.setLayout(new GridBagLayout());
+		
+		
+		lLevelup = new JLabel("Du bist eine Stufe aufgestiegen!");
+		lLevelup.setFont(new Font("Serif", Font.PLAIN, 25));
+		lLevelupc.gridx = 0;
+		lLevelupc.gridy = 0;
+		lLevelupc.fill = GridBagConstraints.BOTH;
+		
+		bLevelupMaxHealth = new JButton("+10 Maximum Health");
+		bLevelupMaxHealth.addActionListener(this);
+		bLevelupMaxHealthc.gridx = 0;
+		bLevelupMaxHealthc.gridy = 1;
+		bLevelupMaxHealthc.fill = GridBagConstraints.HORIZONTAL;
+		
+		bBackToGame = new JButton("Back to game");
+		bBackToGamec.gridx = 0;
+		bBackToGamec.gridy = 2;
+		bBackToGamec.fill = GridBagConstraints.HORIZONTAL;
+		
+		bBackToGame.addActionListener(this);
+		bBackToGame.setDefaultCapable(true);
+		
+		LevelUpPanel.add(lLevelup, lLevelupc);
+		LevelUpPanel.add(bLevelupMaxHealth, bLevelupMaxHealthc);
+		LevelUpPanel.add(bBackToGame, bBackToGamec);
+
+		LevelUpPanel.setVisible(true);
+		
+		cp.add(LevelUpPanel);
 		
 		this.pack();
 		this.setSize(xFrame, yFrame);
