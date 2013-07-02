@@ -1,0 +1,20 @@
+Der Held, die Qualle, wird mit den Pfeiltasten durch das Labyrinth gesteuert.
+
+Hindernisse sind schwarz, der Eingang grün und der Ausgang blau.
+
+Ziel des Spiels ist es, den Ausgang (blau) zu erreichen. Dabei trifft die Falle auf unterschiedliche Gegner 
+(Quallen) oder Bossgegner (ebenfalls Quallen). Berührt die Qualle reguläre Gegner wird der aktuelle Raum neu 
+geladen. Die Qualle wird dabei geheilt. Die Bossgegner müssen getötet werden, um weiter zu kommen. Dazu 
+steht der Qualle momentan ein Nahkampf zur verfügung. Wird die Taste 1 gedrückt (Taste halten) schägt die Qualle 
+zu. Sowohl die Qualle, als auch die Bossgegner besitzen Lebenspunkte und verteilen eine bestimmte Schadensmenge.
+Verliert die Qualle alle ihre Lebenspunkte ist das Spiel vorbei.
+
+Der erste Bossgegner verschießt Feuerbälle, welche dem Spieler 
+Schaden zufügen.
+
+Der zweite Bossgegner ist ein Nahkämpfer. Er kann nur im Fernkampf besiegt werden. Durch Drücken der Shift Taste
+wird ein Pfeil nacht rechts abgeschossen. Durch Drücken der Enter Taste wird ein Feuerball nacht rechts abgeschossen.
+
+Der dritte Bossgenger verschießt Feuerbälle und ist ein Nahkämpfer. Auch er kann nur im Fernkampf besiegt werden.
+
+
