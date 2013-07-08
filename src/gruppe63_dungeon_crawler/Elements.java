@@ -1,6 +1,5 @@
 package gruppe63_dungeon_crawler;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;

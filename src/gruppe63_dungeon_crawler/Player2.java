@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 @SuppressWarnings({ "serial" })
-public class Player extends Elements {
+public class Player2 extends Elements {
 	private Room room;
 	private int health =100;
 	private int mana = 100;
@@ -20,13 +20,6 @@ public class Player extends Elements {
 	private boolean attack = false;
 	private int hits = 0;
 	private int maxHealth =100;
-	
-	private int winnerpoints=0;
-	private int winnerpoints2=0;
-	private int posX2;
-	private int posY2;
-	private int r2;
-	
 	//private float level;
 	//private float xp;
 	Game game;
@@ -42,8 +35,10 @@ public class Player extends Elements {
 	private ArrayList<Magic> magic;
 	private ArrayList<Weapon> weapon;
 	private boolean hatRuestung;
+	
 
-	public Player(int x, int y, Room room) {
+
+	public Player2(int x, int y, Room room) {
 		// Groesse des Spielers
 		super(x, y, 30, 30);
 		this.room = room;
@@ -69,12 +64,7 @@ public class Player extends Elements {
 
 	public int getMaxHealth() {
 
-		return this.maxHealth;
-	}
-	
-	public void setMaxHealth(int mh)
-	{
-		maxHealth = mh;
+		return maxHealth;
 	}
 
 	public int getCurrentHealth() {
@@ -93,21 +83,9 @@ public class Player extends Elements {
 	}*/
 
 
-	public void move(int n) {
-		x = this.getX();
-		y = this.getY();
-
-		if (room.Environment(x + vx, y, xDim, yDim) != 1) {
-			x = x + vx;
-			this.setLocation(x, y);
-		}
-
-		if (room.Environment(x, y - vy, xDim, yDim) != 1) {
-			y = y - vy;
-			this.setLocation(x, y);
-		}
-		if (n!=0) {
-			send(n);}
+	public void move(Player player) {
+		System.out.println("test");
+		this.setLocation(player.getposX2(),player.getposY2());
 	}
 
 	public void paintComponent(Graphics g) {
@@ -130,13 +108,6 @@ public class Player extends Elements {
 		return vy;
 	}
 
-	public int getPosX() {
-		return this.getX();
-	}
-
-	public int getPosY() {
-		return this.getY();
-	}
 
 	public int getHealth() { 
 		return this.health;
@@ -245,90 +216,20 @@ public class Player extends Elements {
 	public void setManapotions(int m)
 	{
 		manapotions = m;
-	}
+	}    	
 	
-	public void send(int n) {
-
-        try {
-           Socket ss = new Socket("Jan", 1231);
-                           
-           OutputStream os = ss.getOutputStream();
-           InputStream is = ss.getInputStream();    
-
-           int x=this.getX();
-           int y=this.getY();
-           
-           System.out.println("Client x:" + x);
-           System.out.println("Client y:" + y); 
-           
-                  	   
-           os.write(n);
-           os.write(x/4);
-           os.write(y/4);
-           os.write(Game.actualroom);
-           os.write(this.winnerpoints/100);
-          
-           
-           int a1=is.read()*4;
-           int b1=is.read()*4;
-           int c = is.read();
-           int d = is.read()*100;
-           
-           
-           System.out.println("Client x2:" + a1);
-           System.out.println("Client y2:" + b1);
-           
-           this.posX2=a1;
-           this.posY2=b1;
-           this.r2=c;
-           this.winnerpoints2=d;
-           
-
-           
-         
-           
-           ss.close();
-           
-         
-           
-                                 
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: taranis.");
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to: taranis.");
-            System.exit(1);
-            
-            
-        }}
 	
-        public int getRoom2() {
-        	
-        	return r2;
-        }
-        	
-        	
-        	public int getposY2(){
-        		return posY2;
-        	}
-        	public int getposX2(){
-        		return posX2;
-        	}
-        	
-        	public int getWinnerpoints(){
-        		return this.winnerpoints;
-        	}
-        	public int getWinnerpoints2(){
-        		return this.winnerpoints2;
-        	}
-        	public void incWinnerpoints(){
-        		this.winnerpoints++;
-        	}
-        	public void setWinpoints(int n){
-        		this.winnerpoints=n;
-        	}
- 
 
-    }
+    	
+	
+	
+    	
+    	
+    	
+    	
+    
+    
+    
+}
 
 

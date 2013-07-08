@@ -1,8 +1,7 @@
 package gruppe63_dungeon_crawler; 
 
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
+
 
 
 @SuppressWarnings({ "serial" })
@@ -27,6 +26,10 @@ public class Infobar extends Elements {
 		g.drawString("Leben: " + game.lifes, 350, 20);
 		g.drawString("Manapotions: " + player.getManapotions(), 350, 40);
 		g.drawString("MaxHealth: " + player.getMaxHealth(), 20, 30);
+		if (game.getClient()!=0){
+			g.drawString("Winnerpoints: " + player.getWinnerpoints(), 20, 50);
+			g.drawString("Winnerpoints2: " + player.getWinnerpoints2(), 200, 50);
+		}
 		
 	//g.dispose();
 	}

@@ -30,6 +30,9 @@ public class Game extends JPanel implements Runnable {
 	private Fireball fireball;
 	private Infobar infobar;
 	
+	private Player2 player2;
+	private int client;
+	
 	private int saveHealth=100;
 	private int saveMoney=100;
 	private int saveHealthpotions=0;
@@ -38,6 +41,7 @@ public class Game extends JPanel implements Runnable {
 	private int saveMaxHealth=100;
 	private boolean saveHatRuestung;
 	private boolean saveHatRing;
+	private int savewinpoints=0;
 	
 	private int playerdamaged=0;
 	private int moneyAmount=10;
@@ -62,13 +66,14 @@ public class Game extends JPanel implements Runnable {
 	public static int lifes = 5;
 	int[][] Z;
 
-	public int actualroom = 1;
+	public static int actualroom = 1;
 	private int endroom = 9;
 
-	public Game(Container container, Menu menu) {
+	public Game(Container container, Menu menu, int n) {
 
 		this.container = container;
 		this.main = menu;
+		this.client=n;
 	}
 	
 	int fireballtimer = 0;
@@ -101,7 +106,10 @@ public class Game extends JPanel implements Runnable {
 				    }
 				}
 				// Spieler
-				player.move();
+				player.move(client);
+				if (client==0) {room.status();}
+				else {player2.move(player);
+				room.status(player, player2);}
 				infobar.repaint();
 				
 				// Feuerbaelle Diana
@@ -315,7 +323,7 @@ public class Game extends JPanel implements Runnable {
 
 	void startRoom() {
 		
-				container.setBackground(Color.WHITE);
+				container.setBackground(Color.CYAN);
 		container.removeAll();
 		room = new Room(50, 50, actualroom, this); // (Elementwidth,
 													// Elementheight, Level,
@@ -338,9 +346,11 @@ public class Game extends JPanel implements Runnable {
 			for (int j = 0; j < Z[i].length; j++) {
 				if (Z[i][j] == 4) {
 
-					player = new Player((j + 1) * Room.elementheight, i
+					player = new Player(j * Room.elementheight, i
 							* Room.elementwidth, room);
 					room.add(player);
+					if(client!=0){player2 = new Player2(j * Room.elementheight, (i) * Room.elementwidth,room);
+					room.add(player2);}
 				}
 
 				if (Z[i][j] == 2) {
@@ -424,6 +434,7 @@ public class Game extends JPanel implements Runnable {
 		player.setManapotions(saveManapotions);
 		player.setHatRuestung(saveHatRuestung);
 		player.setMaxHealth(saveMaxHealth);
+		player.setWinpoints(savewinpoints);
 		moneyAmount = 10;
 		manaAmount = 10;
 		healAmount = 10;
@@ -463,7 +474,11 @@ public class Game extends JPanel implements Runnable {
 				    }
 				}
 				// Spieler
-				player.move();
+				player.move(client);
+				if (client==0) {room.status();}
+				else {player2.move(player);
+				room.status(player, player2);}
+				
 				infobar.repaint();
 				
 				// Feuerbaelle Diana
@@ -544,11 +559,11 @@ public class Game extends JPanel implements Runnable {
 						down = true;
 					}
 //////////////////////////////////////////////////////////////////				
-					/*player.collision(qenemy);
+					player.collision(qenemy);
 					if (qenemy.getHealth() <= 0) {
 						room.remove(qenemy);
 						ring.setVisible(true);
-					}	*/
+					}	
 if (actualroom == 5) {ring.setVisible(false);
 					
 					for (int k = 0; k<fireballs.size(); k++) {
@@ -697,8 +712,10 @@ if (actualroom == 5) {ring.setVisible(false);
 			for (int j = 0; j < Z[i].length; j++) {
 				if (Z[i][j] == 4) {
 
-					player.setLocation((j + 1) * Room.elementheight, i * Room.elementwidth);
+					player.setLocation(j * Room.elementheight, i * Room.elementwidth);
 					room.add(player);
+					if(client!=0){player2.setLocation((j + 1) * Room.elementheight, i * Room.elementwidth);
+					room.add(player2);}
 				}
 
 				if (Z[i][j] == 2) {
@@ -753,7 +770,7 @@ if (actualroom == 5) {ring.setVisible(false);
 	                                   * Room.elementwidth, room);
 	                                  room.add(money);
 	                          }
-				if (Z[i][j] == 17) {
+				/*if (Z[i][j] == 17) {
 
 	                   ring = new Ring(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
@@ -765,8 +782,8 @@ if (actualroom == 5) {ring.setVisible(false);
 	                   qenemy = new Enemyquest(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(qenemy);
-	                                  qenemy.setVisible(true);
-	                          }
+	                                  qenemy.setVisible(false);
+	                          }*/
 			}
 		}
 		infobar = new Infobar(50,600,room,player, this);
@@ -982,7 +999,7 @@ if (rp.intersects(l)) {
 		timer.purge();
 		container.remove(room);
 		room = null;
-		main.win(false);
+		main.win(false, player);
 	}
 
 	public void thisRoom() {
@@ -1000,7 +1017,7 @@ if (rp.intersects(l)) {
 		if (actualroom > endroom) {
 			timer.cancel();
 			timer.purge();
-			main.win(true);
+			main.win(true, player);
 		} else {
 			setsaveMoney(player.getMoney());
 			setsaveHealth(player.getHealth());
@@ -1009,6 +1026,7 @@ if (rp.intersects(l)) {
 			setsaveManapotions(player.getManapotions());
 			setsaveHatRuestung(player.getHatRuestung());
 			setsaveMaxHealth(player.getMaxHealth());
+			setsaveWinnerpoints(player.getWinnerpoints());
 			startRoom();
 		}
 	}
@@ -1065,6 +1083,11 @@ if (rp.intersects(l)) {
 		saveMaxHealth = mh;
 	}
 	
+	public void setsaveWinnerpoints(int n)
+	{
+		this.savewinpoints = n;
+	}
+	
 	public void story()
 	{
 		timer.cancel();
@@ -1090,5 +1113,17 @@ if (rp.intersects(l)) {
 		timer.cancel();
 		main.playerLevelUp(player);
 	}	
+	
+	public void questGame() {
+		    // TODO Auto-generated method stub
+		   continueRoom();
+		   startRoom();
+		   run();
+		    
+		   }   
+	
+	public int getClient(){
+		return this.client;
+	}
 	
 }

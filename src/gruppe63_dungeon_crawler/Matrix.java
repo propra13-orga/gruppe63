@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.FileInputStream;
 import java.io.File;
 import java.util.StringTokenizer;
-import java.lang.Integer.*;
+
 
 public class Matrix {
 

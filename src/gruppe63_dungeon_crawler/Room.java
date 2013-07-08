@@ -239,6 +239,71 @@ public class Room extends JPanel {
 		g.drawImage(img,0,0,this);
 	}
 	
+	public void status(Player player, Player2 player2) {
+		int collision = Environment(player.x, player.y,player.xDim,
+				player.yDim);
+		
+		if (player.getRoom2()>Game.actualroom) {
+				game.nextRoom();
+			}
+		
+		switch (collision) {
+		
+		case 5:
+						
+			if (game.getDown() & Environment(player2.getX(), player2.getY(), player2.xDim,
+					player2.yDim)==5) {
+				game.nextRoom();
+			}
+			
+			if (game.getDown()) {
+			
+			player.incWinnerpoints();}
+			
+			
+			
+			break;
+		case 4:
+			//game.lastRoom(); // Jan: Dass man wieder nach oben gehen kann habe ich erstmal rausgenommen!
+			break;
+		case 7:
+			game.shop(); // Shopmenue.
+			break;
+		case 8:
+			// bossgegner
+			break;
+		case 9:
+			// bossgegner
+			break;
+		//case 13:
+			// Leben			
+			//break;
+		/*
+		 * case 12: 
+		 * //getitem(); //Waffe
+		 *  break;
+		 * case 10: 
+		 * //getitem(); //Rüstung
+		 * break;
+		 * case 11: 
+		 * //getitem(); //Zauber 
+		 * break;*
+		 */
+		// case 6:
+		// break;
+		case 14:
+			// NPC
+			game.story();
+			
+		case 20: //Nixe Quest verdienen von 20 xp
+			game.quest();
+			break;
+		default:
+			break;
+		}
+
+	}
+	
 	public void status() {
 		int collision = Environment(player.x, player.y, player.xDim,
 				player.yDim);

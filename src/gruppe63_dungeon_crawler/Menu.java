@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -63,6 +64,11 @@ public class Menu extends JFrame implements ActionListener{
 	JButton bSave;
 	JButton bClose;
 	JButton bRestart;
+	
+	JButton bServer;
+	JButton bClient2;
+	JButton bClient1;
+	
 	GridBagConstraints lTitlec = new GridBagConstraints();
 	GridBagConstraints lDifficultyc = new GridBagConstraints();
 	GridBagConstraints bStartc = new GridBagConstraints();
@@ -89,6 +95,12 @@ public class Menu extends JFrame implements ActionListener{
 	GridBagConstraints bBuyManapotionc = new GridBagConstraints();
 	GridBagConstraints bBackToGamec = new GridBagConstraints();
 	GridBagConstraints bBuyArmorc = new GridBagConstraints();
+	
+	GridBagConstraints bServerc = new GridBagConstraints();
+	GridBagConstraints bClient2c = new GridBagConstraints();
+	GridBagConstraints bClient1c = new GridBagConstraints();
+	GridBagConstraints lWinnerPoints1c = new GridBagConstraints();
+	GridBagConstraints lWinnerPoints2c = new GridBagConstraints();
 	
 	// NPCstory-elements
 	JLabel lStory;
@@ -141,6 +153,13 @@ public class Menu extends JFrame implements ActionListener{
 		bClose.addActionListener(this);
 		bSave = new JButton("Save and exit");
 		bSave.addActionListener(this);
+		
+		bServer = new JButton("Server starten");
+		bServer.addActionListener(this);
+		bClient2 = new JButton("2. Client starten");
+		bClient2.addActionListener(this);
+		bClient1 = new JButton("1. Client starten");
+		bClient1.addActionListener(this);
 		
 		
 		
@@ -203,6 +222,25 @@ public class Menu extends JFrame implements ActionListener{
 		bExitc.gridy = 4;
 		bExitc.fill = GridBagConstraints.HORIZONTAL;
 		bExitc.weightx = 1.0;
+		
+		// Initialize Serverbutton
+		bServerc.gridx = 0;
+		bServerc.gridy = 6;
+		bServerc.fill = GridBagConstraints.HORIZONTAL;
+		bServerc.weightx = 2.0;
+		
+// Initialize Clientbutton
+		bClient2c.gridx = 0;
+		bClient2c.gridy = 12;
+		bClient2c.fill = GridBagConstraints.HORIZONTAL;
+		bClient2c.weightx = 2.0;
+
+		// Initialize Clientbutton
+		bClient1c.gridx = 0;
+		bClient1c.gridy = 9;
+		bClient1c.fill = GridBagConstraints.HORIZONTAL;
+		bClient1c.weightx = 2.0;	
+		
 
 		cp.setLayout(new GridBagLayout());
 
@@ -211,7 +249,9 @@ public class Menu extends JFrame implements ActionListener{
 		cp.add(bStart, bStartc);
 		cp.add(bSettings, bSettingsc);
 		cp.add(bExit, bExitc);
-		
+		cp.add(bServer, bServerc);
+		cp.add(bClient2, bClient2c);
+		cp.add(bClient1, bClient1c);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -242,7 +282,7 @@ public class Menu extends JFrame implements ActionListener{
 	{
 		if(e.getSource()==this.bStart)
 		{
-			this.startGame();
+			this.startGame(0);
 
 try {
 Sound.main(null);
@@ -260,12 +300,47 @@ e1.printStackTrace();
 		
 		if(e.getSource()==this.ok)
 		{
-			//game.continueGame();
+			game.questGame();
 		}
 		if(e.getSource()==this.no)
 		{
-			//game.continueGame();
+			game.continueGame();
+			 Object[] options = {"OK"};
+			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Spielverderber!!!!<br>"+ "Du willst mich nur aergern!<br>"+" Dabei habe ich mir so Muehe gegeben :(</body></html>","Information", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
 		}
+		
+		if(e.getSource()==this.bClient2)
+		{
+			
+				this.startGame(2);
+			
+		}
+		
+		if(e.getSource()==this.bClient1)
+		{
+			
+				this.startGame(1);
+			
+		}
+		
+		if(e.getSource()==this.bServer)
+		{							
+			
+				try {
+					MultiServer.server();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+				
+			}
+			
+			
+		
+		
+		
+		
 		
 		if(e.getSource()==this.bSettings)
 		{
@@ -310,7 +385,7 @@ e1.printStackTrace();
 		}
 		if(e.getSource()==this.bBackToGame)
 		{
-			game.continueGame();
+			game.questGame();
 			
 try {
 Sound.main(null);
@@ -377,39 +452,39 @@ e1.printStackTrace();
 			storysite++;
 			if(storysite==2)
 			{
-				lStory.setText("<html><body>Berührst du Fallen (grau), verlierst du ein Leben und fängst erneut bei dem Raum an. <br>" +
-						"Wenn du eine Qualle berührst, verlierst du Lebenspunkte. Du kannst dich mit einem Heiltrank heilen. <br>" +
-						"Sowohl normale Gegner als auch Bossgegner haben Leben und fügen dir einen bestimmten Schaden zu.<br>" +
-						"Du musst die Bossgegner töten, um in den nächsten Raum zu gelangen.</body></html>");
+				lStory.setText("<html><body>Fangen dich die Quallen, erfaehrst du Schaden. <br>" +
+						            "Sinken deine Gesundheitspunkte unter 100, verlierst du ein Leben und musst wieder zum Anfang des Raums. Jedoch kannst du dich mit einem Heiltrank heilen. <br>" +
+						            "oder du sammelst Items die im Labyrinth verteilt sind.</body></html>");
 			}
 			else if(storysite==3)
 			{
-				lStory.setText("<html><body>Dir stehen 3 Arten von Angriff zur Verfügung: <br>" +
-						"Nahkampf: Drücke 1 (bzw. halte 1 fest).<br>" +
-						"Bogen: Drücke shift.<br>" +
-						"Feuerball (verbraucht Mana): Drücke enter. <br></body></html>");
+				lStory.setText("<html><body>Zum Angriff und Steuerung<br><br>Dir stehen 3 Arten von Angriff zur Verfuegung: <br>" +
+			             "Nahkampf: Druecke 1 (bzw. halte 1 fest).<br>" +
+			             "Bogen: Druecke shift.<br>" +
+			             "Feuerball (verbraucht Mana): Druecke enter. <br></body></html>");
 			}
 			else if(storysite==4)
 			{
-				lStory.setText("<html><body>Ebenfalls steht dir ein Shop zur Verfügung, in dem du Heil- und Manatränke <br>" +
+				lStory.setText("<html><body>Ebenfalls kannst du den Unterwasser-Shop besuchen, in dem du Heil- und Manatraenke <br>" +
 						"sowie eine Rüstung kaufen kannst (Vermindert nur den Nahkampfschaden durch Gegner!).<br>" +
-						"Heiltrank benutzen: Drücke 2 (heilt bis zu 20 Lebenspunkte)<br>" +
+						"Gebrauchsanweisung zur Benutzung der gekauften Artikel<br><br>Heiltrank benutzen: Druecke 2 (heilt bis zu 20 Lebenspunkte)<br>" +
 						"Manatrank benutzen: Drücke 3 (stellt bis zu 10 Mana wieder her).</body></html>");
 				bNext.setText("Ok, back to game");
 			}
 			else if(storysite==5)
 			{
-				game.continueGame();
+				game.questGame();
 			}			
 		}
 		if(e.getSource()==bLevelupMaxHealth)
 		{
 			player.setMaxHealth(player.getMaxHealth() + 10);
+			game.questGame();
 		}
 		
 	}
 	
-	public void startGame()
+	public void startGame(int n)
 	{
 		// Start game, load dungeon
 		String diffString = null;
@@ -429,14 +504,17 @@ e1.printStackTrace();
 		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
 		//Start new game
-		game = new Game(this.cp, this);
+		game = new Game(this.cp, this, n);
 		thread = new Thread(game);
 		thread.start();
 	}
 	
-	public void win(boolean win) {
+	public void win(boolean win, Player player) {
+		int client=game.getClient();
 		game = null;
 
+		this.player = player;
+		
 		// Zwischenmenu laden
 		GameoverPanel = new JPanel();
 		GameoverPanel.setBounds(0, 0, 600, 600);
@@ -451,6 +529,12 @@ e1.printStackTrace();
 		{
 			lEnde.setText("You lose!");
 		}
+		
+		JLabel lWinnerPoints1 = new JLabel("Your winnerpoints : " + player.getWinnerpoints(), JLabel.CENTER);
+		lWinnerPoints1.setFont(new Font("Serif", Font.PLAIN, 25));
+		JLabel lWinnerPoints2 = new JLabel("Your enemy's winnerpoints : " + player.getWinnerpoints2(), JLabel.CENTER);
+		lWinnerPoints2.setFont(new Font("Serif", Font.PLAIN, 25));
+		
 		bRestart = new JButton("Hauptmenu");
 		bRestart.addActionListener(this);
 		bRestart.setDefaultCapable(true);
@@ -462,6 +546,13 @@ e1.printStackTrace();
 		lEndec.gridy = 0;
 		lEndec.fill = GridBagConstraints.HORIZONTAL;
 		
+		lWinnerPoints1c.gridx = 0;
+		lWinnerPoints1c.gridy = 3;
+		lWinnerPoints1c.fill = GridBagConstraints.HORIZONTAL;
+		lWinnerPoints2c.gridx = 0;
+		lWinnerPoints2c.gridy = 4;
+		lWinnerPoints2c.fill = GridBagConstraints.HORIZONTAL;
+		
 		bExitc2.gridx = 0;
 		bExitc2.gridy = 2;
 		bExitc2.fill = GridBagConstraints.HORIZONTAL;
@@ -470,6 +561,11 @@ e1.printStackTrace();
 		GameoverPanel.add(lEnde, lEndec);
 		GameoverPanel.add(bRestart, bRestartc);
 		GameoverPanel.add(bExit, bExitc2);
+		if (client!=0) {
+			GameoverPanel.add(lWinnerPoints1, lWinnerPoints1c);
+			GameoverPanel.add(lWinnerPoints2, lWinnerPoints2c);
+			}
+
 
 		GameoverPanel.setVisible(true);
 
@@ -553,11 +649,10 @@ e1.printStackTrace();
 		storyPanel.setLayout(new GridBagLayout());
 		
 		
-		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler.<br>" +
-				"Der Held, die Qualle, wird mit den Pfeiltasten durch das Labyrinth gesteuert. <br>" +
-				"Hindernisse sind schwarz, der Eingang grün und der Ausgang blau. <br>" +
-				"Ziel des Spiels ist es, den Ausgang zu erreichen. Dabei triffst du auf unterschiedliche Gegner <br>" +
-				"(Quallen) oder Bossgegner (ebenfalls Quallen).</body></html>");
+		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler der Meere.<br>" +
+				        "DU, die Krake, kannst mit den Pfeiltasten durch das Labyrinth laufen. <br>Korallen sind deine Hindernisse, sie lassen dich nicht durch und tuermen sich auf wie Waende.br> Du kommst aus einer wunderschoenen Muschel.<br>Doch um weiter zu kommen musst du dich zur Glaskugel begeben. <br>Leicht zu erkennen durch das Ausgangssymbol " +
+				        "Ziel ist es, sich durch die Gefahren der Tiefe zu schlaengeln<br>und das Endziel zu erreichen.<br> Dabei triffst du auf unterschiedliche Gegner und Meereserscheinungen. <br>" +
+				        "Pass auf, wenn du auf Kraben triffst, musst du diese erledigen, sonst werden sie dich heimsuchen und du bleibst auf ewig in dem Labyrinth der Meere gefangen.</body></html>"); 
 		lStoryc.gridx = 0;
 		lStoryc.gridy = 0;
 		lStoryc.fill = GridBagConstraints.BOTH;
@@ -634,7 +729,7 @@ e1.printStackTrace();
 		aufgabes.gridy = 0;
 		aufgabes.fill = GridBagConstraints.BOTH;
 		
-		ok = new JButton("Ich neheme deinen Quest an");
+		ok = new JButton("<html><body>Ich neheme die Herausforderung an <br>"+"und finde den Ring</body></html>");
 		ok.addActionListener(this);
 		oks.gridx = 0;
 		oks.gridy = 2;
@@ -644,7 +739,7 @@ e1.printStackTrace();
 		questPanel.add(ok, oks);
 		questPanel.setVisible(true);
 		
-		no = new JButton("Tut mir leid, ich kann dir nicht helfen");
+		no = new JButton("<html><body>Tut mir leid,<br>"+ "ich bin zu erwachsen, um Versteckspiele zu spielen<br></body></html>");
 		no.addActionListener(this);
 		nos.gridx = 0;
 		nos.gridy = 6;
