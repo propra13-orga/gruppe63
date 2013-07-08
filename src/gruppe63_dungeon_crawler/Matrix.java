@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.FileInputStream;
 import java.io.File;
 import java.util.StringTokenizer;
-import java.lang.Integer.*;
 
 public class Matrix {
 
@@ -56,6 +55,7 @@ public class Matrix {
 			File fil = new File(file);
 			FileInputStream fis = new FileInputStream(fil);
 			InputStreamReader isr = new InputStreamReader(fis);
+			@SuppressWarnings("resource")
 			BufferedReader br = new BufferedReader(isr);
 
 			for (int i = 0; i < 12; i++) {

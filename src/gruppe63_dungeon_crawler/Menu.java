@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -28,6 +29,7 @@ public class Menu extends JFrame implements ActionListener{
 	
 	// Game klasse?
 	private static Game game;
+	@SuppressWarnings("unused")
 	private Enemyquest qenemy;
 	
 	private JPanel GameoverPanel;
@@ -260,11 +262,13 @@ e1.printStackTrace();
 		
 		if(e.getSource()==this.ok)
 		{
-			//game.continueGame();
+			game.questGame();
 		}
 		if(e.getSource()==this.no)
 		{
-			//game.continueGame();
+			game.continueGame();
+            Object[] options = {"OK"};
+			JOptionPane.showOptionDialog(null, "<html><body>!!!!!Spielverderber!!!!<br>"+ "Du willst mich nur aergern!<br>"+" Dabei habe ich mir so Muehe gegeben :(</body></html>","Information", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]);
 		}
 		
 		if(e.getSource()==this.bSettings)
@@ -310,17 +314,18 @@ e1.printStackTrace();
 		}
 		if(e.getSource()==this.bBackToGame)
 		{
-			game.continueGame();
+			//game.continueGame();
+			game.questGame();
 			
-try {
-Sound.main(null);
-} catch (UnsupportedAudioFileException | IOException
-| LineUnavailableException e1) {
-// TODO Auto-generated catch block
-e1.printStackTrace();
-}
-
-		}
+        try {
+            Sound.main(null);
+            } 
+        catch (UnsupportedAudioFileException | IOException
+        | LineUnavailableException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+        }
+        }
 		if(e.getSource()==this.bBuyHealthpotion)
 		{
 			if (player.getMoney()>=10)
@@ -377,34 +382,35 @@ e1.printStackTrace();
 			storysite++;
 			if(storysite==2)
 			{
-				lStory.setText("<html><body>Berührst du Fallen (grau), verlierst du ein Leben und fängst erneut bei dem Raum an. <br>" +
-						"Wenn du eine Qualle berührst, verlierst du Lebenspunkte. Du kannst dich mit einem Heiltrank heilen. <br>" +
-						"Sowohl normale Gegner als auch Bossgegner haben Leben und fügen dir einen bestimmten Schaden zu.<br>" +
-						"Du musst die Bossgegner töten, um in den nächsten Raum zu gelangen.</body></html>");
+				lStory.setText("<html><body>Fangen dich die Quallen, erfaehrst du Schaden. <br>" +
+						"Sinken deine Gesundheitspunkte unter 100, verlierst du ein Leben und musst wieder zum Anfang des Raums. Jedoch kannst du dich mit einem Heiltrank heilen. <br>" +
+						"oder du sammelst Items die im Labyrinth verteilt sind.</body></html>");
 			}
 			else if(storysite==3)
 			{
-				lStory.setText("<html><body>Dir stehen 3 Arten von Angriff zur Verfügung: <br>" +
+				lStory.setText("<html><body>Zum Angriff und Steuerung<br><br>Dir stehen 3 Arten von Angriff zur Verfügung: <br>" +
 						"Nahkampf: Drücke 1 (bzw. halte 1 fest).<br>" +
 						"Bogen: Drücke shift.<br>" +
 						"Feuerball (verbraucht Mana): Drücke enter. <br></body></html>");
 			}
 			else if(storysite==4)
 			{
-				lStory.setText("<html><body>Ebenfalls steht dir ein Shop zur Verfügung, in dem du Heil- und Manatränke <br>" +
+				lStory.setText("<html><body>Ebenfalls kannst du den Unterwasser-Shop besuchen, in dem du Heil- und Manatränke <br>" +
 						"sowie eine Rüstung kaufen kannst (Vermindert nur den Nahkampfschaden durch Gegner!).<br>" +
-						"Heiltrank benutzen: Drücke 2 (heilt bis zu 20 Lebenspunkte)<br>" +
+						"Gebrauchsanweisung zur Benutzung der gekauften Artikel<br><br>Heiltrank benutzen: Drücke 2 (heilt bis zu 20 Lebenspunkte)<br>" +
 						"Manatrank benutzen: Drücke 3 (stellt bis zu 10 Mana wieder her).</body></html>");
 				bNext.setText("Ok, back to game");
 			}
 			else if(storysite==5)
 			{
-				game.continueGame();
+				//game.continueGame();
+				game.questGame();
 			}			
 		}
 		if(e.getSource()==bLevelupMaxHealth)
 		{
 			player.setMaxHealth(player.getMaxHealth() + 10);
+			game.questGame();
 		}
 		
 	}
@@ -553,11 +559,10 @@ e1.printStackTrace();
 		storyPanel.setLayout(new GridBagLayout());
 		
 		
-		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler.<br>" +
-				"Der Held, die Qualle, wird mit den Pfeiltasten durch das Labyrinth gesteuert. <br>" +
-				"Hindernisse sind schwarz, der Eingang grün und der Ausgang blau. <br>" +
-				"Ziel des Spiels ist es, den Ausgang zu erreichen. Dabei triffst du auf unterschiedliche Gegner <br>" +
-				"(Quallen) oder Bossgegner (ebenfalls Quallen).</body></html>");
+		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler der Meere.<br>" +
+				"DU, die Krake, kannst mit den Pfeiltasten durch das Labyrinth laufen. <br>Korallen sind deine Hindernisse, sie lassen dich nicht durch und tuermen sich auf wie Waende.br> Du kommst aus einer wunderschoenen Muschel.<br>Doch um weiter zu kommen musst du dich zur Glaskugel begeben. <br>Leicht zu erkennen durch das Ausgangssymbol " +
+				"Ziel ist es, sich durch die Gefahren der Tiefe zu schlaengeln<br>und das Endziel zu erreichen.<br> Dabei triffst du auf unterschiedliche Gegner und Meereserscheinungen. <br>" +
+				"Pass auf, wenn du auf Kraben triffst, musst du diese erledigen, sonst werden sie dich heimsuchen und du bleibst auf ewig in dem Labyrinth der Meere gefangen.</body></html>");
 		lStoryc.gridx = 0;
 		lStoryc.gridy = 0;
 		lStoryc.fill = GridBagConstraints.BOTH;
@@ -634,7 +639,7 @@ e1.printStackTrace();
 		aufgabes.gridy = 0;
 		aufgabes.fill = GridBagConstraints.BOTH;
 		
-		ok = new JButton("Ich neheme deinen Quest an");
+		ok = new JButton("<html><body>Ich neheme die Herausforderung an <br>"+"und finde den Ring</body></html>");
 		ok.addActionListener(this);
 		oks.gridx = 0;
 		oks.gridy = 2;
@@ -644,7 +649,7 @@ e1.printStackTrace();
 		questPanel.add(ok, oks);
 		questPanel.setVisible(true);
 		
-		no = new JButton("Tut mir leid, ich kann dir nicht helfen");
+		no = new JButton("<html><body>Tut mir leid,<br>"+ "ich bin zu erwachsen, um Versteckspiele zu spielen<br></body></html>");
 		no.addActionListener(this);
 		nos.gridx = 0;
 		nos.gridy = 6;

@@ -12,6 +12,7 @@ public class Mana extends Elements {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private Room room;
 	///*****////
 	
@@ -22,6 +23,7 @@ public class Mana extends Elements {
 	//private int damage = 100;
 	//private boolean attack = false;
 	//private int hits = 0;
+	@SuppressWarnings("unused")
 	private boolean alive=true;
 	
 	private Image sprite;

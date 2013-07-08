@@ -1,12 +1,11 @@
 package gruppe63_dungeon_crawler; 
 
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 
 
 @SuppressWarnings({ "serial" })
 public class Infobar extends Elements {
+	@SuppressWarnings("unused")
 	private Room room;
 	private Player player;
 	private Game game;
@@ -19,6 +18,7 @@ public class Infobar extends Elements {
 		this.game = game;
 	}
 	
+	@SuppressWarnings("static-access")
 	public void paintComponent(Graphics g){
 		g.drawString("Lebenspunkte: " + player.getHealth(), 20, 20);
 		g.drawString("Mana: " + player.getMana(), 20, 40);

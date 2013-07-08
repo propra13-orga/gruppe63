@@ -108,14 +108,6 @@ public class Leben extends Elements { // Einfache Kopie von der Klasse Player
 	}
 
 }**/
-
-
-
-
-
-
-
-
 package gruppe63_dungeon_crawler;
 
 import java.awt.Graphics;
@@ -130,6 +122,7 @@ public class Leben extends Elements {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private Room room;
 	///*****////
 	
@@ -140,6 +133,7 @@ public class Leben extends Elements {
 	//private int damage = 100;
 	//private boolean attack = false;
 	//private int hits = 0;
+	@SuppressWarnings("unused")
 	private boolean alive=true;
 	
 	private Image sprite;

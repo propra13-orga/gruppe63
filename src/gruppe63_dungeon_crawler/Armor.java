@@ -22,6 +22,7 @@ public class Armor extends Elements {
 	//private int damage = 100;
 	//private boolean attack = false;
 	//private int hits = 0;
+	@SuppressWarnings("unused")
 	private boolean alive=true;
 	
 	private Image sprite;

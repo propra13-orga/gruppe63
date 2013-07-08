@@ -37,6 +37,7 @@ public class Game extends JPanel implements Runnable {
 	private int saveMana=100;
 	private int saveMaxHealth=100;
 	private boolean saveHatRuestung;
+	@SuppressWarnings("unused")
 	private boolean saveHatRing;
 	
 	private int playerdamaged=0;
@@ -315,7 +316,7 @@ public class Game extends JPanel implements Runnable {
 
 	void startRoom() {
 		
-				container.setBackground(Color.WHITE);
+		container.setBackground(Color.CYAN);
 		container.removeAll();
 		room = new Room(50, 50, actualroom, this); // (Elementwidth,
 													// Elementheight, Level,
@@ -328,10 +329,9 @@ public class Game extends JPanel implements Runnable {
 		isleben=false;
 		isarmor=false;
 		ismana=false;
-		ismoney=false;
-/////////////////////////////////////////////////////////////////		
+		ismoney=false;		
 		isring=false;
-/////////////////////////////////////////////////////////////////////		
+		
 		int[][] Z = Matrix.playedRoom(actualroom);
 
 		for (int i = 0; i < Z.length; i++) {
@@ -399,22 +399,21 @@ public class Game extends JPanel implements Runnable {
 	                                  room.add(money);
 	                                  ismoney=true;
 	                          }
-////////////////////////////////////////////////////////////////////////////////////				
+				
 				if (Z[i][j] == 16) {
 
 	                   qenemy = new Enemyquest(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(qenemy);
 	                                  }
-////////////////////////////////////////////////////////////////////////////////////	                                  
+				
 				if (Z[i][j] == 17) {
 
 	                   ring = new Ring(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(ring);
 	                                  isring=true;
-	                          }
-//////////////////////////////////////////////////////////////////////////////				
+	                          }				
 			}
 		}
 		player.setHealth(saveHealth);
@@ -544,11 +543,11 @@ public class Game extends JPanel implements Runnable {
 						down = true;
 					}
 //////////////////////////////////////////////////////////////////				
-					/*player.collision(qenemy);
+					player.collision(qenemy);
 					if (qenemy.getHealth() <= 0) {
 						room.remove(qenemy);
 						ring.setVisible(true);
-					}	*/
+					}	
 if (actualroom == 5) {ring.setVisible(false);
 					
 					for (int k = 0; k<fireballs.size(); k++) {
@@ -753,7 +752,7 @@ if (actualroom == 5) {ring.setVisible(false);
 	                                   * Room.elementwidth, room);
 	                                  room.add(money);
 	                          }
-				if (Z[i][j] == 17) {
+				/*if (Z[i][j] == 17) {
 
 	                   ring = new Ring(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
@@ -765,10 +764,11 @@ if (actualroom == 5) {ring.setVisible(false);
 	                   qenemy = new Enemyquest(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(qenemy);
-	                                  qenemy.setVisible(true);
-	                          }
+	                                  qenemy.setVisible(false);
+	                          }*/
 			}
 		}
+		
 		infobar = new Infobar(50,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
@@ -1071,12 +1071,11 @@ if (rp.intersects(l)) {
 		//container.remove(room);
 		main.NPCstory();
 	}
-	///////////////////////////////////////////////7/////
+	
 	public void quest(){
 		timer.cancel();
 		main.NixeQuest();
 	}
-	/////////////////////////////////////////////////////
 
 	public void shop()
 	{
@@ -1089,6 +1088,14 @@ if (rp.intersects(l)) {
 	{
 		timer.cancel();
 		main.playerLevelUp(player);
+	}
+
+	public void questGame() {
+		// TODO Auto-generated method stub
+		continueRoom();
+		startRoom();
+		run();
+		
 	}	
 	
 }
