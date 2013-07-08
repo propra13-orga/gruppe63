@@ -5,40 +5,26 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-public class Mana extends Elements {
+public class Ring extends Elements {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Room room;
-	///*****////
-	
 	private int width;
 	private int height;
-	
-	//private int health = 60;
-	//private int damage = 100;
-	//private boolean attack = false;
-	//private int hits = 0;
-	private boolean alive=true;
-	
 	private Image sprite;
 
-	public Mana(int x, int y, Room room) {
-		super(x, y, 30, 30);
-		this.room = room;
-		sprite = Toolkit.getDefaultToolkit().getImage("res/mana.gif");
+	public Ring(int x, int y, Room room) {
+		super(x, y, 30, 40);
+		sprite = Toolkit.getDefaultToolkit().getImage("res/schmuck.gif");
 		width = 30;
-	    height = 30;
+	    height = 40;
 	    
 	}
 
 	private int collision = 0;
-	//private int hits = 0;
-
-	//private int damage = 100;
 	Game game;
 
     public void paintComponent(Graphics g) {
@@ -51,10 +37,6 @@ public class Mana extends Elements {
 
 	}
 
-	//public int getDamage() {
-	//	return this.damage;
-	//}
-	
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

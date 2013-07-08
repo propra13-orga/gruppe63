@@ -20,7 +20,7 @@ public class Magic extends Elements {
 		vx = 2;
 		//vy = getRandomMov();
 		setVisible(true);
-		sprite = Toolkit.getDefaultToolkit().getImage("Fireball.gif");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/Fireball.gif");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	 }

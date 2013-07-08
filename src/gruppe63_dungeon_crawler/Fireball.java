@@ -69,7 +69,7 @@ public class Fireball extends Elements {
 	}
 
 	public void paintComponent(Graphics g) {
-		Image img = Toolkit.getDefaultToolkit().getImage("feuerball.png");
+		Image img = Toolkit.getDefaultToolkit().getImage("res/feuerball.png");
 		g.drawImage(img, 0, 0, this);
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();

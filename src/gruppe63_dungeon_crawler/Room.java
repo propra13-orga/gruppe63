@@ -1,7 +1,10 @@
 package gruppe63_dungeon_crawler;
 
-import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 public class Room extends JPanel {
@@ -32,18 +35,19 @@ public class Room extends JPanel {
 
 	private Player player;
 	private Game game;
-	private Leben leben;
+	//private Leben leben;
+	Image img;
+	static BufferedImage background;
 	//private Mana mana;
 	//private Money money;
 	//private Armor armor;
-	private Enemy enemy = new Enemy(1, 1, null);
+	//private Enemy enemy = new Enemy(1, 1, null);
 
 	public Room(int elementwidth, int elementheigth, int level, Game game) {
 		super();
 		Room.elementwidth = elementwidth;
 		Room.elementheight = elementheigth;
 		this.setBounds(0, 0, 600, 650);
-		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		this.setVisible(true);
 
@@ -114,6 +118,12 @@ public class Room extends JPanel {
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 15:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 16:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 17:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 20:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
 		default:
 			return null;
 		}
@@ -121,7 +131,16 @@ public class Room extends JPanel {
 
 	public void paintRoom() {
 
-		int x, y;
+		int x, y;	
+	
+		try {
+	          img = getToolkit().getImage("res/hintergrund2.png");
+	          MediaTracker mt = new MediaTracker( this );
+	          mt.addImage( img,0);
+	        }catch(Exception ex ) {
+	          System.out.println(ex.toString());
+	       }
+		
 		for (int i = 0; i < roomwidth; i++) {
 			x = i * Room.elementwidth;
 			for (int j = 0; j < roomheight; j++) {
@@ -135,7 +154,9 @@ public class Room extends JPanel {
 				}
 			}
 		}
+		
 	}
+
 
 	public int Environment(int x, int y, int sizeplx, int sizeply) { // Untersuche,
 																		// was
@@ -195,6 +216,15 @@ public class Room extends JPanel {
 		else if (upright == 15 || downright == 15 || downleft == 15
 				|| upleft == 15)
 			return 15;
+		else if (upright == 16 || downright == 16 || downleft == 16
+				|| upleft == 16)
+			return 16;
+		else if (upright == 17 || downright == 17 || downleft == 17
+				|| upleft == 17)
+			return 17;
+		else if (upright == 20 || downright == 20 || downleft == 20
+				|| upleft == 20)
+			return 20;
 		else
 			return 0;
 	}
@@ -204,7 +234,11 @@ public class Room extends JPanel {
 		this.player = player;
 		return component;
 	}
-
+		
+	public void paintComponent(Graphics g){
+		g.drawImage(img,0,0,this);
+	}
+	
 	public void status() {
 		int collision = Environment(player.x, player.y, player.xDim,
 				player.yDim);
@@ -221,28 +255,10 @@ public class Room extends JPanel {
 		case 7:
 			game.shop(); // Shopmenue.
 			break;
-		case 8:
-			// bossgegner
+		case 20: //Nixe Quest verdienen von 20 xp
+			game.quest();
 			break;
-		case 9:
-			// bossgegner
-			break;
-		//case 13:
-			// Leben			
-			//break;
-		/*
-		 * case 12: 
-		 * //getitem(); //Waffe
-		 *  break;
-		 * case 10: 
-		 * //getitem(); //Rüstung
-		 * break;
-		 * case 11: 
-		 * //getitem(); //Zauber 
-		 * break;*
-		 */
-		// case 6:
-		// break;
+		
 		case 14:
 			// NPC
 			game.story();

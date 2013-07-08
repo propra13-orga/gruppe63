@@ -25,9 +25,9 @@ public class Boss2 extends Elements {
 	private Image sprite;
 
 	public Boss2(int x, int y, Room room) {
-		super(x, y, 30, 30);
+		super(x, y, 66, 35);
 		this.room = room;
-		sprite = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/bossgegner.gif");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	    

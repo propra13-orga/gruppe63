@@ -3,15 +3,15 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
+
 
 public class Menu extends JFrame implements ActionListener{
 
@@ -27,11 +27,13 @@ public class Menu extends JFrame implements ActionListener{
 	private Thread thread;
 	
 	// Game klasse?
-	private Game game;
+	private static Game game;
+	private Enemyquest qenemy;
 	
 	private JPanel GameoverPanel;
 	private JPanel shopPanel;
 	private JPanel storyPanel;
+	private JPanel questPanel;
 	private JPanel LevelUpPanel;
 	private Container cp;
 	int difficulty;
@@ -39,8 +41,8 @@ public class Menu extends JFrame implements ActionListener{
 	private Player player = null;
 	private int storysite;
 	
-	private int xFrame=600;
-	private int yFrame=700;
+	private int xFrame=610;
+	private int yFrame=689;
 	
 
 	public Menu() {
@@ -99,6 +101,16 @@ public class Menu extends JFrame implements ActionListener{
 	JButton bLevelupMaxHealth;
 	GridBagConstraints lLevelupc = new GridBagConstraints();
 	GridBagConstraints bLevelupMaxHealthc = new GridBagConstraints();
+	
+	//Quest-elements
+	JLabel aufgabe;
+	JButton ok;
+	JButton no;
+	GridBagConstraints aufgabes = new GridBagConstraints();
+	GridBagConstraints oks = new GridBagConstraints();
+	GridBagConstraints nos = new GridBagConstraints();
+	
+
 
 	public void initialize() {
 		
@@ -231,12 +243,30 @@ public class Menu extends JFrame implements ActionListener{
 		if(e.getSource()==this.bStart)
 		{
 			this.startGame();
-			
+
+try {
+Sound.main(null);
+} catch (UnsupportedAudioFileException | IOException
+| LineUnavailableException e1) {
+// TODO Auto-generated catch block
+e1.printStackTrace();
+}
+					
 		}
 		if(e.getSource()==this.bExit)
 		{
 			System.exit(0);
 		}
+		
+		if(e.getSource()==this.ok)
+		{
+			//game.continueGame();
+		}
+		if(e.getSource()==this.no)
+		{
+			//game.continueGame();
+		}
+		
 		if(e.getSource()==this.bSettings)
 		{
 			// open Settings
@@ -281,6 +311,15 @@ public class Menu extends JFrame implements ActionListener{
 		if(e.getSource()==this.bBackToGame)
 		{
 			game.continueGame();
+			
+try {
+Sound.main(null);
+} catch (UnsupportedAudioFileException | IOException
+| LineUnavailableException e1) {
+// TODO Auto-generated catch block
+e1.printStackTrace();
+}
+
 		}
 		if(e.getSource()==this.bBuyHealthpotion)
 		{
@@ -334,6 +373,7 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==this.bNext)
 		{
+
 			storysite++;
 			if(storysite==2)
 			{
@@ -360,7 +400,7 @@ public class Menu extends JFrame implements ActionListener{
 			else if(storysite==5)
 			{
 				game.continueGame();
-			}
+			}			
 		}
 		if(e.getSource()==bLevelupMaxHealth)
 		{
@@ -576,6 +616,49 @@ public class Menu extends JFrame implements ActionListener{
 		
 		this.pack();
 		this.setSize(xFrame, yFrame);
+	}
+
+	public void NixeQuest() {
+		
+		questPanel = new JPanel();
+		questPanel.setBounds(0, 0, 600, 600);
+		questPanel.setLayout(new GridBagLayout());
+		
+		
+		aufgabe = new JLabel("<html><body>la la la la Hallo !<br>" +
+				"Ich bin die Nixe Melodie. <br>" +
+				"Ich und eine boese rosa Qualle haben meinen Ring versteckt, <br>" +
+				" wenn du ihn findest, dann erhaelst du 10 XP.<br>" +
+				"Kannst du meinen Ring finden?....<br> traust du dir das zu ?? <br> Ha haha ha<br></body></html>");
+		aufgabes.gridx = 0;
+		aufgabes.gridy = 0;
+		aufgabes.fill = GridBagConstraints.BOTH;
+		
+		ok = new JButton("Ich neheme deinen Quest an");
+		ok.addActionListener(this);
+		oks.gridx = 0;
+		oks.gridy = 2;
+		oks.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(ok, oks);
+		questPanel.setVisible(true);
+		
+		no = new JButton("Tut mir leid, ich kann dir nicht helfen");
+		no.addActionListener(this);
+		nos.gridx = 0;
+		nos.gridy = 6;
+		nos.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(no, nos);
+		questPanel.setVisible(true);
+		
+		cp.add(questPanel);
+		
+		this.pack();
+		this.setSize(xFrame, yFrame);
+		
 	}
 
 }

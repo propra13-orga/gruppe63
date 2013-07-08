@@ -11,6 +11,7 @@ public class Controller extends KeyAdapter {
 	}
 
 	public Controller() {
+		
 	}
 
 	public void setPlayer(Player player) {

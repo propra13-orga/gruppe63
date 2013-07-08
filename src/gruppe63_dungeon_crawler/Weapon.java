@@ -20,7 +20,7 @@ public class Weapon extends Elements {
 		vx = 2;
 		//vy = getRandomMov();
 		setVisible(true);
-		sprite = Toolkit.getDefaultToolkit().getImage("Arrow.png");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/Arrow.png");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	 }

@@ -41,7 +41,7 @@ public class Player extends Elements {
 				
 		magic = new ArrayList<Magic>();
 		weapon = new ArrayList<Weapon>();
-		sprite = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 

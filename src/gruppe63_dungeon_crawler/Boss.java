@@ -20,7 +20,7 @@ public class Boss extends Elements {
 	private int height=50;
 
 	public Boss(int x, int y, Room room) {
-		super(x, y, 30, 30);
+		super(x, y, 66, 35);
 		this.room = room;
 	}
 
@@ -41,7 +41,7 @@ public class Boss extends Elements {
 	}
 
 	public void paintComponent(Graphics g) {
-		Image img = Toolkit.getDefaultToolkit().getImage("ghost1.gif");
+		Image img = Toolkit.getDefaultToolkit().getImage("res/bossgegner.gif");
 		g.drawImage(img, 0, 0, this);
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();

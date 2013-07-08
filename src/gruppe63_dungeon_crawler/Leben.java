@@ -147,7 +147,7 @@ public class Leben extends Elements {
 	public Leben(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;
-		sprite = Toolkit.getDefaultToolkit().getImage("leben.png");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/leben.png");
 		width = 30;
 	    height = 30;
 	    

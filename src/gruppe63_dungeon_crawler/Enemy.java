@@ -26,7 +26,7 @@ public class Enemy extends Elements {
 		vx = getRandomMov();
 		vy = getRandomMov();
 		setVisible(true);
-		sprite = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/qualle05.gif");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	}

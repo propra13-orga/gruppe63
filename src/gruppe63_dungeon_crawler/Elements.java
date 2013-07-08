@@ -46,7 +46,7 @@ public class Elements extends JComponent {
 		this.setBounds(0, 0, xDim, yDim);
 	}
 
-	public Elements(int x, int y, int xDim, int yDim, int type) {
+	/*public Elements(int x, int y, int xDim, int yDim, int type) {
 		this.type = type;
 		this.xDim = xDim;
 		this.yDim = yDim;
@@ -55,65 +55,52 @@ public class Elements extends JComponent {
 
 	public int getType() {
 		return type;
-	}
+	}*/
 
 	public boolean getRemove() {
 		return remove;
 	}
 
 	public void paintComponent(Graphics g) {
+	
 		switch (this.number) {
 		case 1:
-			g.setColor(Color.black);
-			g.fillRect(0, 0, xDim, yDim);
-			break;
-		//case 2:
-			//g.setColor(Color.gray);
+			Image img3 = Toolkit.getDefaultToolkit().getImage("res/oralle1.png");
+		    g.drawImage(img3, 0, 0, this);
+			//g.setColor(Color.black);
 			//g.fillRect(0, 0, xDim, yDim);
-			//break;
+			break;
 		case 4:
-			g.setColor(Color.green);
-			g.fillRect(0, 0, xDim, yDim);
+			Image img7 = Toolkit.getDefaultToolkit().getImage("res/eingang.gif");
+		    g.drawImage(img7, 0, 0, this);
+			//g.setColor(Color.green);
+			//g.fillRect(0, 0, xDim, yDim);
 			break;
 		case 3:
-			Image img1 = Toolkit.getDefaultToolkit().getImage("ghost.gif");
+			Image img1 = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");
 			g.drawImage(img1, 0, 0, this);
 			g.finalize();
 			break;
 		case 5:
-			g.setColor(Color.blue);
-			g.fillRect(0, 0, xDim, yDim);
-			break;
-		// case 6:
-		// g.setColor(Color.red);
-		// g.fillRect(0, 0, xDim, yDim);
-		// break;
-		case 7:
-			Image img2 = Toolkit.getDefaultToolkit().getImage("shop.png");
-			g.drawImage(img2, 0, 0, this);
-			//g.setColor(Color.yellow);
+			Image img8 = Toolkit.getDefaultToolkit().getImage("res/Ausgang.png");
+		    g.drawImage(img8, 0, 0, this);
+			//g.setColor(Color.blue);
 			//g.fillRect(0, 0, xDim, yDim);
 			break;
-		//case 13:
-			/**Image img2 = Toolkit.getDefaultToolkit().getImage("leben.png");
+		case 7:
+			Image img2 = Toolkit.getDefaultToolkit().getImage("res/shop.png");
 			g.drawImage(img2, 0, 0, this);
-			g.dispose();**/
-
-			// g.setColor(Color.pink);//Leben
-			// g.fillRect(0, 0, xDim, yDim);
-			//break;
+			break;
 		case 14:
-			Image img3 = Toolkit.getDefaultToolkit().getImage("Frosch.gif");
-			g.drawImage(img3, 0, 0, this);
+			Image img4 = Toolkit.getDefaultToolkit().getImage("res/info.gif");
+			g.drawImage(img4, 0, 0, this);
 			//g.setColor(Color.ORANGE);
 			//g.fillRect(0, 0, xDim, yDim);
 			break;
-		/*
-		 * case 12: g.setColor(Color.red);//Waffe g.fillRect(0, 0, xDim, yDim);
-		 * break; case 10: g.setColor(Color.cyan); //Rüstung g.fillRect(0, 0,
-		 * xDim, yDim); break; case 11: g.setColor(Color.magenta); //Zauber
-		 * g.fillRect(0, 0, xDim, yDim); break;
-		 */
+		case 20: //Quest 1  Nixe und Ring      finde meinen Schatz und du erhälst 20xp
+			Image img5 = Toolkit.getDefaultToolkit().getImage("res/nixe.gif");
+			g.drawImage(img5, 0, 0, this);
+			break;
 		}
 
 	}

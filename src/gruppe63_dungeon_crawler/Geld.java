@@ -29,7 +29,7 @@ public class Geld extends Elements {
 	public Geld(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;
-		sprite = Toolkit.getDefaultToolkit().getImage("geld.gif");
+		sprite = Toolkit.getDefaultToolkit().getImage("res/geld.gif");
 		width = 30;
 	    height = 30;
 	    
