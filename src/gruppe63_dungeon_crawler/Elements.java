@@ -59,8 +59,6 @@ public class Elements extends JComponent {
 		case 4:
 			Image img7 = Toolkit.getDefaultToolkit().getImage("res/eingang.gif");
 		    g.drawImage(img7, 0, 0, this);
-			//g.setColor(Color.green);
-			//g.fillRect(0, 0, xDim, yDim);
 			break;
 		case 3:
 			Image img1 = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");

@@ -30,21 +30,6 @@ public class Boss3 extends Elements {
 	    height = sprite.getHeight(null);
 	}
 	
-	public void move(){
-		x=this.getX();
-		y=this.getY();
-			
-		if(room.Environment(x+vx,y,xDim,yDim)!=1){	
-			x = x+vx;
-			this.setLocation(x,y);
-		}
-		
-		if(room.Environment(x,y-vy,xDim,yDim)!=1){	
-			y = y-vy;
-			this.setLocation(x,y);
-		}
-		room.status();
-	}
 	
 public void paintComponent(Graphics g) {
 		
@@ -52,21 +37,6 @@ public void paintComponent(Graphics g) {
 		
 	}
 	
-	public void setMovX(int vx) {
-		this.vx = vx;
-	}
-	
-	public void setMovY(int vy) {
-		this.vy = vy;
-	}
-	
-	public int getMovX() {
-		return vx;
-	}
-	
-	public int getMovY() {
-		return vy;
-	}
 	
 	public int getPosX() {
 		return this.getX();

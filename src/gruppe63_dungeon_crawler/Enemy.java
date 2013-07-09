@@ -27,8 +27,8 @@ public class Enemy extends Elements {
 		vy = getRandomMov();
 		setVisible(true);
 		sprite = Toolkit.getDefaultToolkit().getImage("res/qualle05.gif");
-		width = sprite.getWidth(null);
-	    height = sprite.getHeight(null);
+		width = 48;
+	    height = 48;
 	}
 
 	public void move() {
@@ -55,7 +55,7 @@ public class Enemy extends Elements {
 			y = y-vy;
 		}
 		
-		//room.status();
+	
 	}
 	
 	public int getRandomMov() {
@@ -94,7 +94,6 @@ public class Enemy extends Elements {
 	}
 	
 	public void paintComponent(Graphics g){
-		//Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
 		g.drawImage(sprite, 0, 0, this);
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
