@@ -54,8 +54,8 @@ public class Player extends Elements {
 		magic = new ArrayList<Magic>();
 		weapon = new ArrayList<Weapon>();
 		sprite = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");
-		width = sprite.getWidth(null);
-	    height = sprite.getHeight(null);
+		width = 30;
+	    height = 30;
 
 	}
 
@@ -250,7 +250,7 @@ public class Player extends Elements {
 	public void send(int n) {
 
         try {
-           Socket ss = new Socket("Jan", 1231);
+           Socket ss = new Socket("localhost", 1231);
                            
            OutputStream os = ss.getOutputStream();
            InputStream is = ss.getInputStream();    
