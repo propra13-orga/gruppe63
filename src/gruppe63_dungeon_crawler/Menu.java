@@ -29,6 +29,7 @@ public class Menu extends JFrame implements ActionListener{
 	
 	// Game klasse?
 	private static Game game;
+	@SuppressWarnings("unused")
 	private Enemyquest qenemy;
 	
 	private JPanel GameoverPanel;
@@ -118,9 +119,11 @@ public class Menu extends JFrame implements ActionListener{
 	JLabel aufgabe;
 	JButton ok;
 	JButton no;
+	JButton nop;
 	GridBagConstraints aufgabes = new GridBagConstraints();
 	GridBagConstraints oks = new GridBagConstraints();
 	GridBagConstraints nos = new GridBagConstraints();
+	GridBagConstraints nops = new GridBagConstraints();
 	
 
 
@@ -307,6 +310,12 @@ e1.printStackTrace();
 			game.continueGame();
 			 Object[] options = {"OK"};
 			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Spielverderber!!!!<br>"+ "Du willst mich nur aergern!<br>"+" Dabei habe ich mir so Muehe gegeben :(</body></html>","Information", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
+		}
+		if(e.getSource()==this.nop)
+		{
+			game.continueGame();
+			 Object[] options = {"OK"};
+			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Schade!!!!<br>"+ "Jetzt werde ich Tage brauchen bis ich Bubous gefunden habe und er ist schon wieder der Gewinner!<br>"+" Dabei habe ich mir so eine schoene Belohnung ausgedacht :(</body></html>","Info", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
 		}
 		
 		if(e.getSource()==this.bClient2)
@@ -754,6 +763,48 @@ e1.printStackTrace();
 		this.pack();
 		this.setSize(xFrame, yFrame);
 		
+	}
+
+	public void FroschQuest() {
+		
+		questPanel = new JPanel();
+		questPanel.setBounds(0, 0, 600, 600);
+		questPanel.setLayout(new GridBagLayout());
+		
+		
+		aufgabe = new JLabel("<html><body>Quack.... Hallo !...Quack<br>" +
+				"Ich bin Feivel der Froschkewitz. <br>" +
+				"Ich und mein Freund Bubous spielen verstecken.<br>Bubous hat sich versteckt, und ich kann ihn nicht finden. <br> Er ist ein Meister im verstecken.<br>Selbst der Buergermeister konnte ihn nicht finden.<br> " +
+				"??...Koennt ihr mir helfen Bubous zu finden??.. <br>Wenn ihr es schaft ihn zu finden,dann erhaltet ihr eine Belohnung.<br>" +
+				"???..Was die Behlohnung ist wollt ihr wissen ??... <br> Haha das bleibt mein Geheimnis<br>.<br>.<br></body></html>");
+		aufgabes.gridx = 0;
+		aufgabes.gridy = 0;
+		aufgabes.fill = GridBagConstraints.BOTH;
+		
+		ok = new JButton("<html><body>Wir helfen dir <br>"+"und finden deinen Freund</body></html>");
+		ok.addActionListener(this);
+		oks.gridx = 0;
+		oks.gridy = 2;
+		oks.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(ok, oks);
+		questPanel.setVisible(true);
+		
+		nop = new JButton("<html><body>Tut mir leid,<br>"+ "Wir sind zu erwachsen, um Versteckspiele zu spielen<br></body></html>");
+		nop.addActionListener(this);
+		nops.gridx = 0;
+		nops.gridy = 6;
+		nops.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(nop, nops);
+		questPanel.setVisible(true);
+		
+		cp.add(questPanel);
+		
+		this.pack();
+		this.setSize(xFrame, yFrame);
 	}
 
 }

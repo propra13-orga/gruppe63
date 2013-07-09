@@ -124,6 +124,8 @@ public class Room extends JPanel {
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 20:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 21:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
 		default:
 			return null;
 		}
@@ -225,6 +227,9 @@ public class Room extends JPanel {
 		else if (upright == 20 || downright == 20 || downleft == 20
 				|| upleft == 20)
 			return 20;
+		else if (upright == 21 || downright == 21 || downleft == 21
+				|| upleft == 21)
+			return 21;
 		else
 			return 0;
 	}
@@ -275,28 +280,15 @@ public class Room extends JPanel {
 		case 9:
 			// bossgegner
 			break;
-		//case 13:
-			// Leben			
-			//break;
-		/*
-		 * case 12: 
-		 * //getitem(); //Waffe
-		 *  break;
-		 * case 10: 
-		 * //getitem(); //Rüstung
-		 * break;
-		 * case 11: 
-		 * //getitem(); //Zauber 
-		 * break;*
-		 */
-		// case 6:
-		// break;
 		case 14:
 			// NPC
 			game.story();
 			
 		case 20: //Nixe Quest verdienen von 20 xp
 			game.quest();
+			break;
+		case 21: //Frosch Quest verdienen von 20 xp
+			game.quest2();
 			break;
 		default:
 			break;
@@ -320,8 +312,13 @@ public class Room extends JPanel {
 		case 7:
 			game.shop(); // Shopmenue.
 			break;
-		case 20: //Nixe Quest verdienen von 20 xp
+			
+		case 20: //Nixe Quest verdienen von 10 xp
 			game.quest();
+			break;
+			
+		case 21: //Frosch Quest verdienen von Belohnung
+			game.quest2();
 			break;
 		
 		case 14:

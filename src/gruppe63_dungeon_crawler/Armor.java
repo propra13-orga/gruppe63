@@ -12,6 +12,7 @@ public class Armor extends Elements {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private Room room;
 	///*****////
 	
@@ -19,6 +20,7 @@ public class Armor extends Elements {
 	private int height;
 	
 	
+	@SuppressWarnings("unused")
 	private boolean alive=true;
 	
 	private Image sprite;

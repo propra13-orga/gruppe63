@@ -40,6 +40,7 @@ public class Game extends JPanel implements Runnable {
 	private int saveMana=100;
 	private int saveMaxHealth=100;
 	private boolean saveHatRuestung;
+	@SuppressWarnings("unused")
 	private boolean saveHatRing;
 	private int savewinpoints=0;
 	
@@ -1094,12 +1095,16 @@ if (rp.intersects(l)) {
 		//container.remove(room);
 		main.NPCstory();
 	}
-	///////////////////////////////////////////////7/////
+
 	public void quest(){
 		timer.cancel();
 		main.NixeQuest();
 	}
-	/////////////////////////////////////////////////////
+	public void quest2() {
+		timer.cancel();
+		main.FroschQuest();
+	}
+	
 
 	public void shop()
 	{

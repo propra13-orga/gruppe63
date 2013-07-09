@@ -45,17 +45,6 @@ public class Elements extends JComponent {
 		this.setBounds(0, 0, xDim, yDim);
 	}
 
-	/*public Elements(int x, int y, int xDim, int yDim, int type) {
-		this.type = type;
-		this.xDim = xDim;
-		this.yDim = yDim;
-		this.setBounds(0, 0, xDim, yDim);
-	}
-
-	public int getType() {
-		return type;
-	}*/
-
 	public boolean getRemove() {
 		return remove;
 	}
@@ -66,8 +55,6 @@ public class Elements extends JComponent {
 		case 1:
 			Image img3 = Toolkit.getDefaultToolkit().getImage("res/oralle1.png");
 		    g.drawImage(img3, 0, 0, this);
-			//g.setColor(Color.black);
-			//g.fillRect(0, 0, xDim, yDim);
 			break;
 		case 4:
 			Image img7 = Toolkit.getDefaultToolkit().getImage("res/eingang.gif");
@@ -83,8 +70,6 @@ public class Elements extends JComponent {
 		case 5:
 			Image img8 = Toolkit.getDefaultToolkit().getImage("res/Ausgang.png");
 		    g.drawImage(img8, 0, 0, this);
-			//g.setColor(Color.blue);
-			//g.fillRect(0, 0, xDim, yDim);
 			break;
 		case 7:
 			Image img2 = Toolkit.getDefaultToolkit().getImage("res/shop.png");
@@ -93,12 +78,14 @@ public class Elements extends JComponent {
 		case 14:
 			Image img4 = Toolkit.getDefaultToolkit().getImage("res/info.gif");
 			g.drawImage(img4, 0, 0, this);
-			//g.setColor(Color.ORANGE);
-			//g.fillRect(0, 0, xDim, yDim);
 			break;
-		case 20: //Quest 1  Nixe und Ring      finde meinen Schatz und du erhälst 20xp
+		case 20: //Quest 1  Nixe und Ring      finde meinen Schatz und du erhälst 10xp
 			Image img5 = Toolkit.getDefaultToolkit().getImage("res/nixe.gif");
 			g.drawImage(img5, 0, 0, this);
+			break;
+		case 21: //Quest 2  Frosch und Freund      finde meinen Schatz und du erhälst eine Belohnung
+			Image img6 = Toolkit.getDefaultToolkit().getImage("res/Frosch.gif");
+			g.drawImage(img6, 0, 0, this);
 			break;
 		}
 
