@@ -81,9 +81,25 @@ public class Elements extends JComponent {
 			Image img5 = Toolkit.getDefaultToolkit().getImage("res/nixe.gif");
 			g.drawImage(img5, 0, 0, this);
 			break;
-		case 21: //Quest 2  Frosch und Freund      finde meinen Schatz und du erhälst eine Belohnung
+		case 21: //Quest 2  Frosch und Freund      finde meinen Freund und du erhälst eine Belohnung
 			Image img6 = Toolkit.getDefaultToolkit().getImage("res/Frosch.gif");
 			g.drawImage(img6, 0, 0, this);
+			break;
+		case 22: //Quest 2  Frosch und Freund      finde meinen Freund und du erhälst eine Belohnung
+			Image img9 = Toolkit.getDefaultToolkit().getImage("res/taucher.gif");
+			g.drawImage(img9, 0, 0, this);
+			break;
+		case 23: //Quest 2  Frosch und Freund      finde meinen Freund und du erhälst eine Belohnung
+			Image img10 = Toolkit.getDefaultToolkit().getImage("res/taucher.gif");
+			g.drawImage(img10, 0, 0, this);
+			break;
+		case 24: //Quest 2  Frosch und Freund      finde meinen Freund und du erhälst eine Belohnung
+			Image img11 = Toolkit.getDefaultToolkit().getImage("res/taucher.gif");
+			g.drawImage(img11, 0, 0, this);
+			break;
+		case 25: //Quest 2  Frosch und Freund      finde meinen Freund und du erhälst eine Belohnung
+			Image img12 = Toolkit.getDefaultToolkit().getImage("res/taucher.gif");
+			g.drawImage(img12, 0, 0, this);
 			break;
 		}
 

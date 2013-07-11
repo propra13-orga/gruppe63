@@ -5,7 +5,16 @@ import java.awt.event.KeyEvent;
 
 public class Controller extends KeyAdapter {
 	private Player player;
+	//private Game game;
+	/*boolean quit = false;
 
+	public void paintComponent(Graphics g){
+		if(quit==true){
+		g.drawString("Resume (R)",250,100);
+		g.drawString("Main Menu (M)",250,150);
+		g.drawString("Quit Game (Q)",250,200);
+	}}*/
+	
 	public Controller(Player player) {
 		this.player = player;
 	}
@@ -89,7 +98,12 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_SHIFT) {
 		    	player.shootWeapon();
 		 }
+		
+		/*if (key == KeyEvent.VK_ESCAPE) {
+			quit = true;
+	 }*/
 	}
+	
 
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -116,6 +130,9 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 			player.setAttack(false);
 		}
+		/*if (key == KeyEvent.VK_ESCAPE) {
+	    	quit= false;
+	 }*/
 	}
 
 }

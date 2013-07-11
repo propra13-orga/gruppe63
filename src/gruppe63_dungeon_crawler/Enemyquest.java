@@ -8,10 +8,15 @@ import java.awt.Rectangle;
 public class Enemyquest extends Elements {
 
 	/**
-	 * 
+	 * Die besondere boese rosa Qualle die einen Ring versteckt haelt
+	 * anderes als die anderen Quallen bewegt sie sich nicht, so ist bei  der Questaufgabe das ein Hinweiß,
+	 * um herauszufinden, welche Qualle den Ring versteckt (alle anderen Quallen bewegen sich zufaellig).
+	 * Die schwierigkeit besteht darin, dass die anderen Quallen sich willkuerlich bewegen aber auch stehen bleiben können,
+	 * so ist es auch nicht immer direkt klar welche Qualle die Qualle mit dem Ring ist.
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private Room room;
 	private int width;
 	private int height;
@@ -33,42 +38,10 @@ public class Enemyquest extends Elements {
 	    
 	}
 
-	public void move() {
-		x = this.getX();
-		y = this.getY();
-
-		if (room.Environment(x + vx, y, xDim, yDim) != 1) {
-			x = x + vx;
-			this.setLocation(x, y);
-		}
-
-		if (room.Environment(x, y - vy, xDim, yDim) != 1) {
-			y = y - vy;
-			this.setLocation(x, y);
-		}
-		room.status();
-	}
-
 	public void paintComponent(Graphics g) {
 		
 		g.drawImage(sprite, 0, 0, this);
 		
-	}
-
-	public void setMovX(int vx) {
-		this.vx = vx;
-	}
-
-	public void setMovY(int vy) {
-		this.vy = vy;
-	}
-
-	public int getMovX() {
-		return vx;
-	}
-
-	public int getMovY() {
-		return vy;
 	}
 
 	public int getPosX() {

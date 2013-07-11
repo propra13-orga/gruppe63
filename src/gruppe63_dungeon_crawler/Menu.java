@@ -36,7 +36,11 @@ public class Menu extends JFrame implements ActionListener{
 	private JPanel shopPanel;
 	private JPanel storyPanel;
 	private JPanel questPanel;
+	@SuppressWarnings("unused")
+	private JPanel gameStopPanel;
 	private JPanel LevelUpPanel;
+	//private JPanel quit;
+	//boolean quit = false;
 	private Container cp;
 	int difficulty;
 	public Controller controller;
@@ -118,12 +122,19 @@ public class Menu extends JFrame implements ActionListener{
 	//Quest-elements
 	JLabel aufgabe;
 	JButton ok;
+	JButton oke;
 	JButton no;
 	JButton nop;
 	GridBagConstraints aufgabes = new GridBagConstraints();
 	GridBagConstraints oks = new GridBagConstraints();
+	GridBagConstraints okes = new GridBagConstraints();
 	GridBagConstraints nos = new GridBagConstraints();
 	GridBagConstraints nops = new GridBagConstraints();
+	
+	//Stopgame
+	JLabel pause;
+	GridBagConstraints pauses = new GridBagConstraints();
+	
 	
 
 
@@ -285,15 +296,17 @@ public class Menu extends JFrame implements ActionListener{
 	{
 		if(e.getSource()==this.bStart)
 		{
+			try {
+	            Sound.main(null);
+	            }
+			catch (UnsupportedAudioFileException | IOException
+					| LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
 			this.startGame(0);
 
-try {
-Sound.main(null);
-} catch (UnsupportedAudioFileException | IOException
-| LineUnavailableException e1) {
-// TODO Auto-generated catch block
-e1.printStackTrace();
-}
+
 					
 		}
 		if(e.getSource()==this.bExit)
@@ -303,18 +316,58 @@ e1.printStackTrace();
 		
 		if(e.getSource()==this.ok)
 		{
-			game.questGame();
+			try {
+				Sound.main2(null);
+				} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}	
+		    game.setQuest(true);
+			game.continueGame();
+						
+		}
+		if(e.getSource()==this.oke)
+		{
+			try {
+				Sound.main2(null);
+				} catch (UnsupportedAudioFileException | IOException
+				| LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}	
+		    game.setQuest2(true);
+			game.continueGame();
+						
 		}
 		if(e.getSource()==this.no)
-		{
+		{ 
+			try {
+				 Sound.main(null);
+				 } catch (UnsupportedAudioFileException | IOException
+				 | LineUnavailableException e1) {
+				 // TODO Auto-generated catch block
+				 e1.printStackTrace();
+				 }
+			
 			game.continueGame();
+						
 			 Object[] options = {"OK"};
-			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Spielverderber!!!!<br>"+ "Du willst mich nur aergern!<br>"+" Dabei habe ich mir so Muehe gegeben :(</body></html>","Information", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
+			
+			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Spielverderber!!!!<br>"+ "Du willst mich nur aergern!<br>"+" Dabei habe ich mir so Muehe gegeben :(</body></html>","Die Nixe dreht sich beleidigt weg", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
 		}
 		if(e.getSource()==this.nop)
-		{
+		{ 
+			try {
+				 Sound.main(null);
+				 } catch (UnsupportedAudioFileException | IOException
+				 | LineUnavailableException e1) {
+				 // TODO Auto-generated catch block
+				 e1.printStackTrace();
+				 }
 			game.continueGame();
 			 Object[] options = {"OK"};
+			
 			 JOptionPane.showOptionDialog(null, "<html><body>!!!!!Schade!!!!<br>"+ "Jetzt werde ich Tage brauchen bis ich Bubous gefunden habe und er ist schon wieder der Gewinner!<br>"+" Dabei habe ich mir so eine schoene Belohnung ausgedacht :(</body></html>","Info", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,null,options,options[0]); 
 		}
 		
@@ -345,12 +398,6 @@ e1.printStackTrace();
 				
 			}
 			
-			
-		
-		
-		
-		
-		
 		if(e.getSource()==this.bSettings)
 		{
 			// open Settings
@@ -394,15 +441,16 @@ e1.printStackTrace();
 		}
 		if(e.getSource()==this.bBackToGame)
 		{
-			game.questGame();
+			try {
+				Sound.main(null);
+				} catch (UnsupportedAudioFileException | IOException
+						| LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					}
+			game.continueGame();
 			
-try {
-Sound.main(null);
-} catch (UnsupportedAudioFileException | IOException
-| LineUnavailableException e1) {
-// TODO Auto-generated catch block
-e1.printStackTrace();
-}
+
 
 		}
 		if(e.getSource()==this.bBuyHealthpotion)
@@ -457,11 +505,19 @@ e1.printStackTrace();
 		}
 		if(e.getSource()==this.bNext)
 		{
-
+			try {
+	            Sound.main3(null);
+	            }
+			catch (UnsupportedAudioFileException | IOException
+					| LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
 			storysite++;
 			if(storysite==2)
 			{
-				lStory.setText("<html><body>Fangen dich die Quallen, erfaehrst du Schaden. <br>" +
+				lStory.setText("<html><body>Ziel ist es, sich durch die Gefahren der Tiefe zu schlaengeln<br>und das Endziel zu erreichen.<br> Dabei triffst du auf unterschiedliche Gegner und Meereserscheinungen. <br>" +
+				        "Pass auf, wenn du auf Kraben triffst, musst du diese erledigen, sonst werden sie dich heimsuchen und du bleibst auf ewig in dem Labyrinth der Meere gefangen.Fangen dich die Quallen, erfaehrst du Schaden. <br>" +
 						            "Sinken deine Gesundheitspunkte unter 100, verlierst du ein Leben und musst wieder zum Anfang des Raums. Jedoch kannst du dich mit einem Heiltrank heilen. <br>" +
 						            "oder du sammelst Items die im Labyrinth verteilt sind.</body></html>");
 			}
@@ -482,13 +538,13 @@ e1.printStackTrace();
 			}
 			else if(storysite==5)
 			{
-				game.questGame();
+				game.continueGame();
 			}			
 		}
 		if(e.getSource()==bLevelupMaxHealth)
 		{
 			player.setMaxHealth(player.getMaxHealth() + 10);
-			game.questGame();
+			game.continueGame();
 		}
 		
 	}
@@ -660,10 +716,9 @@ e1.printStackTrace();
 		storyPanel.setLayout(new GridBagLayout());
 		
 		
-		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler der Meere.<br>" +
-				        "DU, die Krake, kannst mit den Pfeiltasten durch das Labyrinth laufen. <br>Korallen sind deine Hindernisse, sie lassen dich nicht durch und tuermen sich auf wie Waende.br> Du kommst aus einer wunderschoenen Muschel.<br>Doch um weiter zu kommen musst du dich zur Glaskugel begeben. <br>Leicht zu erkennen durch das Ausgangssymbol " +
-				        "Ziel ist es, sich durch die Gefahren der Tiefe zu schlaengeln<br>und das Endziel zu erreichen.<br> Dabei triffst du auf unterschiedliche Gegner und Meereserscheinungen. <br>" +
-				        "Pass auf, wenn du auf Kraben triffst, musst du diese erledigen, sonst werden sie dich heimsuchen und du bleibst auf ewig in dem Labyrinth der Meere gefangen.</body></html>"); 
+		lStory = new JLabel("<html><body>Willkommen bei Dungeon Crawler der Meere.<br><br>" +
+				        "Hier erhaelst du einige Anweisungen und erklaerungen zum Spiel.<br><br>DU, die Krake, kannst mit den Pfeiltasten durch das Labyrinth laufen. <br>Korallen sind deine Hindernisse, sie lassen dich nicht durch und tuermen sich auf wie Waende<br> Du kommst aus einer wunderschoenen Muschel.<br>Doch um weiter zu kommen musst du dich zur Glaskugel begeben. <br>Leicht zu erkennen durch das Ausgangssymbol " +
+				       "</body></html>"); 
 		lStoryc.gridx = 0;
 		lStoryc.gridy = 0;
 		lStoryc.fill = GridBagConstraints.BOTH;
@@ -783,6 +838,49 @@ e1.printStackTrace();
 		aufgabes.gridy = 0;
 		aufgabes.fill = GridBagConstraints.BOTH;
 		
+		oke = new JButton("<html><body>Wir helfen dir <br>"+"und finden deinen Freund</body></html>");
+		oke.addActionListener(this);
+		okes.gridx = 0;
+		okes.gridy = 2;
+		okes.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(oke, okes);
+		questPanel.setVisible(true);
+		
+		nop = new JButton("<html><body>Tut mir leid,<br>"+ "Wir sind zu erwachsen, um Versteckspiele zu spielen<br></body></html>");
+		nop.addActionListener(this);
+		nops.gridx = 0;
+		nops.gridy = 6;
+		nops.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(nop, nops);
+		questPanel.setVisible(true);
+		
+		cp.add(questPanel);
+		
+		this.pack();
+		this.setSize(xFrame, yFrame);
+	}
+	
+	/*
+	public void gameStop(){
+		
+		questPanel = new JPanel();
+		questPanel.setBounds(0, 0, 600, 600);
+		questPanel.setLayout(new GridBagLayout());
+		
+		
+		aufgabe = new JLabel("<html><body>Quack.... Hallo !...Quack<br>" +
+				"Ich bin Feivel der Froschkewitz. <br>" +
+				"Ich und mein Freund Bubous spielen verstecken.<br>Bubous hat sich versteckt, und ich kann ihn nicht finden. <br> Er ist ein Meister im verstecken.<br>Selbst der Buergermeister konnte ihn nicht finden.<br> " +
+				"??...Koennt ihr mir helfen Bubous zu finden??.. <br>Wenn ihr es schaft ihn zu finden,dann erhaltet ihr eine Belohnung.<br>" +
+				"???..Was die Behlohnung ist wollt ihr wissen ??... <br> Haha das bleibt mein Geheimnis<br>.<br>.<br></body></html>");
+		aufgabes.gridx = 0;
+		aufgabes.gridy = 0;
+		aufgabes.fill = GridBagConstraints.BOTH;
+		
 		ok = new JButton("<html><body>Wir helfen dir <br>"+"und finden deinen Freund</body></html>");
 		ok.addActionListener(this);
 		oks.gridx = 0;
@@ -807,6 +905,82 @@ e1.printStackTrace();
 		
 		this.pack();
 		this.setSize(xFrame, yFrame);
+		
+		
+		/*gameStopPanel = new JPanel();
+		gameStopPanel.setBounds(0, 0, 600, 600);
+		gameStopPanel.setLayout(new GridBagLayout());
+		
+		bBackToGame = new JButton("Back to game (Z)");
+		bBackToGamec.gridx = 0;
+		bBackToGamec.gridy = 1;
+		bBackToGamec.fill = GridBagConstraints.HORIZONTAL;
+		
+		bBackToGame.addActionListener(this);
+		bBackToGame.setDefaultCapable(true);
+		
+		gameStopPanel.add(bBackToGame, bBackToGamec);
+		gameStopPanel.setVisible(true);
+		
+		cp.add(gameStopPanel);
+		
+		bRestart = new JButton("Hauptmenu (M)");
+		bRestart.addActionListener(this);
+		bRestart.setDefaultCapable(true);
+		bRestartc.gridx = 0;
+		bRestartc.gridy = 6;
+		bRestartc.fill = GridBagConstraints.HORIZONTAL;
+		
+		gameStopPanel.add(bRestart, bRestartc);
+		gameStopPanel.setVisible(true);
+		
+		cp.add(gameStopPanel);
+		
+		/*lEndec.gridx = 0;
+		lEndec.gridy = 0;
+		lEndec.fill = GridBagConstraints.HORIZONTAL;*/
+		
+		/*bExit = new JButton("Exit (Q)");
+		bExit.addActionListener(this);
+		bExit.setDefaultCapable(true);
+		bExitc2.gridx = 0;
+		bExitc2.gridy = 6;
+		bExitc2.fill = GridBagConstraints.HORIZONTAL;
+		//bExitc2 = new GridBagConstraints();
+		
+		gameStopPanel.add(bExit, bExitc2);
+		gameStopPanel.setVisible(true);
+		
+		cp.add(gameStopPanel);
+		
+		this.pack();
+		this.setSize(xFrame, yFrame);*/
+	//}
+
+	public void Taucher() {
+		// TODO Auto-generated method stub
+		questPanel = new JPanel();
+		questPanel.setBounds(0, 0, 600, 600);
+		questPanel.setLayout(new GridBagLayout());
+		
+		
+		aufgabe = new JLabel("<html><body> Hallo !<br>" +
+				"....  <br>" +
+				"Nein, den Bubous habe ich nicht gesehen.<br> " +
+				"<br>.<br>.<br></body></html>");
+		aufgabes.gridx = 0;
+		aufgabes.gridy = 0;
+		aufgabes.fill = GridBagConstraints.BOTH;
+		
+		ok = new JButton("<html><body>Danke, wir suchen dann weiter.</body></html>");
+		ok.addActionListener(this);
+		oks.gridx = 0;
+		oks.gridy = 2;
+		oks.fill = GridBagConstraints.HORIZONTAL;
+		
+		questPanel.add(aufgabe, aufgabes);
+		questPanel.add(ok, oks);
+		questPanel.setVisible(true);
 	}
 
 }

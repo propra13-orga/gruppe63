@@ -38,6 +38,7 @@ public class Room extends JPanel {
 	//private Leben leben;
 	Image img;
 	static BufferedImage background;
+	boolean quit = false;
 	//private Mana mana;
 	//private Money money;
 	//private Armor armor;
@@ -122,9 +123,19 @@ public class Room extends JPanel {
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 17:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 18:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 20:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		case 21:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 22:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 23:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 24:
+			return new Elements(Room.elementwidth, Room.elementheight, number);
+		case 25:
 			return new Elements(Room.elementwidth, Room.elementheight, number);
 		default:
 			return null;
@@ -224,12 +235,27 @@ public class Room extends JPanel {
 		else if (upright == 17 || downright == 17 || downleft == 17
 				|| upleft == 17)
 			return 17;
+		else if (upright == 18 || downright == 18 || downleft == 18
+				|| upleft == 18)
+			return 18;
 		else if (upright == 20 || downright == 20 || downleft == 20
 				|| upleft == 20)
 			return 20;
 		else if (upright == 21 || downright == 21 || downleft == 21
 				|| upleft == 21)
 			return 21;
+		else if (upright == 22 || downright == 22 || downleft == 22
+				|| upleft == 22)
+			return 22;
+		else if (upright == 23 || downright == 23 || downleft == 23
+				|| upleft == 23)
+			return 23;
+		else if (upright == 24 || downright == 24 || downleft == 24
+				|| upleft == 24)
+			return 24;
+		else if (upright == 25 || downright == 25 || downleft == 25
+				|| upleft == 25)
+			return 25;
 		else
 			return 0;
 	}
@@ -242,6 +268,11 @@ public class Room extends JPanel {
 		
 	public void paintComponent(Graphics g){
 		g.drawImage(img,0,0,this);
+		if(quit==true){
+			g.drawString("Resume (R)",250,100);
+			g.drawString("Main Menu (M)",250,150);
+			g.drawString("Quit Game (Q)",250,200);
+		}
 	}
 	
 	public void status(Player player, Player2 player2) {
@@ -287,7 +318,19 @@ public class Room extends JPanel {
 		case 20: //Nixe Quest verdienen von 20 xp
 			game.quest();
 			break;
-		case 21: //Frosch Quest verdienen von 20 xp
+		case 21: //Frosch Quest verdienen von Belohnung
+			game.quest2();
+			break;
+		case 22: //Frosch Quest verdienen von Belohnung
+			game.quest2();
+			break;
+		case 23: //Frosch Quest verdienen von Belohnung
+			game.quest2();
+			break;
+		case 24: //Frosch Quest verdienen von Belohnung
+			game.quest2();
+			break;
+		case 25: //Frosch Quest verdienen von Belohnung
 			game.quest2();
 			break;
 		default:
@@ -319,6 +362,18 @@ public class Room extends JPanel {
 			
 		case 21: //Frosch Quest verdienen von Belohnung
 			game.quest2();
+			break;
+		case 22: //Frosch Quest verdienen von Belohnung
+			game.taucher();
+			break;
+		case 23: //Frosch Quest verdienen von Belohnung
+			game.taucher();
+			break;
+		case 24: //Frosch Quest verdienen von Belohnung
+			game.taucher();
+			break;
+		case 25: //Frosch Quest verdienen von Belohnung
+			game.taucher();
 			break;
 		
 		case 14:

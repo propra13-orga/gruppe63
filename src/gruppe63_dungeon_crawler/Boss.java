@@ -12,6 +12,7 @@ public class Boss extends Elements {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private Room room;
 	private int health = 30;
 	private int width=50;

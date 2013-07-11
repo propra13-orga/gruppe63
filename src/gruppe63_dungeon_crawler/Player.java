@@ -18,6 +18,7 @@ public class Player extends Elements {
 	private int mana = 100;
 	private int damage = 50;
 	private boolean attack = false;
+	//private boolean speak = false;
 	private int hits = 0;
 	private int maxHealth =100;
 	
@@ -157,7 +158,7 @@ public class Player extends Elements {
 	public void setAttack(boolean b) {
 		this.attack = b;
 	}
-
+    
 	public void collision(Elements element) {
 		Rectangle rh = getBounds();
 		Rectangle rb = element.getBounds();
