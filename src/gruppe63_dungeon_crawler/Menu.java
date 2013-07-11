@@ -72,7 +72,6 @@ public class Menu extends JFrame implements ActionListener{
 	
 	JButton bServer;
 	JButton bClient2;
-	JButton bClient1;
 	
 	GridBagConstraints lTitlec = new GridBagConstraints();
 	GridBagConstraints lDifficultyc = new GridBagConstraints();
@@ -103,7 +102,6 @@ public class Menu extends JFrame implements ActionListener{
 	
 	GridBagConstraints bServerc = new GridBagConstraints();
 	GridBagConstraints bClient2c = new GridBagConstraints();
-	GridBagConstraints bClient1c = new GridBagConstraints();
 	GridBagConstraints lWinnerPoints1c = new GridBagConstraints();
 	GridBagConstraints lWinnerPoints2c = new GridBagConstraints();
 	
@@ -168,12 +166,11 @@ public class Menu extends JFrame implements ActionListener{
 		bSave = new JButton("Save and exit");
 		bSave.addActionListener(this);
 		
-		bServer = new JButton("Server starten");
+		bServer = new JButton("Server und 1. Client starten");
 		bServer.addActionListener(this);
 		bClient2 = new JButton("2. Client starten");
 		bClient2.addActionListener(this);
-		bClient1 = new JButton("1. Client starten");
-		bClient1.addActionListener(this);
+
 		
 		
 		
@@ -243,17 +240,13 @@ public class Menu extends JFrame implements ActionListener{
 		bServerc.fill = GridBagConstraints.HORIZONTAL;
 		bServerc.weightx = 2.0;
 		
-// Initialize Clientbutton
+// Initialize Clientbutton 2
 		bClient2c.gridx = 0;
-		bClient2c.gridy = 12;
+		bClient2c.gridy = 9;
 		bClient2c.fill = GridBagConstraints.HORIZONTAL;
 		bClient2c.weightx = 2.0;
 
-		// Initialize Clientbutton
-		bClient1c.gridx = 0;
-		bClient1c.gridy = 9;
-		bClient1c.fill = GridBagConstraints.HORIZONTAL;
-		bClient1c.weightx = 2.0;	
+
 		
 
 		cp.setLayout(new GridBagLayout());
@@ -265,7 +258,7 @@ public class Menu extends JFrame implements ActionListener{
 		cp.add(bExit, bExitc);
 		cp.add(bServer, bServerc);
 		cp.add(bClient2, bClient2c);
-		cp.add(bClient1, bClient1c);
+
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -378,22 +371,14 @@ public class Menu extends JFrame implements ActionListener{
 			
 		}
 		
-		if(e.getSource()==this.bClient1)
-		{
-			
-				this.startGame(1);
-			
-		}
+		
 		
 		if(e.getSource()==this.bServer)
-		{							
-			
-				try {
-					MultiServer.server();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+		{
+			MultiServer server = new MultiServer();
+			Thread t = new Thread(server);
+			t.start();
+			this.startGame(1);		
 			
 				
 			}
