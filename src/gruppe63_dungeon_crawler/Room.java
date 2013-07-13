@@ -325,16 +325,25 @@ public class Room extends JPanel {
 			game.quest2();
 			break;
 		case 22: //Frosch Quest verdienen von Belohnung
-			game.quest2();
+			//game.quest2();
+			if (Environment(player2.getX(), player2.getY(), player2.xDim,
+					player2.yDim)==25) {
+				
+				game.setcoopquestfinish(true);
+			}
 			break;
 		case 23: //Frosch Quest verdienen von Belohnung
-			game.quest2();
+			//game.quest2();
 			break;
 		case 24: //Frosch Quest verdienen von Belohnung
-			game.quest2();
+			//game.quest2();
 			break;
 		case 25: //Frosch Quest verdienen von Belohnung
-			game.quest2();
+			//game.quest2();
+			if (Environment(player2.getX(), player2.getY(), player2.xDim,
+					player2.yDim)==22) {
+				game.setcoopquestfinish(true);	
+			}
 			break;
 		default:
 			break;

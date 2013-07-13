@@ -40,4 +40,5 @@ public class Ring extends Elements {
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
+
 }
