@@ -43,6 +43,9 @@ public class Player extends Elements {
 	private ArrayList<Magic> magic;
 	private ArrayList<Weapon> weapon;
 	private boolean hatRuestung;
+	
+	private int wplocal=0;
+	private int wpunlocal=0;
 
 	public Player(int x, int y, Room room) {
 		// Groesse des Spielers
@@ -267,14 +270,16 @@ public class Player extends Elements {
            os.write(x/4);
            os.write(y/4);
            os.write(Game.actualroom);
-           os.write(this.winnerpoints/100);
+           os.write(this.wplocal/100);
+           os.write(this.wpunlocal/100);
           
            
            int a1=is.read()*4;
            int b1=is.read()*4;
            int c = is.read();
            int d = is.read()*100;
-           
+           int e = is.read()*100;
+                      
            
            System.out.println("Client x2:" + a1);
            System.out.println("Client y2:" + b1);
@@ -283,6 +288,8 @@ public class Player extends Elements {
            this.posY2=b1;
            this.r2=c;
            this.winnerpoints2=d;
+           this.winnerpoints=e;
+           
            
 
            
@@ -322,13 +329,35 @@ public class Player extends Elements {
         	public int getWinnerpoints2(){
         		return this.winnerpoints2;
         	}
-        	public void incWinnerpoints(){
+        	/*public void incWinnerpoints(){
         		this.winnerpoints++;
         	}
         	public void setWinpoints(int n){
         		this.winnerpoints=n;
         	}
+        	public void setWinpoints2(int n){
+        		this.winnerpoints2=n;
+        	}*/
  
+        	public int getwpunlocal() {
+        		return this.wpunlocal;
+        	}
+        	public void incwpunlocal(){
+        		this.wpunlocal++;
+        	}
+			public void incwplocal() {
+				this.wplocal++;
+			}
+			public int getwplocal(){
+				return this.wplocal;
+			}
+			public void setwplocal(int n){
+        		this.wplocal=n;
+        	}
+			public void setwpunlocal(int n){
+        		this.wpunlocal=n;
+        	}
+			
 
     }
 

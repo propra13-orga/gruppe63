@@ -13,9 +13,11 @@ public class MultiServerThread extends Thread {
     private int y1=MultiServer.y1;
     private int x2=MultiServer.x2;
     private int y2=MultiServer.y2;
-    private int wp;
-    private int wp1=MultiServer.wp1;
-    private int wp2=MultiServer.wp2;
+    private int wplocal;
+    private int wpunlocal;
+    private int wpc1unlocal=MultiServer.wpc1unlocal;
+    private int wpc2unlocal=MultiServer.wpc2unlocal;
+    
     private int Kennung;
     private int x;
     private int y;
@@ -41,7 +43,8 @@ public class MultiServerThread extends Thread {
         x=is1.read();
         y=is1.read();
         r=is1.read();
-        wp=is1.read();
+        wplocal=is1.read();
+        wpunlocal=is1.read();
 
         
         if (Kennung==1) {
@@ -51,14 +54,15 @@ public class MultiServerThread extends Thread {
         	MultiServer.x1=x;
         	MultiServer.y1=y;
         	MultiServer.r1=r;
-        	MultiServer.wp1=wp;
+        	MultiServer.wpc1local=wplocal;
+        	MultiServer.wpc1unlocal=wpunlocal;
         	
         	
         	os1.write(x2);
             os1.write(y2);
             os1.write(r2);
-            os1.write(wp2);
-
+            os1.write((MultiServer.wpc2local+wpc1unlocal)/2);
+            os1.write((MultiServer.wpc1local+wpc2unlocal)/2);
         	
         }
         
@@ -69,14 +73,14 @@ public class MultiServerThread extends Thread {
         	MultiServer.x2=x;
         	MultiServer.y2=y;
         	MultiServer.r2=r;
-        	MultiServer.wp2=wp;
+        	MultiServer.wpc2local=wplocal;
+        	MultiServer.wpc2unlocal=wpunlocal;
         	
         	os1.write(x1);
             os1.write(y1);
             os1.write(r1);
-            os1.write(wp1);
-
-            	
+            os1.write((MultiServer.wpc1local+wpc2unlocal)/2);
+            os1.write((MultiServer.wpc2local+wpc1unlocal)/2);
         }
 
         
@@ -87,25 +91,7 @@ public class MultiServerThread extends Thread {
     
 	}
     }
-    
-   /* public void setx1(int n) {
-    	this.x1=n;
-    }
-    public void setx2(int n) {
-    	this.x2=n;
-    }
-    public void sety1(int n) {
-    	this.y1=n;
-    }
-    public void sety2(int n) {
-    	this.y2=n;
-    }
-    public void setr2(int n) {
-    	this.r2=n;
-    }
-    public void setr1(int n) {
-    	this.r1=n;
-    }*/
+
     
 }
 

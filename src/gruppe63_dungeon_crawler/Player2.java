@@ -30,6 +30,7 @@ public class Player2 extends Elements {
 	private ArrayList<Magic> magic;
 	private ArrayList<Weapon> weapon;
 	private boolean hatRuestung;
+	private int winnerpoints=0;
 	
 
 
@@ -213,7 +214,14 @@ public class Player2 extends Elements {
 		manapotions = m;
 	}    	
 	
+	public void incWinnerpoints(){
+		this.winnerpoints++;
+	}
 	
+	public int getWinnerpoints() {
+		return this.winnerpoints;
+	}
+		
 
     	
 	

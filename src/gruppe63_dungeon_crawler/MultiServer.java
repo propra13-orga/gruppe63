@@ -12,8 +12,13 @@ public class MultiServer implements Runnable{
 	public static int r2=1;
 	public static int wp1=0;
 	public static int wp2=0;
+	public static int wpp2c2=0;
+	public static int wpp2c1=0;
+	public static int wpc1local=0;
+	public static int wpc2local=0;
+	public static int wpc1unlocal=0;
+	public static int wpc2unlocal=0;
 	
-   
 	@Override
 	public void run() {
 		

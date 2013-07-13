@@ -279,6 +279,9 @@ public class Room extends JPanel {
 		int collision = Environment(player.x, player.y,player.xDim,
 				player.yDim);
 		
+		if (Environment(player2.getX(), player2.getY(), player2.xDim,
+				player2.yDim)==5) {player.incwpunlocal();}
+		
 		if (player.getRoom2()>Game.actualroom) {
 				game.nextRoom();
 			}
@@ -294,7 +297,7 @@ public class Room extends JPanel {
 			
 			if (game.getDown()) {
 			
-			player.incWinnerpoints();}
+			player.incwplocal();}
 			
 			
 			

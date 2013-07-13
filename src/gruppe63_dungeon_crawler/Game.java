@@ -47,6 +47,7 @@ public class Game extends JPanel implements Runnable {
 	@SuppressWarnings("unused")
 	private boolean saveHatRing;
 	private int savewinpoints=0;
+	private int savewinpoints2=0;
 	
 	private int playerdamaged=0;
 	private int moneyAmount=10;
@@ -492,7 +493,8 @@ public class Game extends JPanel implements Runnable {
 		player.setManapotions(saveManapotions);
 		player.setHatRuestung(saveHatRuestung);
 		player.setMaxHealth(saveMaxHealth);
-		player.setWinpoints(savewinpoints);
+		player.setwplocal(savewinpoints);
+		player.setwpunlocal(savewinpoints2);
 		moneyAmount = 10;
 		manaAmount = 10;
 		healAmount = 10;
@@ -1143,6 +1145,7 @@ if (rp.intersects(l)) {
 			setsaveHatRuestung(player.getHatRuestung());
 			setsaveMaxHealth(player.getMaxHealth());
 			setsaveWinnerpoints(player.getWinnerpoints());
+			setsaveWinnerpoints2(player.getWinnerpoints2());
 			startRoom();
 		}
 	}
@@ -1202,6 +1205,10 @@ if (rp.intersects(l)) {
 	public void setsaveWinnerpoints(int n)
 	{
 		this.savewinpoints = n;
+	}
+	public void setsaveWinnerpoints2(int n)
+	{
+		this.savewinpoints2 = n;
 	}
 	
 	public void story()
