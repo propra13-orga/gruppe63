@@ -7,6 +7,9 @@ import java.util.TimerTask;
 import javax.swing.JPanel;
 import java.util.ArrayList;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Game extends JPanel implements Runnable {
 
@@ -33,6 +36,7 @@ public class Game extends JPanel implements Runnable {
 	private Fireball fireball;
 	private Infobar infobar;
 	boolean quit = false;
+	private boolean load;
 	
 	private Player2 player2;
 	private int client;
@@ -53,6 +57,7 @@ public class Game extends JPanel implements Runnable {
 	private int moneyAmount=10;
 	private int healAmount=10;
 	private int manaAmount=10;
+	private int player1X, player1Y, player2X, player2Y;
 	
 	private ArrayList<Enemy> enemies;
 	//private ArrayList<Enemyquest> qenemies;
@@ -76,6 +81,9 @@ public class Game extends JPanel implements Runnable {
 	private boolean buboustaken=false;
 	
 	private boolean coopquestfinish=false;
+	
+	FileWriter writer;
+	File file;
 
 	public static int lifes = 5;
 	int[][] Z;
@@ -83,8 +91,9 @@ public class Game extends JPanel implements Runnable {
 	public static int actualroom = 1;
 	private int endroom = 9;
 
-	public Game(Container container, Menu menu, int n) {
+	public Game(Container container, Menu menu, int n, boolean b) {
 
+		load = b;
 		this.container = container;
 		this.main = menu;
 		this.client=n;
@@ -95,8 +104,16 @@ public class Game extends JPanel implements Runnable {
 
 	public void run() {
 
+		if (load)
+		{
+			// Spielstand laden
+		}
+		else
+		{
+			// neues Spiel
+			Game.lifes=5;
+		}
 		startRoom();
-		Game.lifes=5;
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
@@ -132,6 +149,7 @@ public class Game extends JPanel implements Runnable {
 				    }
 				}*/
 				// Spieler
+				saveLocation1();
 				player.move(client);
 				if (client==0) {room.status();}
 				else {player2.move(player);
@@ -546,6 +564,7 @@ public class Game extends JPanel implements Runnable {
 				    }
 				}
 				// Spieler
+				saveLocation1();
 				player.move(client);
 				if (client==0) {room.status();}
 				else {player2.move(player);
@@ -798,7 +817,7 @@ public class Game extends JPanel implements Runnable {
 			for (int j = 0; j < Z[i].length; j++) {
 				if (Z[i][j] == 4) {
 
-					player.setLocation(j * Room.elementheight, i * Room.elementwidth);
+					player.setLocation(player1X, player1Y);
 					room.add(player);
 					if(client!=0){player2.setLocation((j + 1) * Room.elementheight, i * Room.elementwidth);
 					room.add(player2);}
@@ -1173,7 +1192,40 @@ if (rp.intersects(l)) {
 
 	public void nextRoom() {
 		actualroom++;
-		//room.removeAll();
+		// spielstand bei nächstem level (nach bossgegner, also raum 4 oder raum 7) in datei speichern
+				if (actualroom == 4 || actualroom == 7)
+				{
+					file = new File("Savegame.cjr");
+					try
+					{
+						// new FileWriter(file ,true) - falls die Datei bereits existiert
+						// werden die Bytes an das Ende der Datei geschrieben
+					       
+					    // new FileWriter(file) - falls die Datei bereits existiert
+					    // wird diese überschrieben
+					    writer = new FileWriter(file);
+					       
+					    // Text wird in den Stream geschrieben
+					    int n = 0;
+					    if(player.getHatRuestung() == true)
+					    {
+					    	n = 1;
+					    }
+					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth());
+					       
+					    // Schreibt den Stream in die Datei
+					    // Sollte immer am Ende ausgeführt werden, sodass der Stream 
+					    // leer ist und alles in der Datei steht.
+					    writer.flush();
+					       
+					    // Schließt den Stream
+					    writer.close();
+					}
+					catch (IOException e) 
+					{
+					   e.printStackTrace();
+				    }
+				}
 		container.remove(room);
 		room = null;
 		if (actualroom > endroom) {
@@ -1304,6 +1356,12 @@ if (rp.intersects(l)) {
 	}
 	public void setcoopquestfinish(boolean b){
 		this.coopquestfinish=b;
+	}
+	
+	public void saveLocation1()
+	{
+		player1X = player.getPosX();
+		player1Y = player.getPosY();
 	}
 	
 }

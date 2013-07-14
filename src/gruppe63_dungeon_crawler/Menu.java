@@ -69,6 +69,7 @@ public class Menu extends JFrame implements ActionListener{
 	JButton bSave;
 	JButton bClose;
 	JButton bRestart;
+	JButton bLoadSavegame;
 	
 	JButton bServer;
 	JButton bClient2;
@@ -85,6 +86,7 @@ public class Menu extends JFrame implements ActionListener{
 	GridBagConstraints bExitc2 = new GridBagConstraints();
 	GridBagConstraints bRestartc = new GridBagConstraints();
 	GridBagConstraints lEndec = new GridBagConstraints();
+	GridBagConstraints bLoadSavegamec = new GridBagConstraints();
 	
 	// Shop-elements
 	JLabel lShop;
@@ -165,6 +167,8 @@ public class Menu extends JFrame implements ActionListener{
 		bClose.addActionListener(this);
 		bSave = new JButton("Save and exit");
 		bSave.addActionListener(this);
+		bLoadSavegame = new JButton("Load last Savegame");
+		bLoadSavegame.addActionListener(this);
 		
 		bServer = new JButton("Server und 1. Client starten");
 		bServer.addActionListener(this);
@@ -234,6 +238,12 @@ public class Menu extends JFrame implements ActionListener{
 		bExitc.fill = GridBagConstraints.HORIZONTAL;
 		bExitc.weightx = 1.0;
 		
+		// Initialize LoadSavegamebutton
+		bLoadSavegamec.gridx = 0;
+		bLoadSavegamec.gridy = 5;
+		bLoadSavegamec.fill = GridBagConstraints.HORIZONTAL;
+		bLoadSavegamec.weightx = 1.0;
+		
 		// Initialize Serverbutton
 		bServerc.gridx = 0;
 		bServerc.gridy = 6;
@@ -258,6 +268,7 @@ public class Menu extends JFrame implements ActionListener{
 		cp.add(bExit, bExitc);
 		cp.add(bServer, bServerc);
 		cp.add(bClient2, bClient2c);
+		cp.add(bLoadSavegame, bLoadSavegamec);
 
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -289,15 +300,8 @@ public class Menu extends JFrame implements ActionListener{
 	{
 		if(e.getSource()==this.bStart)
 		{
-			try {
-	            Sound.main(null);
-	            }
-			catch (UnsupportedAudioFileException | IOException
-					| LineUnavailableException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				}
-			this.startGame(0);
+			this.initSound();
+			this.startGame(0, false);
 
 
 					
@@ -367,7 +371,7 @@ public class Menu extends JFrame implements ActionListener{
 		if(e.getSource()==this.bClient2)
 		{
 			
-				this.startGame(2);
+				this.startGame(2, false);
 			
 		}
 		
@@ -378,7 +382,7 @@ public class Menu extends JFrame implements ActionListener{
 			MultiServer server = new MultiServer();
 			Thread t = new Thread(server);
 			t.start();
-			this.startGame(1);		
+			this.startGame(1, false);		
 			
 				
 			}
@@ -403,20 +407,14 @@ public class Menu extends JFrame implements ActionListener{
 				difficulty = 1;
 			setVisible(false);
 			cp.removeAll();
-			cp.add(lTitle, lTitlec);
-			cp.add(bStart, bStartc);
-			cp.add(bSettings, bSettingsc);
-			cp.add(bExit, bExitc);
+			this.initialize();
 			setVisible(true);
 		}
 		if(e.getSource()==this.bClose)
 		{
 			setVisible(false);
 			cp.removeAll();
-			cp.add(lTitle, lTitlec);
-			cp.add(bStart, bStartc);
-			cp.add(bSettings, bSettingsc);
-			cp.add(bExit, bExitc);
+			this.initialize();
 			setVisible(true);
 		}
 		if(e.getSource()==this.bRestart)
@@ -426,13 +424,7 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==this.bBackToGame)
 		{
-			try {
-				Sound.main(null);
-				} catch (UnsupportedAudioFileException | IOException
-						| LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					}
+			this.initSound();
 			game.continueGame();
 			
 
@@ -531,10 +523,15 @@ public class Menu extends JFrame implements ActionListener{
 			player.setMaxHealth(player.getMaxHealth() + 10);
 			game.continueGame();
 		}
+		if(e.getSource() == bLoadSavegame)
+		{
+			this.initSound();
+			this.startGame(0, true);
+		}
 		
 	}
 	
-	public void startGame(int n)
+	public void startGame(int n, boolean b)
 	{
 		// Start game, load dungeon
 		String diffString = null;
@@ -554,7 +551,7 @@ public class Menu extends JFrame implements ActionListener{
 		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
 
 		//Start new game
-		game = new Game(this.cp, this, n);
+		game = new Game(this.cp, this, n, b);
 		thread = new Thread(game);
 		thread.start();
 	}
@@ -966,6 +963,17 @@ public class Menu extends JFrame implements ActionListener{
 		questPanel.add(aufgabe, aufgabes);
 		questPanel.add(ok, oks);
 		questPanel.setVisible(true);
+	}
+	
+	private void initSound()
+	{
+		try {
+			Sound.main(null);
+			} catch (UnsupportedAudioFileException | IOException
+					| LineUnavailableException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
 	}
 
 }

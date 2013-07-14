@@ -1,0 +1,2 @@
+Bedeutung:
+Raum, Leben, Lebenspunkte, Manapunkte, Geld, Lebenstränke, Manatränke, Rüstung (1=true, 0=false), Maximallebenspunkte
