@@ -58,6 +58,10 @@ public class Game extends JPanel implements Runnable {
 	private int healAmount=10;
 	private int manaAmount=10;
 	private int player1X, player1Y, player2X, player2Y;
+	private int totalxp=0;
+	private int levelxp=0;
+	private int playerLevel=0;
+	private int playerXP=0;
 	
 	private ArrayList<Enemy> enemies;
 	//private ArrayList<Enemyquest> qenemies;
@@ -133,7 +137,13 @@ public class Game extends JPanel implements Runnable {
 				    else 
 				    {
 				    	enemies.remove(i);
-				    	playerLevelUp();
+				    	totalxp++;
+				    	if(totalxp%3 == 0)
+				    	{
+				    		playerLevelUp(1);
+				    	}
+				    	berechnePlayerlevel();
+				    	berechneLevelXP();
 				    }
 				}
 				//quenemy
@@ -528,7 +538,7 @@ public class Game extends JPanel implements Runnable {
 		moneyAmount = 10;
 		manaAmount = 10;
 		healAmount = 10;
-		infobar = new Infobar(50,600,room,player, this);
+		infobar = new Infobar(20,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
 		room.paintRoom();
@@ -560,7 +570,13 @@ public class Game extends JPanel implements Runnable {
 				    else 
 				    {
 				    	enemies.remove(i);
-				    	playerLevelUp();
+				    	totalxp++;
+				    	if(totalxp%3 == 0)
+				    	{
+				    		playerLevelUp(1);
+				    	}
+				    	berechnePlayerlevel();
+				    	berechneLevelXP();
 				    }
 				}
 				// Spieler
@@ -925,7 +941,7 @@ isbubous=true;
 }}
 			}
 		}
-		infobar = new Infobar(50,600,room,player, this);
+		infobar = new Infobar(20,600,room,player, this);
 		room.add(infobar);
 		main.controller.setPlayer(player);
 		room.paintRoom();
@@ -1043,7 +1059,7 @@ if (rp.intersects(l)) {
 	        	ring.setVisible(false);
 		        room.remove(ring);
 		        ringtaken=true;
-		        playerLevelUp();
+		        playerLevelUp(2);
 	        }
 		}}	
 			if (isbubous){
@@ -1059,7 +1075,7 @@ if (rp.intersects(l)) {
 		        	bubous.setVisible(false);
 			        room.remove(bubous);
 			        buboustaken=true;
-			        playerLevelUp();
+			        playerLevelUp(2);
 		        }}}
         
 		for (int j = 0; j<enemies.size(); j++) {
@@ -1120,7 +1136,14 @@ if (rp.intersects(l)) {
 	        	if(rm.intersects(re)) {
 	        		m.setVisible(false);
 	        			        		
-	        		e.setHealth(e.getHealth() - m.getDamage());
+	        		if (player.getUpMagicdmg() == false)
+	        		{
+	        			e.setHealth(e.getHealth() - m.getDamage());
+	        		}
+	        		else
+	        		{
+	        			e.setHealth(e.getHealth() - m.getDamage() - 10);
+	        		}
 					System.out.println(e.getHealth());
 	        	}
 	        	
@@ -1339,10 +1362,10 @@ if (rp.intersects(l)) {
 		main.shop(player);
 	}
 	
-	public void playerLevelUp()
+	public void playerLevelUp(int punkte)
 	{
 		timer.cancel();
-		main.playerLevelUp(player);
+		main.playerLevelUp(player, punkte);
 	}	
 	
 	public int getClient(){
@@ -1362,6 +1385,31 @@ if (rp.intersects(l)) {
 	{
 		player1X = player.getPosX();
 		player1Y = player.getPosY();
+	}
+	
+	public int getTotalXP()
+	{
+		return totalxp;
+	}
+	
+	public int getLevelXP()
+	{
+		return levelxp;
+	}
+	
+	public int getPlayerlevel()
+	{
+		return this.playerLevel;
+	}
+	
+	public void berechnePlayerlevel()
+	{
+		this.playerLevel = totalxp/3;
+	}
+	
+	public void berechneLevelXP()
+	{
+		this.levelxp = totalxp%3;
 	}
 	
 }

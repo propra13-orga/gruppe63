@@ -58,7 +58,14 @@ public class Fireball extends Elements {
 		if (rf.intersects(rh)) {
 
 			if (hits % 150 == 0) {
-				player.setHealth(player.getHealth() - getDamage());
+				if (player.getFireres() == true)
+				{
+					player.setHealth(player.getHealth() - getDamage() + 10);
+				}
+				else
+				{
+					player.setHealth(player.getHealth() - getDamage());
+				}
 				System.out.println(player.getHealth());
 				
 			}

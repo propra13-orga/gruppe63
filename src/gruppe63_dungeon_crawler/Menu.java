@@ -28,7 +28,8 @@ public class Menu extends JFrame implements ActionListener{
 	private Thread thread;
 	
 	// Game klasse?
-	private static Game game;
+	//private static Game game; // Wieso game auf static?
+	private Game game;
 	@SuppressWarnings("unused")
 	private Enemyquest qenemy;
 	
@@ -46,6 +47,7 @@ public class Menu extends JFrame implements ActionListener{
 	public Controller controller;
 	private Player player = null;
 	private int storysite;
+	private int points;
 	
 	private int xFrame=610;
 	private int yFrame=689;
@@ -115,9 +117,17 @@ public class Menu extends JFrame implements ActionListener{
 	
 	// Playerlevelup-elements
 	JLabel lLevelup;
+	JLabel lPoints;
 	JButton bLevelupMaxHealth;
+	JButton bLevelupMaxMana;
+	JButton bLevelupFireres;
+	JButton bLevelupMagicDmg;
 	GridBagConstraints lLevelupc = new GridBagConstraints();
+	GridBagConstraints lPointsc = new GridBagConstraints();
 	GridBagConstraints bLevelupMaxHealthc = new GridBagConstraints();
+	GridBagConstraints bLevelupMaxManac = new GridBagConstraints();
+	GridBagConstraints bLevelupFireresc = new GridBagConstraints();
+	GridBagConstraints bLevelupMagicDmgc = new GridBagConstraints();
 	
 	//Quest-elements
 	JLabel aufgabe;
@@ -520,8 +530,69 @@ public class Menu extends JFrame implements ActionListener{
 		}
 		if(e.getSource()==bLevelupMaxHealth)
 		{
-			player.setMaxHealth(player.getMaxHealth() + 10);
-			game.continueGame();
+			if (points > 0)
+			{
+				player.setMaxHealth(player.getMaxHealth() + 10);
+				points--;
+				lPoints.setText("Punkte: " + points);
+			}
+			else
+			{
+				lLevelup.setText("Nicht genügend Punkte!");
+			}
+		}
+		if(e.getSource()==bLevelupMaxMana)
+		{
+			if (points > 0)
+			{
+				player.setMaxMana(player.getMaxMana() + 10);
+				points--;
+				lPoints.setText("Punkte: " + points);
+			}
+			else
+			{
+				lLevelup.setText("Nicht genügend Punkte!");
+			}
+		}
+		if(e.getSource() == bLevelupFireres)
+		{
+			if (points > 0)
+			{
+				if (player.getFireres() == false)
+				{
+					player.setFireres(true);
+					points--;
+					lPoints.setText("Punkte: " + points);
+				}
+				else
+				{
+					lLevelup.setText("Bereits erhöht!");
+				}
+			}
+			else
+			{
+				lLevelup.setText("Nicht genügend Punkte!");
+			}
+		}
+		if(e.getSource() == bLevelupMagicDmg)
+		{
+			if (points > 0)
+			{
+				if (player.getUpMagicdmg() == false)
+				{
+					player.setUpMagicdmg(true);
+					points--;
+					lPoints.setText("Punkte: " + points);
+				}
+				else
+				{
+					lLevelup.setText("Bereits erhöht!");
+				}
+			}
+			else
+			{
+				lLevelup.setText("Nicht genügend Punkte!");
+			}
 		}
 		if(e.getSource() == bLoadSavegame)
 		{
@@ -721,9 +792,10 @@ public class Menu extends JFrame implements ActionListener{
 		this.setSize(xFrame, yFrame);
 	}
 
-	public void playerLevelUp(Player p)
+	public void playerLevelUp(Player p, int punkte)
 	{
 		this.player = p;
+		points = punkte;
 		LevelUpPanel = new JPanel();
 		LevelUpPanel.setBounds(0, 0, 600, 600);
 		LevelUpPanel.setLayout(new GridBagLayout());
@@ -741,17 +813,44 @@ public class Menu extends JFrame implements ActionListener{
 		bLevelupMaxHealthc.gridy = 1;
 		bLevelupMaxHealthc.fill = GridBagConstraints.HORIZONTAL;
 		
+		bLevelupMaxMana = new JButton("+10 Maximum Mana");
+		bLevelupMaxMana.addActionListener(this);
+		bLevelupMaxManac.gridx = 0;
+		bLevelupMaxManac.gridy = 2;
+		bLevelupMaxManac.fill = GridBagConstraints.HORIZONTAL;
+		
+		bLevelupFireres = new JButton("Einmalig: +10 Feuerrüstung (benötigt 5 Upgrades in Maxhealth)");
+		bLevelupFireres.addActionListener(this);
+		bLevelupFireresc.gridx = 0;
+		bLevelupFireresc.gridy = 3;
+		bLevelupFireresc.fill = GridBagConstraints.HORIZONTAL;
+		
+		bLevelupMagicDmg = new JButton("Einmalig: +10 Feuerballschaden (benötigt 5 Upgrades in Maxmana)");
+		bLevelupMagicDmg.addActionListener(this);
+		bLevelupMagicDmgc.gridx = 0;
+		bLevelupMagicDmgc.gridy = 2;
+		bLevelupMagicDmgc.fill = GridBagConstraints.HORIZONTAL;
+		
 		bBackToGame = new JButton("Back to game");
 		bBackToGamec.gridx = 0;
-		bBackToGamec.gridy = 2;
+		bBackToGamec.gridy = 5;
 		bBackToGamec.fill = GridBagConstraints.HORIZONTAL;
+		
+		lPoints = new JLabel("Punkte: " + points);
+		lPointsc.gridx = 0;
+		lPointsc.gridy = 6;
+		lPointsc.fill = GridBagConstraints.BOTH;
 		
 		bBackToGame.addActionListener(this);
 		bBackToGame.setDefaultCapable(true);
 		
 		LevelUpPanel.add(lLevelup, lLevelupc);
 		LevelUpPanel.add(bLevelupMaxHealth, bLevelupMaxHealthc);
+		LevelUpPanel.add(bLevelupMaxMana, bLevelupMaxManac);
+		LevelUpPanel.add(bLevelupFireres, bLevelupFireresc);
+		LevelUpPanel.add(bLevelupMagicDmg, bLevelupMagicDmgc);
 		LevelUpPanel.add(bBackToGame, bBackToGamec);
+		LevelUpPanel.add(lPoints, lPointsc);
 
 		LevelUpPanel.setVisible(true);
 		

@@ -21,6 +21,7 @@ public class Player extends Elements {
 	//private boolean speak = false;
 	private int hits = 0;
 	private int maxHealth =100;
+	private int maxMana = 100;
 	
 	private int winnerpoints=0;
 	private int winnerpoints2=0;
@@ -42,7 +43,7 @@ public class Player extends Elements {
 	private Image sprite;
 	private ArrayList<Magic> magic;
 	private ArrayList<Weapon> weapon;
-	private boolean hatRuestung;
+	private boolean hatRuestung, fireres, UpMagicdmg;
 	
 	private int wplocal=0;
 	private int wpunlocal=0;
@@ -79,6 +80,16 @@ public class Player extends Elements {
 	public void setMaxHealth(int mh)
 	{
 		maxHealth = mh;
+	}
+	
+	public int getMaxMana()
+	{
+		return this.maxMana;
+	}
+	
+	public void setMaxMana(int mm)
+	{
+		maxMana = mm;
 	}
 
 	public int getCurrentHealth() {
@@ -229,6 +240,26 @@ public class Player extends Elements {
 	public boolean getHatRuestung()
 	{
 		return hatRuestung;
+	}
+	
+	public void setFireres(boolean b)
+	{
+		fireres = b;
+	}
+	
+	public boolean getFireres()
+	{
+		return fireres;
+	}
+	
+	public void setUpMagicdmg(boolean b)
+	{
+		UpMagicdmg = b;
+	}
+	
+	public boolean getUpMagicdmg()
+	{
+		return UpMagicdmg;
 	}
 	
 	public void setMana(int m)

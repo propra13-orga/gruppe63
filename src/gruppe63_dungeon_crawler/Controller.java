@@ -69,18 +69,18 @@ public class Controller extends KeyAdapter {
 		}
 		if (key == KeyEvent.VK_3)
 		{
-			if (player.getMana() != 100)
+			if (player.getMana() != player.getMaxMana())
 			{
 				if (player.getManapotions() > 0)
 				{
-					if (player.getMana()+10 < 100)
+					if (player.getMana()+10 < player.getMaxMana())
 					{
 						player.setMana(player.getMana()+10);
 						player.setManapotions(player.getManapotions()-1);
 					}
 					else
 					{
-						player.setMana(100);
+						player.setMana(player.getMaxMana());
 						player.setManapotions(player.getManapotions()-1);
 					}
 				}

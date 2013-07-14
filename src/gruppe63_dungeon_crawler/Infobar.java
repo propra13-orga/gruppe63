@@ -21,16 +21,18 @@ public class Infobar extends Elements {
 	
 	@SuppressWarnings("static-access")
 	public void paintComponent(Graphics g){
-		g.drawString("Lebenspunkte: " + player.getHealth(), 20, 20);
-		g.drawString("Mana: " + player.getMana(), 20, 40);
-		g.drawString("Geld: " + player.getMoney(), 200, 20);
-		g.drawString("Healthpotions: " + player.getHealthpotions(), 200, 40);
-		g.drawString("Leben: " + game.lifes, 350, 20);
-		g.drawString("Manapotions: " + player.getManapotions(), 350, 40);
+		g.drawString("Lebenspunkte: " + player.getHealth(), 20, 15);
+		g.drawString("Mana: " + player.getMana(), 20, 45);
+		g.drawString("Geld: " + player.getMoney(), 150, 15);
+		g.drawString("Healthpotions: " + player.getHealthpotions(), 150, 45);
+		g.drawString("Leben: " + game.lifes, 280, 15);
+		g.drawString("Manapotions: " + player.getManapotions(), 150, 30);
 		g.drawString("MaxHealth: " + player.getMaxHealth(), 20, 30);
+		g.drawString("Playerlevel: " + game.getPlayerlevel() + " (Levelup bei 3xp)", 280, 30);
+		g.drawString("Erfahrung: " + game.getLevelXP(), 280, 45);
 		if (game.getClient()!=0){
-			g.drawString("Winnerpoints: " + player.getWinnerpoints(), 20, 50);
-			g.drawString("Winnerpoints2: " + player.getWinnerpoints2(), 200, 50);
+			g.drawString("Winnerpoints: " + player.getWinnerpoints(), 400, 15);
+			g.drawString("Winnerpoints2: " + player.getWinnerpoints2(), 400, 45);
 		}
 		
 	//g.dispose();
