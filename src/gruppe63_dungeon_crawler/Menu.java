@@ -558,15 +558,22 @@ public class Menu extends JFrame implements ActionListener{
 		{
 			if (points > 0)
 			{
-				if (player.getFireres() == false)
+				if (player.getMaxHealth() >= 150)
 				{
-					player.setFireres(true);
-					points--;
-					lPoints.setText("Punkte: " + points);
+					if (player.getFireres() == false)
+					{
+						player.setFireres(true);
+						points--;
+						lPoints.setText("Punkte: " + points);
+					}
+					else
+					{
+						lLevelup.setText("Bereits erhöht!");
+					}
 				}
 				else
 				{
-					lLevelup.setText("Bereits erhöht!");
+					lLevelup.setText("Nicht genügend Punkte in Maxhealth!");
 				}
 			}
 			else
@@ -578,15 +585,22 @@ public class Menu extends JFrame implements ActionListener{
 		{
 			if (points > 0)
 			{
-				if (player.getUpMagicdmg() == false)
+				if (player.getMaxMana() >= 150)
 				{
-					player.setUpMagicdmg(true);
-					points--;
-					lPoints.setText("Punkte: " + points);
+					if (player.getUpMagicdmg() == false)
+					{
+						player.setUpMagicdmg(true);
+						points--;
+						lPoints.setText("Punkte: " + points);
+					}
+					else
+					{
+						lLevelup.setText("Bereits erhöht!");
+					}
 				}
 				else
 				{
-					lLevelup.setText("Bereits erhöht!");
+					lLevelup.setText("Nicht genügend Punkte in Maxmana!");
 				}
 			}
 			else
