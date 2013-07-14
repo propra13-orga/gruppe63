@@ -543,7 +543,7 @@ public class Game extends JPanel implements Runnable {
 	                                   //qenemies.add(qenemy);
 	                                   room.add(qenemy);
 	                                  }
-				if (Z[i][j] == 24) {
+			/*	if (Z[i][j] == 24) {
 
 	                   taucher1 = new Taucher1(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
@@ -554,7 +554,7 @@ public class Game extends JPanel implements Runnable {
 	                   taucher2 = new Taucher2(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
 	                                  room.add(taucher2);
-	                                  }
+	                                  }*/
 ////////////////////////////////////////////////////////////////////////////////////	                                  
 			if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 
@@ -959,8 +959,7 @@ public class Game extends JPanel implements Runnable {
 	                          }
 				
 ////////////////////////////////////////////////////////////////////////////////////
-
-if (Z[i][j] == 24) {
+/*if (Z[i][j] == 24) {
 
 taucher1 = new Taucher1(j * Room.elementheight, i
 * Room.elementwidth, room);
@@ -971,7 +970,7 @@ if (Z[i][j] == 23) {
 taucher2 = new Taucher2(j * Room.elementheight, i
 * Room.elementwidth, room);
 room.add(taucher2);
-}
+}*/
 ////////////////////////////////////////////////////////////////////////////////////
 if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 

@@ -373,19 +373,19 @@ public class Room extends JPanel {
 			break;
 			
 		case 21: //Frosch Quest verdienen von Belohnung
-			game.quest2();
+			//game.quest2();
 			break;
 		case 22: //Frosch Quest verdienen von Belohnung
-			game.taucher();
+			//game.taucher();
 			break;
 		case 23: //Frosch Quest verdienen von Belohnung
-			game.taucher();
+			//game.taucher();
 			break;
 		case 24: //Frosch Quest verdienen von Belohnung
-			game.taucher();
+			//game.taucher();
 			break;
 		case 25: //Frosch Quest verdienen von Belohnung
-			game.taucher();
+			//game.taucher();
 			break;
 		
 		case 14:
