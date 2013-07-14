@@ -2,14 +2,18 @@ package gruppe63_dungeon_crawler;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JPanel;
 import java.util.ArrayList;
 import java.awt.Rectangle;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Game extends JPanel implements Runnable {
 
@@ -108,9 +112,36 @@ public class Game extends JPanel implements Runnable {
 
 	public void run() {
 
+		int[] ladewerte = new int[11];
 		if (load)
 		{
-			// Spielstand laden
+			String string;
+			
+			try {
+				File fil = new File("Savegame.cjr");
+				FileInputStream fis = new FileInputStream(fil);
+				InputStreamReader isr = new InputStreamReader(fis);
+				@SuppressWarnings("resource")
+				BufferedReader br = new BufferedReader(isr);
+
+				string = br.readLine();
+				StringTokenizer tokenisedstring = new StringTokenizer(string, ",");
+				for (int i = 0; i < 11; i++)
+				{
+					ladewerte[i] = Integer.parseInt(tokenisedstring.nextToken());
+				}
+				
+				// Anfangswerte setzen (player werte können noch nicht gesetzt werden, da dieser erst in startRoom erstellt wird)
+				actualroom = ladewerte[0];
+				Game.lifes = ladewerte[1];
+				totalxp = ladewerte[10];
+			}
+			catch (java.io.FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (java.io.IOException e) {
+				e.printStackTrace();
+			}
 		}
 		else
 		{
@@ -118,6 +149,26 @@ public class Game extends JPanel implements Runnable {
 			Game.lifes=5;
 		}
 		startRoom();
+		
+		// player werte setzen, falls spielstand geladen wurde
+		if (load)
+		{
+			player.setHealth(ladewerte[2]);
+			player.setMana(ladewerte[3]);
+			player.setMoney(ladewerte[4]);
+			player.setHealthpotions(ladewerte[5]);
+			player.setManapotions(ladewerte[6]);
+			if (ladewerte[7] == 1)
+				player.setHatRuestung(true);
+			else
+				player.setHatRuestung(false);
+			player.setMaxHealth(ladewerte[8]);
+			player.setMaxMana(ladewerte[9]);
+			
+			// playerlevel und playerxp berechnen, damit diese richtig angezeigt werden in der infobar
+			berechnePlayerlevel();
+	    	berechneLevelXP();
+		}
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
@@ -1234,7 +1285,7 @@ if (rp.intersects(l)) {
 					    {
 					    	n = 1;
 					    }
-					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth());
+					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth() + "," + player.getMaxMana() + "," + totalxp);
 					       
 					    // Schreibt den Stream in die Datei
 					    // Sollte immer am Ende ausgeführt werden, sodass der Stream 
