@@ -149,6 +149,7 @@ public class Game extends JPanel implements Runnable {
 		{
 			// neues Spiel
 			Game.lifes=5;
+			actualroom=1;
 		}
 		startRoom();
 		
