@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class Armor extends Elements {
 
 	/**
-	 * 
+	 * Ist das Item für die Ruestung  und funktioniert wie die anderen Items
 	 */
 	private static final long serialVersionUID = 1L;
 

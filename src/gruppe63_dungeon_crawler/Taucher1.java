@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class Taucher1 extends Elements {
 
 	/**
-	 * 
+	 * Ist für den Taucherquest da/ wird den Items ähnlich 
 	 */
 	private static final long serialVersionUID = 1L;
 

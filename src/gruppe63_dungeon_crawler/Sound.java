@@ -3,6 +3,11 @@ package gruppe63_dungeon_crawler;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
+/**
+ * 
+ * Sounddatei: Alle Sounds werden von hier geladen 
+ *
+ */
 
 public class Sound {
 	

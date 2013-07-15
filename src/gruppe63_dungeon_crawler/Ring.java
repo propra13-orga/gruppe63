@@ -8,7 +8,8 @@ import java.awt.Toolkit;
 public class Ring extends Elements {
 
 	/**
-	 * 
+	 * Ring, der gefunden werden muss. Gehört der Nixe und kommt erst dann ins Spiel, wenn
+	 * man ihren Quest akzeptiert.
 	 */
 	private static final long serialVersionUID = 1L;
 
