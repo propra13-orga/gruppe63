@@ -114,7 +114,7 @@ public class Game extends JPanel implements Runnable {
 
 	public void run() {
 
-		int[] ladewerte = new int[11];
+		int[] ladewerte = new int[13];
 		if (load)
 		{
 			String string;
@@ -128,7 +128,7 @@ public class Game extends JPanel implements Runnable {
 
 				string = br.readLine();
 				StringTokenizer tokenisedstring = new StringTokenizer(string, ",");
-				for (int i = 0; i < 11; i++)
+				for (int i = 0; i < 13; i++)
 				{
 					ladewerte[i] = Integer.parseInt(tokenisedstring.nextToken());
 				}
@@ -167,6 +167,14 @@ public class Game extends JPanel implements Runnable {
 				player.setHatRuestung(false);
 			player.setMaxHealth(ladewerte[8]);
 			player.setMaxMana(ladewerte[9]);
+			if (ladewerte[11] == 1)
+				player.setFireres(true);
+			else
+				player.setFireres(false);
+			if (ladewerte[12] == 1)
+				player.setUpMagicdmg(true);
+			else
+				player.setUpMagicdmg(false);
 			
 			// playerlevel und playerxp berechnen, damit diese richtig angezeigt werden in der infobar
 			berechnePlayerlevel();
@@ -1303,11 +1311,21 @@ if (rp.intersects(l)) {
 					       
 					    // Text wird in den Stream geschrieben
 					    int n = 0;
+					    int f = 0;
+					    int m = 0;
 					    if(player.getHatRuestung() == true)
 					    {
 					    	n = 1;
 					    }
-					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth() + "," + player.getMaxMana() + "," + totalxp);
+					    if(player.getFireres() == true)
+					    {
+					    	f = 1;
+					    }
+					    if(player.getUpMagicdmg() == true)
+					    {
+					    	m = 1;
+					    }
+					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth() + "," + player.getMaxMana() + "," + totalxp + "," + f + "," + m);
 					       
 					    // Schreibt den Stream in die Datei
 					    // Sollte immer am Ende ausgeführt werden, sodass der Stream 
