@@ -1484,5 +1484,8 @@ if (rp.intersects(l)) {
 	{
 		this.levelxp = totalxp%3;
 	}
+	public boolean getquest2() {
+		return this.quest2;
+	}
 	
 }
