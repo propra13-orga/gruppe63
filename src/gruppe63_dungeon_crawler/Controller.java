@@ -99,9 +99,9 @@ public class Controller extends KeyAdapter {
 		    	player.shootWeapon();
 		 }
 		
-		/*if (key == KeyEvent.VK_ESCAPE) {
-			quit = true;
-	 }*/
+		if (key == KeyEvent.VK_ESCAPE) {
+			player.setescape(true);
+	 }
 	}
 	
 
@@ -130,9 +130,9 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 			player.setAttack(false);
 		}
-		/*if (key == KeyEvent.VK_ESCAPE) {
-	    	quit= false;
-	 }*/
+		if (key == KeyEvent.VK_ESCAPE) {
+	    	player.setescape(false);
+	 }
 	}
 
 }

@@ -687,7 +687,7 @@ public class Menu extends JFrame implements ActionListener{
 		bExitc2.weightx = 1.0;
 		
 		GameoverPanel.add(lEnde, lEndec);
-		GameoverPanel.add(bRestart, bRestartc);
+		if (client==0) {GameoverPanel.add(bRestart, bRestartc);}
 		GameoverPanel.add(bExit, bExitc2);
 		if (client!=0) {
 			GameoverPanel.add(lWinnerPoints1, lWinnerPoints1c);

@@ -96,7 +96,7 @@ public class Game extends JPanel implements Runnable {
 	int[][] Z;
 
 	public static int actualroom = 1;
-	private int endroom = 9;
+	private int endroom = 10;
 
 	public Game(Container container, Menu menu, int n, boolean b) {
 
@@ -256,7 +256,7 @@ public class Game extends JPanel implements Runnable {
 				fireballtimer++;
 
 				// Anfang Bosskmapf 1.
-				if (actualroom == 3) {
+				if (actualroom == 3) {down=false; player.setdown(false);
 					if (fireballtimer % 1000 == 0 & down == false) {
 						fireball = new Fireball(boss.getPosX(), boss.getPosY(),
 								room);
@@ -297,13 +297,14 @@ public class Game extends JPanel implements Runnable {
 					if (boss.getHealth() <= 0) {
 						room.remove(boss);
 						down = true;
+						player.setdown(true);
 					}
 
 				}
 				// Ende Bosskampf 1.
 				// Angfang Bosskampf 2.
 
-				if (actualroom == 6) {down=false;
+				if (actualroom == 6) {down=false;player.setdown(false);
 					
 					for (int k = 0; k<fireballs.size(); k++) {
 			        	Magic m = (Magic) fireballs.get(k);
@@ -323,6 +324,7 @@ public class Game extends JPanel implements Runnable {
 						room.remove(boss2);
 						boss2.setDead();
 						down = true;
+						player.setdown(true);
 					}
 
 				}
@@ -363,7 +365,7 @@ public class Game extends JPanel implements Runnable {
 			//}
 				//Ende Bubous quest
 				// Anfang Bosskampf 3.
-				if (actualroom == 9) {
+				if (actualroom == 9) {down=false; player.setdown(false);
 					
 					
 					
@@ -430,10 +432,14 @@ public class Game extends JPanel implements Runnable {
 						room.remove(boss3);
 						boss3.setDead();
 						down = true;
+						player.setdown(true);
 					}
 				}
 				// Ende Bosskmapf 3.
-
+					
+				if (actualroom==10 & player.getescape()) {
+					main.win(true, player);
+				}
 			}
 		};
 		timer = new Timer();
@@ -486,7 +492,7 @@ public class Game extends JPanel implements Runnable {
 					boss = new Boss(j * Room.elementheight, i
 							* Room.elementwidth, room);
 					room.add(boss);
-					down = false;
+					
 				}
 				if (Z[i][j] == 8) {
 
@@ -499,7 +505,7 @@ public class Game extends JPanel implements Runnable {
 					boss3 = new Boss3(j * Room.elementheight, i
 							* Room.elementwidth, room);
 					room.add(boss3);
-					down = false;
+					
 				}
 				if (Z[i][j] == 13) {
 
@@ -667,7 +673,7 @@ public class Game extends JPanel implements Runnable {
 				fireballtimer++;
 
 				// Anfang Bosskmapf 1.
-				if (actualroom == 3) {
+				if (actualroom == 3) {down=false; player.setdown(false);
 					if (fireballtimer % 1000 == 0 & down == false) {
 						fireball = new Fireball(boss.getPosX(), boss.getPosY(),
 								room);
@@ -708,6 +714,7 @@ public class Game extends JPanel implements Runnable {
 					if (boss.getHealth() <= 0) {
 						room.remove(boss);
 						down = true;
+						player.setdown(true);
 					}
 
 			}
@@ -745,7 +752,7 @@ public class Game extends JPanel implements Runnable {
 /////////////////////////////////////////////////////////////////////////
 				// Angfang Bosskampf 2.
 
-				if (actualroom == 6) {down=false;
+				if (actualroom == 6) {down=false; player.setdown(false);
 					
 					for (int k = 0; k<fireballs.size(); k++) {
 			        	Magic m = (Magic) fireballs.get(k);
@@ -765,12 +772,13 @@ public class Game extends JPanel implements Runnable {
 						room.remove(boss2);
 						boss2.setDead();
 						down = true;
+						player.setdown(true);
 					}
 
 				}
 				// Ende Bosskampf 2.
 				// Anfang Bosskampf 3.
-				if (actualroom == 9) {
+				if (actualroom == 9) {down=false; player.setdown(false);
 					
 					
 					
@@ -837,6 +845,7 @@ public class Game extends JPanel implements Runnable {
 						room.remove(boss3);
 						boss3.setDead();
 						down = true;
+						player.setdown(true);
 					}
 				}
 				// Ende Bosskmapf 3.
@@ -884,20 +893,20 @@ public class Game extends JPanel implements Runnable {
 					boss = new Boss(j * Room.elementheight, i
 							* Room.elementwidth, room);
 					room.add(boss);
-					down = false;
+					
 				}
 				if (Z[i][j] == 8) {
 
 					boss2 = new Boss2(j * Room.elementheight, i
 							* Room.elementwidth, room);
-					room.add(boss2);
+					
 				}
 				if (Z[i][j] == 9) {
 
 					boss3 = new Boss3(j * Room.elementheight, i
 							* Room.elementwidth, room);
 					room.add(boss3);
-					down = false;
+					
 				}
 				if (Z[i][j] == 13) {
 

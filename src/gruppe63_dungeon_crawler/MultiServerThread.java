@@ -24,6 +24,7 @@ public class MultiServerThread extends Thread {
     private int r;
     private int r1=MultiServer.r1;
     private int r2=MultiServer.r2;
+    private int down;
 
 
     
@@ -45,6 +46,7 @@ public class MultiServerThread extends Thread {
         r=is1.read();
         wplocal=is1.read();
         wpunlocal=is1.read();
+        down=is1.read();
 
         
         if (Kennung==1) {
@@ -56,6 +58,7 @@ public class MultiServerThread extends Thread {
         	MultiServer.r1=r;
         	MultiServer.wpc1local=wplocal;
         	MultiServer.wpc1unlocal=wpunlocal;
+        	MultiServer.down1=down;
         	
         	
         	os1.write(x2);
@@ -63,6 +66,7 @@ public class MultiServerThread extends Thread {
             os1.write(r2);
             os1.write((MultiServer.wpc2local+wpc1unlocal)/2);
             os1.write((MultiServer.wpc1local+wpc2unlocal)/2);
+            os1.write(MultiServer.down2);
         	
         }
         
@@ -75,12 +79,14 @@ public class MultiServerThread extends Thread {
         	MultiServer.r2=r;
         	MultiServer.wpc2local=wplocal;
         	MultiServer.wpc2unlocal=wpunlocal;
+        	MultiServer.down2=down;
         	
         	os1.write(x1);
             os1.write(y1);
             os1.write(r1);
             os1.write((MultiServer.wpc1local+wpc2unlocal)/2);
             os1.write((MultiServer.wpc2local+wpc1unlocal)/2);
+            os1.write(MultiServer.down1);
         }
 
         

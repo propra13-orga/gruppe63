@@ -28,6 +28,9 @@ public class Player extends Elements {
 	private int posX2;
 	private int posY2;
 	private int r2;
+	private boolean escape;
+	private boolean player2down;
+	private boolean playerdown;
 	
 	//private float level;
 	//private float xp;
@@ -290,8 +293,8 @@ public class Player extends Elements {
            OutputStream os = ss.getOutputStream();
            InputStream is = ss.getInputStream();    
 
-           int x=this.getX();
-           int y=this.getY();
+          
+           
            
            System.out.println("Client x:" + x);
            System.out.println("Client y:" + y); 
@@ -303,6 +306,9 @@ public class Player extends Elements {
            os.write(Game.actualroom);
            os.write(this.wplocal/100);
            os.write(this.wpunlocal/100);
+           if (playerdown) {os.write(1);}
+           else {os.write(0);}
+           
           
            
            int a1=is.read()*4;
@@ -310,6 +316,7 @@ public class Player extends Elements {
            int c = is.read();
            int d = is.read()*100;
            int e = is.read()*100;
+           int f = is.read();
                       
            
            System.out.println("Client x2:" + a1);
@@ -321,7 +328,7 @@ public class Player extends Elements {
            this.winnerpoints2=d;
            this.winnerpoints=e;
            
-           
+           if (f==1) {this.player2down=true;} else {this.player2down=false;}
 
            
          
@@ -388,7 +395,18 @@ public class Player extends Elements {
 			public void setwpunlocal(int n){
         		this.wpunlocal=n;
         	}
-			
+			public void setescape(boolean b) {
+				this.escape=b;
+			}
+			public boolean getescape(){
+				return this.escape;
+			}
+			public boolean getplayer2down() {
+				return this.player2down;
+			}
+			public void setdown(boolean b) {
+				this.playerdown=b;
+			}
 
     }
 

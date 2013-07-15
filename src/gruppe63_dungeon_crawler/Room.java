@@ -32,6 +32,7 @@ public class Room extends JPanel {
 	int[][] room7 = Matrix.getMat("Room7.txt");
 	int[][] room8 = Matrix.getMat("Room8.txt");
 	int[][] room9 = Matrix.getMat("Room9.txt");
+	int[][] room10 = Matrix.getMat("Room10.txt");
 
 	private Player player;
 	private Game game;
@@ -80,6 +81,9 @@ public class Room extends JPanel {
 			break;
 		case 9:
 			this.room = this.room9;
+			break;
+		case 10:
+			this.room = this.room10;
 			break;
 		}
 	}
@@ -279,7 +283,7 @@ public class Room extends JPanel {
 		int collision = Environment(player.x, player.y,player.xDim,
 				player.yDim);
 		
-		if (Environment(player2.getX(), player2.getY(), player2.xDim,
+		if (player.getplayer2down() & Environment(player2.getX(), player2.getY(), player2.xDim,
 				player2.yDim)==5) {player.incwpunlocal();}
 		
 		if (player.getRoom2()>Game.actualroom) {
@@ -291,7 +295,7 @@ public class Room extends JPanel {
 		case 5:
 						
 			if (game.getDown() & Environment(player2.getX(), player2.getY(), player2.xDim,
-					player2.yDim)==5) {
+					player2.yDim)==5 & player.getplayer2down()) {
 				game.nextRoom();
 			}
 			
@@ -352,6 +356,8 @@ public class Room extends JPanel {
 	}
 	
 	public void status() {
+		
+		if (game.getClient()==0) {
 		int collision = Environment(player.x, player.y, player.xDim,
 				player.yDim);
 		switch (collision) {
@@ -393,7 +399,7 @@ public class Room extends JPanel {
 			game.story();
 		default:
 			break;
-		}
+		}}
 
 	}
 
