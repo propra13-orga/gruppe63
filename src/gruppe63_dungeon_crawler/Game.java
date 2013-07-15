@@ -148,7 +148,7 @@ public class Game extends JPanel implements Runnable {
 		else
 		{
 			// neues Spiel
-			Game.lifes=1;
+			Game.lifes=5;
 		}
 		startRoom();
 		
@@ -621,6 +621,8 @@ public class Game extends JPanel implements Runnable {
 				
 				if (player.getHealth() <= 0)
 				{
+					saveHealth = player.getMaxHealth();
+					saveMaxHealth = player.getMaxHealth();
 					Game.lifes--;
 					System.out.println(Game.lifes);
 					if (Game.lifes == 0)
