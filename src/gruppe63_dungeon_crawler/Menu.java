@@ -656,12 +656,10 @@ public class Menu extends JFrame implements ActionListener{
 		if(win)
 		{
 			lEnde.setText("You win!");
-			Game.actualroom=1;
 		} 
 		else
 		{
 			lEnde.setText("You lose!");
-			Game.actualroom=1;
 		}
 		
 		JLabel lWinnerPoints1 = new JLabel("Your winnerpoints : " + player.getWinnerpoints(), JLabel.CENTER);

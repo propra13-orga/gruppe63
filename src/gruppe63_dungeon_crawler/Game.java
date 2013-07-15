@@ -148,7 +148,7 @@ public class Game extends JPanel implements Runnable {
 		else
 		{
 			// neues Spiel
-			Game.lifes=5;
+			Game.lifes=1;
 		}
 		startRoom();
 		
@@ -174,12 +174,20 @@ public class Game extends JPanel implements Runnable {
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
-				if (player.getHealth() <= 0) {
-				saveHealth = 100;
-				Game.lifes--;
-				System.out.println(Game.lifes);
-				startRoom();
-					
+				if (player.getHealth() <= 0) 
+				{
+					saveHealth = player.getMaxHealth();
+					saveMaxHealth = player.getMaxHealth();
+					Game.lifes--;
+					System.out.println(Game.lifes);
+					if (Game.lifes == 0)
+					{
+						gameOver();
+					}
+					else
+					{
+						startRoom();
+					}
 				}
 								
 				// Gegner				
@@ -611,11 +619,18 @@ public class Game extends JPanel implements Runnable {
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
-				if (player.getHealth() <= 0) {
-				Game.lifes--;
-				System.out.println(Game.lifes);
-				startRoom();
-					
+				if (player.getHealth() <= 0)
+				{
+					Game.lifes--;
+					System.out.println(Game.lifes);
+					if (Game.lifes == 0)
+					{
+						gameOver();
+					}
+					else
+					{
+						startRoom();
+					}
 				}
 				
 				// Gegner				
