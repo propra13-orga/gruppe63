@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class Geld extends Elements {
 
 	/**
-	 * 
+	 * Gelditem. Wird in der Gameklasse implementiert, sowie im Room und Elements.
 	 */
 	private static final long serialVersionUID = 1L;
 

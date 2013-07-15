@@ -8,7 +8,9 @@ import java.awt.Toolkit;
 public class Bubous extends Elements {
 
 	/**
-	 * 
+	 * ist der Freund des Frosches. Soll als questaufgabe gefunden werden. 
+	 * Die Taucher verstecken Ihn. Es muss die richtige Kombination an Taucherkollision gefunden werde,
+	 * um  Bubous zu finden. 
 	 */
 	private static final long serialVersionUID = 1L;
 

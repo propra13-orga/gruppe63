@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class Mana extends Elements {
 
 	/**
-	 * 
+	 * Mana Item  wird in der Gameklasse in das Spiel implementiert sowie in der Room und Elementsklasse
 	 */
 	private static final long serialVersionUID = 1L;
 

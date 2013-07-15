@@ -5,7 +5,10 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-public class Magic extends Elements {
+public class Magic extends Elements{
+	/**
+	 * Magie/Feuerbaelle die von der Qualle benutzt wird, erhaelt bewegung im controller
+	 */
 	private static final long serialVersionUID = 1L;
 	private Room room;
 	private int width;
@@ -101,8 +104,4 @@ public class Magic extends Elements {
 	}
 	public int getDamage(){
 	return this.damage;		
-	}
-
-}
-
-
+	}}

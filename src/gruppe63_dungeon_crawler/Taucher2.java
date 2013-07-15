@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 public class Taucher2 extends Elements {
 
 	/**
-	 * 
+	 * Taucherquest,  dieser und der erste müssen berührt werden, um den Quest zu bestehen
 	 */
 	private static final long serialVersionUID = 1L;
 
