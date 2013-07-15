@@ -842,7 +842,7 @@ public class Menu extends JFrame implements ActionListener{
 		bLevelupMagicDmg = new JButton("Einmalig: +10 Feuerballschaden (benötigt 5 Upgrades in Maxmana)");
 		bLevelupMagicDmg.addActionListener(this);
 		bLevelupMagicDmgc.gridx = 0;
-		bLevelupMagicDmgc.gridy = 2;
+		bLevelupMagicDmgc.gridy = 4;
 		bLevelupMagicDmgc.fill = GridBagConstraints.HORIZONTAL;
 		
 		bBackToGame = new JButton("Back to game");
