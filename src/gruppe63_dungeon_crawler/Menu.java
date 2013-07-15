@@ -27,8 +27,6 @@ public class Menu extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private Thread thread;
 	
-	// Game klasse?
-	//private static Game game; // Wieso game auf static?
 	private Game game;
 	@SuppressWarnings("unused")
 	private Enemyquest qenemy;
@@ -40,8 +38,6 @@ public class Menu extends JFrame implements ActionListener{
 	@SuppressWarnings("unused")
 	private JPanel gameStopPanel;
 	private JPanel LevelUpPanel;
-	//private JPanel quit;
-	//boolean quit = false;
 	private Container cp;
 	int difficulty;
 	public Controller controller;
@@ -956,99 +952,6 @@ public class Menu extends JFrame implements ActionListener{
 		this.pack();
 		this.setSize(xFrame, yFrame);
 	}
-	
-	/*
-	public void gameStop(){
-		
-		questPanel = new JPanel();
-		questPanel.setBounds(0, 0, 600, 600);
-		questPanel.setLayout(new GridBagLayout());
-		
-		
-		aufgabe = new JLabel("<html><body>Quack.... Hallo !...Quack<br>" +
-				"Ich bin Feivel der Froschkewitz. <br>" +
-				"Ich und mein Freund Bubous spielen verstecken.<br>Bubous hat sich versteckt, und ich kann ihn nicht finden. <br> Er ist ein Meister im verstecken.<br>Selbst der Buergermeister konnte ihn nicht finden.<br> " +
-				"??...Koennt ihr mir helfen Bubous zu finden??.. <br>Wenn ihr es schaft ihn zu finden,dann erhaltet ihr eine Belohnung.<br>" +
-				"???..Was die Behlohnung ist wollt ihr wissen ??... <br> Haha das bleibt mein Geheimnis<br>.<br>.<br></body></html>");
-		aufgabes.gridx = 0;
-		aufgabes.gridy = 0;
-		aufgabes.fill = GridBagConstraints.BOTH;
-		
-		ok = new JButton("<html><body>Wir helfen dir <br>"+"und finden deinen Freund</body></html>");
-		ok.addActionListener(this);
-		oks.gridx = 0;
-		oks.gridy = 2;
-		oks.fill = GridBagConstraints.HORIZONTAL;
-		
-		questPanel.add(aufgabe, aufgabes);
-		questPanel.add(ok, oks);
-		questPanel.setVisible(true);
-		
-		nop = new JButton("<html><body>Tut mir leid,<br>"+ "Wir sind zu erwachsen, um Versteckspiele zu spielen<br></body></html>");
-		nop.addActionListener(this);
-		nops.gridx = 0;
-		nops.gridy = 6;
-		nops.fill = GridBagConstraints.HORIZONTAL;
-		
-		questPanel.add(aufgabe, aufgabes);
-		questPanel.add(nop, nops);
-		questPanel.setVisible(true);
-		
-		cp.add(questPanel);
-		
-		this.pack();
-		this.setSize(xFrame, yFrame);
-		
-		
-		/*gameStopPanel = new JPanel();
-		gameStopPanel.setBounds(0, 0, 600, 600);
-		gameStopPanel.setLayout(new GridBagLayout());
-		
-		bBackToGame = new JButton("Back to game (Z)");
-		bBackToGamec.gridx = 0;
-		bBackToGamec.gridy = 1;
-		bBackToGamec.fill = GridBagConstraints.HORIZONTAL;
-		
-		bBackToGame.addActionListener(this);
-		bBackToGame.setDefaultCapable(true);
-		
-		gameStopPanel.add(bBackToGame, bBackToGamec);
-		gameStopPanel.setVisible(true);
-		
-		cp.add(gameStopPanel);
-		
-		bRestart = new JButton("Hauptmenu (M)");
-		bRestart.addActionListener(this);
-		bRestart.setDefaultCapable(true);
-		bRestartc.gridx = 0;
-		bRestartc.gridy = 6;
-		bRestartc.fill = GridBagConstraints.HORIZONTAL;
-		
-		gameStopPanel.add(bRestart, bRestartc);
-		gameStopPanel.setVisible(true);
-		
-		cp.add(gameStopPanel);
-		
-		/*lEndec.gridx = 0;
-		lEndec.gridy = 0;
-		lEndec.fill = GridBagConstraints.HORIZONTAL;*/
-		
-		/*bExit = new JButton("Exit (Q)");
-		bExit.addActionListener(this);
-		bExit.setDefaultCapable(true);
-		bExitc2.gridx = 0;
-		bExitc2.gridy = 6;
-		bExitc2.fill = GridBagConstraints.HORIZONTAL;
-		//bExitc2 = new GridBagConstraints();
-		
-		gameStopPanel.add(bExit, bExitc2);
-		gameStopPanel.setVisible(true);
-		
-		cp.add(gameStopPanel);
-		
-		this.pack();
-		this.setSize(xFrame, yFrame);*/
-	//}
 
 	public void Taucher() {
 		// TODO Auto-generated method stub

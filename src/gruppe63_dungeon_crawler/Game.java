@@ -32,8 +32,6 @@ public class Game extends JPanel implements Runnable {
 	private Enemyquest qenemy;
 	private Ring ring;
 	private Bubous bubous;
-	private Taucher1 taucher1;
-	private Taucher2 taucher2;
 	private Boss boss;
 	private Boss2 boss2;
 	private Boss3 boss3;
@@ -63,14 +61,13 @@ public class Game extends JPanel implements Runnable {
 	private int moneyAmount=10;
 	private int healAmount=10;
 	private int manaAmount=10;
-	private int player1X, player1Y, player2X, player2Y;
+	private int player1X, player1Y;
 	private int totalxp=0;
 	private int levelxp=0;
 	private int playerLevel=0;
 	private int playerXP=0;
 	
 	private ArrayList<Enemy> enemies;
-	//private ArrayList<Enemyquest> qenemies;
 	private ArrayList<Magic> fireballs;
 	private ArrayList<Weapon> arrows;
 
@@ -216,18 +213,6 @@ public class Game extends JPanel implements Runnable {
 				    	berechneLevelXP();
 				    }
 				}
-				//quenemy
-				/*
-				for (int i = 0; i < qenemies.size(); i++) {
-				    Enemyquest eq = (Enemyquest) qenemies.get(i);
-				    if (eq.isVisible())
-				        ring.setVisible(false);//eq.move();
-				    else 
-				    {
-				    	qenemies.remove(i);
-				    	ring.setVisible(true);
-				    }
-				}*/
 				// Spieler
 				saveLocation1();
 				player.move(client);
@@ -372,16 +357,7 @@ public class Game extends JPanel implements Runnable {
                if (actualroom == 8) {
             	   
             	   if (coopquestfinish) {bubous.setVisible(true);}
-            	   
-            	  
-				
-				
-				//if (player.collision1(taucher1)&& player.collision1(taucher2)) {
-					/*taucher1.setVisible(false);
-					taucher2.setVisible(false);
-					room.remove(taucher1);
-					room.remove(taucher2);*/
-					
+            	
 				}
 
 			//}
@@ -473,7 +449,6 @@ public class Game extends JPanel implements Runnable {
 													// Game)
 		
 		enemies = new ArrayList<Enemy>();
-		//qenemies = new ArrayList<Enemyquest>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
 		
@@ -559,21 +534,8 @@ public class Game extends JPanel implements Runnable {
 
 	                   qenemy = new Enemyquest(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
-	                                   //qenemies.add(qenemy);
 	                                   room.add(qenemy);
 	                                  }
-			/*	if (Z[i][j] == 24) {
-
-	                   taucher1 = new Taucher1(j * Room.elementheight, i
-	                                   * Room.elementwidth, room);
-	                                  room.add(taucher1);
-	                                  }
-				if (Z[i][j] == 23) {
-
-	                   taucher2 = new Taucher2(j * Room.elementheight, i
-	                                   * Room.elementwidth, room);
-	                                  room.add(taucher2);
-	                                  }*/
 ////////////////////////////////////////////////////////////////////////////////////	                                  
 			if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 
@@ -779,17 +741,6 @@ public class Game extends JPanel implements Runnable {
            //Anfang Bubous Quest
 					if (actualroom == 8) {if (coopquestfinish) {bubous.setVisible(true);}}
 	           
-	           /*if (game.taucher()(player2.getX(), player2.getY(), player2.xDim,
-						player2.yDim)==5) {
-					bubous.setVisible(true);
-				}
-	           //if (player.collision1(taucher1)&& player.collision1(taucher2)) {
-		/*taucher1.setVisible(false);
-		taucher2.setVisible(false);
-		room.remove(taucher1);
-		room.remove(taucher2);*/
-           // bubous.setVisible(true);}
-	           
 	//Ende Bubous quest
 /////////////////////////////////////////////////////////////////////////
 				// Angfang Bosskampf 2.
@@ -905,7 +856,6 @@ public class Game extends JPanel implements Runnable {
 													// Game)
 		
 		enemies = new ArrayList<Enemy>();
-		//qenemies = new ArrayList<Enemyquest>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
 		
@@ -988,21 +938,6 @@ public class Game extends JPanel implements Runnable {
 	                                 // qenemies.add(qenemy);
 	                                  qenemy.setVisible(false);
 	                          }
-				
-////////////////////////////////////////////////////////////////////////////////////
-/*if (Z[i][j] == 24) {
-
-taucher1 = new Taucher1(j * Room.elementheight, i
-* Room.elementwidth, room);
-room.add(taucher1);
-}
-if (Z[i][j] == 23) {
-
-taucher2 = new Taucher2(j * Room.elementheight, i
-* Room.elementwidth, room);
-room.add(taucher2);
-}*/
-////////////////////////////////////////////////////////////////////////////////////
 if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 
 ring = new Ring(j * Room.elementheight, i
@@ -1028,29 +963,8 @@ isbubous=true;
 		room.paintRoom();
 		container.add(room);
 		room.repaint(100);
-		//player.setHealth(saveHealth);
-		//player.setMoney(saveMoney);
 		
 		
-	}
-
-	private void startRoomRev() { // Muss noch überarbeitet werden.
-
-		container.setBackground(Color.CYAN);
-		container.removeAll();
-		room = new Room(50, 50, actualroom, this); // (Elementwidth,
-													// Elementheight, Level,
-													// Game)
-		player = new Player(Matrix.Downy(actualroom) * Room.elementheight,
-				Matrix.Downx(actualroom) * Room.elementwidth, room);
-		room.add(player);
-		
-		enemyInit(Z);
-		
-		main.controller.setPlayer(player);
-		room.paintRoom();
-		container.add(room);
-		room.repaint(100);
 	}
 	
 	public void collision() {
@@ -1135,8 +1049,6 @@ if (rp.intersects(l)) {
 			
 			if (rp.intersects(rg)) {
 		        
-	        	//player.setMoney(player.getMoney()+this.moneyAmount);
-	        	//moneyAmount = 0;
 	        	ring.setVisible(false);
 		        room.remove(ring);
 		        ringtaken=true;
@@ -1151,8 +1063,6 @@ if (rp.intersects(l)) {
 				
 				if (rp.intersects(rg)) {
 			        
-		        	//player.setMoney(player.getMoney()+this.moneyAmount);
-		        	//moneyAmount = 0;
 		        	bubous.setVisible(false);
 			        room.remove(bubous);
 			        buboustaken=true;
@@ -1182,33 +1092,6 @@ if (rp.intersects(l)) {
 	        	player.collision(e);
 	          		        	
 	        	}
-	        /*for (int y = 0; y<enemies.size(); y++) {
-    	        Enemyquest eq = (Enemyquest) qenemies.get(y);
-    	        Rectangle req = eq.getBounds();
-
-    	        if (rp.intersects(req)) {
-    	        	
-    	        	if (playerdamaged % 100 == 0) 
-    	        	{
-    	        		if (player.getHatRuestung())
-    	        		{
-    	        			player.setHealth(player.getHealth()-(e.getDamage()/2));
-    	        		}
-    	        		else
-    	        		{
-    	        			player.setHealth(player.getHealth()-e.getDamage());
-    	        		}
-    	        		System.out.println(player.getHealth());
-    	        	}}
-	
-
-        	playerdamaged++;
-        	player.collision(eq);
-          		        	
-        	}*/
-	        	
-	        	
-	        
 	        
 	        for (int k = 0; k<fireballs.size(); k++) {
 	        	Magic m = (Magic) fireballs.get(k);
@@ -1231,14 +1114,6 @@ if (rp.intersects(l)) {
 	        	
 	        }
 	        
-	      /*  for (int k = 0; k<fireballs.size(); k++) {
-	        	Magic m = (Magic) fireballs.get(k);
-	        	Rectangle rm = m.getBounds();
-	        	Rectangle b2 = boss2.getBounds();
-	        
-	       if(rm.intersects(b2)) {System.out.println("test");room.remove(boss2);}
-	        }*/
-	        
 	        for (int k = 0; k<arrows.size(); k++) {
 	        	Weapon w = (Weapon) arrows.get(k);
 	        	Rectangle rw = w.getBounds();
@@ -1259,8 +1134,6 @@ if (rp.intersects(l)) {
 	
 	private void enemyInit(int[][] Z) {
 		enemies = new ArrayList<Enemy>();
-		
-		//int[][] room2 = room.getRoom(actualroom);
 		
 		for(int i=0;i<Z.length;i++) {
 			for(int j=0;j<Z[0].length;j++) {
@@ -1364,17 +1237,6 @@ if (rp.intersects(l)) {
 		}
 	}
 
-	public void lastRoom() {
-		if (actualroom > 1) {
-			actualroom--;
-			room.removeAll();
-			container.remove(room);
-			room = null;
-			startRoomRev();
-		}
-
-	}
-
 	public boolean getDown() {
 		return this.down;
 	}
@@ -1442,7 +1304,6 @@ if (rp.intersects(l)) {
 	public void story()
 	{
 		timer.cancel();
-		//container.remove(room);
 		main.NPCstory();
 	}
 
@@ -1458,16 +1319,10 @@ if (rp.intersects(l)) {
 		timer.cancel();
 		main.Taucher();
 	}
-	/*public void gameStop1() {
-		timer.cancel();
-		main.gameStop();
-	}*/
-	
 
 	public void shop()
 	{
 		timer.cancel();
-		//container.remove(room);
 		main.shop(player);
 	}
 	
