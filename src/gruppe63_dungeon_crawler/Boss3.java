@@ -27,8 +27,8 @@ public class Boss3 extends Elements {
 		super(x, y, 66, 35);
 		this.room = room;
 		sprite = Toolkit.getDefaultToolkit().getImage("res/bossgegner.gif");
-		width = sprite.getWidth(null);
-	    height = sprite.getHeight(null);
+		width = 35;
+	    height =35;
 	}
 	
 	

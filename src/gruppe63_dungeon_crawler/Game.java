@@ -32,8 +32,6 @@ public class Game extends JPanel implements Runnable {
 	private Enemyquest qenemy;
 	private Ring ring;
 	private Bubous bubous;
-	private Taucher1 taucher1;
-	private Taucher2 taucher2;
 	private Boss boss;
 	private Boss2 boss2;
 	private Boss3 boss3;
@@ -57,19 +55,19 @@ public class Game extends JPanel implements Runnable {
 	private boolean saveHatRing;
 	private int savewinpoints=0;
 	private int savewinpoints2=0;
+	private boolean saveFireres, saveUpMagicdmg;
 	
 	private int playerdamaged=0;
 	private int moneyAmount=10;
 	private int healAmount=10;
 	private int manaAmount=10;
-	private int player1X, player1Y, player2X, player2Y;
+	private int player1X, player1Y;
 	private int totalxp=0;
 	private int levelxp=0;
 	private int playerLevel=0;
 	private int playerXP=0;
 	
 	private ArrayList<Enemy> enemies;
-	//private ArrayList<Enemyquest> qenemies;
 	private ArrayList<Magic> fireballs;
 	private ArrayList<Weapon> arrows;
 
@@ -113,7 +111,7 @@ public class Game extends JPanel implements Runnable {
 
 	public void run() {
 
-		int[] ladewerte = new int[11];
+		int[] ladewerte = new int[13];
 		if (load)
 		{
 			String string;
@@ -127,7 +125,7 @@ public class Game extends JPanel implements Runnable {
 
 				string = br.readLine();
 				StringTokenizer tokenisedstring = new StringTokenizer(string, ",");
-				for (int i = 0; i < 11; i++)
+				for (int i = 0; i < 13; i++)
 				{
 					ladewerte[i] = Integer.parseInt(tokenisedstring.nextToken());
 				}
@@ -148,6 +146,7 @@ public class Game extends JPanel implements Runnable {
 		{
 			// neues Spiel
 			Game.lifes=5;
+			actualroom=1;
 		}
 		startRoom();
 		
@@ -165,6 +164,14 @@ public class Game extends JPanel implements Runnable {
 				player.setHatRuestung(false);
 			player.setMaxHealth(ladewerte[8]);
 			player.setMaxMana(ladewerte[9]);
+			if (ladewerte[11] == 1)
+				player.setFireres(true);
+			else
+				player.setFireres(false);
+			if (ladewerte[12] == 1)
+				player.setUpMagicdmg(true);
+			else
+				player.setUpMagicdmg(false);
 			
 			// playerlevel und playerxp berechnen, damit diese richtig angezeigt werden in der infobar
 			berechnePlayerlevel();
@@ -173,12 +180,20 @@ public class Game extends JPanel implements Runnable {
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
-				if (player.getHealth() <= 0) {
-				saveHealth = 100;
-				Game.lifes--;
-				System.out.println(Game.lifes);
-				startRoom();
-					
+				if (player.getHealth() <= 0) 
+				{
+					saveHealth = player.getMaxHealth();
+					saveMaxHealth = player.getMaxHealth();
+					Game.lifes--;
+					System.out.println(Game.lifes);
+					if (Game.lifes == 0)
+					{
+						gameOver();
+					}
+					else
+					{
+						startRoom();
+					}
 				}
 								
 				// Gegner				
@@ -198,18 +213,6 @@ public class Game extends JPanel implements Runnable {
 				    	berechneLevelXP();
 				    }
 				}
-				//quenemy
-				/*
-				for (int i = 0; i < qenemies.size(); i++) {
-				    Enemyquest eq = (Enemyquest) qenemies.get(i);
-				    if (eq.isVisible())
-				        ring.setVisible(false);//eq.move();
-				    else 
-				    {
-				    	qenemies.remove(i);
-				    	ring.setVisible(true);
-				    }
-				}*/
 				// Spieler
 				saveLocation1();
 				player.move(client);
@@ -354,16 +357,7 @@ public class Game extends JPanel implements Runnable {
                if (actualroom == 8) {
             	   
             	   if (coopquestfinish) {bubous.setVisible(true);}
-            	   
-            	  
-				
-				
-				//if (player.collision1(taucher1)&& player.collision1(taucher2)) {
-					/*taucher1.setVisible(false);
-					taucher2.setVisible(false);
-					room.remove(taucher1);
-					room.remove(taucher2);*/
-					
+            	
 				}
 
 			//}
@@ -455,7 +449,6 @@ public class Game extends JPanel implements Runnable {
 													// Game)
 		
 		enemies = new ArrayList<Enemy>();
-		//qenemies = new ArrayList<Enemyquest>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
 		
@@ -541,21 +534,8 @@ public class Game extends JPanel implements Runnable {
 
 	                   qenemy = new Enemyquest(j * Room.elementheight, i
 	                                   * Room.elementwidth, room);
-	                                   //qenemies.add(qenemy);
 	                                   room.add(qenemy);
 	                                  }
-			/*	if (Z[i][j] == 24) {
-
-	                   taucher1 = new Taucher1(j * Room.elementheight, i
-	                                   * Room.elementwidth, room);
-	                                  room.add(taucher1);
-	                                  }
-				if (Z[i][j] == 23) {
-
-	                   taucher2 = new Taucher2(j * Room.elementheight, i
-	                                   * Room.elementwidth, room);
-	                                  room.add(taucher2);
-	                                  }*/
 ////////////////////////////////////////////////////////////////////////////////////	                                  
 			if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 
@@ -588,6 +568,8 @@ public class Game extends JPanel implements Runnable {
 		player.setMaxMana(saveMaxMana);
 		player.setwplocal(savewinpoints);
 		player.setwpunlocal(savewinpoints2);
+		player.setUpMagicdmg(saveUpMagicdmg);
+		player.setFireres(saveFireres);
 		moneyAmount = 10;
 		manaAmount = 10;
 		healAmount = 10;
@@ -608,11 +590,20 @@ public class Game extends JPanel implements Runnable {
 		TimerTask action = new TimerTask() {
 			public void run() {
 				
-				if (player.getHealth() <= 0) {
-				Game.lifes--;
-				System.out.println(Game.lifes);
-				startRoom();
-					
+				if (player.getHealth() <= 0)
+				{
+					saveHealth = player.getMaxHealth();
+					saveMaxHealth = player.getMaxHealth();
+					Game.lifes--;
+					System.out.println(Game.lifes);
+					if (Game.lifes == 0)
+					{
+						gameOver();
+					}
+					else
+					{
+						startRoom();
+					}
 				}
 				
 				// Gegner				
@@ -750,17 +741,6 @@ public class Game extends JPanel implements Runnable {
            //Anfang Bubous Quest
 					if (actualroom == 8) {if (coopquestfinish) {bubous.setVisible(true);}}
 	           
-	           /*if (game.taucher()(player2.getX(), player2.getY(), player2.xDim,
-						player2.yDim)==5) {
-					bubous.setVisible(true);
-				}
-	           //if (player.collision1(taucher1)&& player.collision1(taucher2)) {
-		/*taucher1.setVisible(false);
-		taucher2.setVisible(false);
-		room.remove(taucher1);
-		room.remove(taucher2);*/
-           // bubous.setVisible(true);}
-	           
 	//Ende Bubous quest
 /////////////////////////////////////////////////////////////////////////
 				// Angfang Bosskampf 2.
@@ -876,7 +856,6 @@ public class Game extends JPanel implements Runnable {
 													// Game)
 		
 		enemies = new ArrayList<Enemy>();
-		//qenemies = new ArrayList<Enemyquest>();
 		fireballs = new ArrayList<Magic>();
 		arrows = new ArrayList<Weapon>();
 		
@@ -959,21 +938,6 @@ public class Game extends JPanel implements Runnable {
 	                                 // qenemies.add(qenemy);
 	                                  qenemy.setVisible(false);
 	                          }
-				
-////////////////////////////////////////////////////////////////////////////////////
-/*if (Z[i][j] == 24) {
-
-taucher1 = new Taucher1(j * Room.elementheight, i
-* Room.elementwidth, room);
-room.add(taucher1);
-}
-if (Z[i][j] == 23) {
-
-taucher2 = new Taucher2(j * Room.elementheight, i
-* Room.elementwidth, room);
-room.add(taucher2);
-}*/
-////////////////////////////////////////////////////////////////////////////////////
 if (quest & (ringtaken==false))	{if (Z[i][j] == 17) {
 
 ring = new Ring(j * Room.elementheight, i
@@ -999,29 +963,8 @@ isbubous=true;
 		room.paintRoom();
 		container.add(room);
 		room.repaint(100);
-		//player.setHealth(saveHealth);
-		//player.setMoney(saveMoney);
 		
 		
-	}
-
-	private void startRoomRev() { // Muss noch überarbeitet werden.
-
-		container.setBackground(Color.CYAN);
-		container.removeAll();
-		room = new Room(50, 50, actualroom, this); // (Elementwidth,
-													// Elementheight, Level,
-													// Game)
-		player = new Player(Matrix.Downy(actualroom) * Room.elementheight,
-				Matrix.Downx(actualroom) * Room.elementwidth, room);
-		room.add(player);
-		
-		enemyInit(Z);
-		
-		main.controller.setPlayer(player);
-		room.paintRoom();
-		container.add(room);
-		room.repaint(100);
 	}
 	
 	public void collision() {
@@ -1106,8 +1049,6 @@ if (rp.intersects(l)) {
 			
 			if (rp.intersects(rg)) {
 		        
-	        	//player.setMoney(player.getMoney()+this.moneyAmount);
-	        	//moneyAmount = 0;
 	        	ring.setVisible(false);
 		        room.remove(ring);
 		        ringtaken=true;
@@ -1122,8 +1063,6 @@ if (rp.intersects(l)) {
 				
 				if (rp.intersects(rg)) {
 			        
-		        	//player.setMoney(player.getMoney()+this.moneyAmount);
-		        	//moneyAmount = 0;
 		        	bubous.setVisible(false);
 			        room.remove(bubous);
 			        buboustaken=true;
@@ -1153,33 +1092,6 @@ if (rp.intersects(l)) {
 	        	player.collision(e);
 	          		        	
 	        	}
-	        /*for (int y = 0; y<enemies.size(); y++) {
-    	        Enemyquest eq = (Enemyquest) qenemies.get(y);
-    	        Rectangle req = eq.getBounds();
-
-    	        if (rp.intersects(req)) {
-    	        	
-    	        	if (playerdamaged % 100 == 0) 
-    	        	{
-    	        		if (player.getHatRuestung())
-    	        		{
-    	        			player.setHealth(player.getHealth()-(e.getDamage()/2));
-    	        		}
-    	        		else
-    	        		{
-    	        			player.setHealth(player.getHealth()-e.getDamage());
-    	        		}
-    	        		System.out.println(player.getHealth());
-    	        	}}
-	
-
-        	playerdamaged++;
-        	player.collision(eq);
-          		        	
-        	}*/
-	        	
-	        	
-	        
 	        
 	        for (int k = 0; k<fireballs.size(); k++) {
 	        	Magic m = (Magic) fireballs.get(k);
@@ -1202,14 +1114,6 @@ if (rp.intersects(l)) {
 	        	
 	        }
 	        
-	      /*  for (int k = 0; k<fireballs.size(); k++) {
-	        	Magic m = (Magic) fireballs.get(k);
-	        	Rectangle rm = m.getBounds();
-	        	Rectangle b2 = boss2.getBounds();
-	        
-	       if(rm.intersects(b2)) {System.out.println("test");room.remove(boss2);}
-	        }*/
-	        
 	        for (int k = 0; k<arrows.size(); k++) {
 	        	Weapon w = (Weapon) arrows.get(k);
 	        	Rectangle rw = w.getBounds();
@@ -1230,8 +1134,6 @@ if (rp.intersects(l)) {
 	
 	private void enemyInit(int[][] Z) {
 		enemies = new ArrayList<Enemy>();
-		
-		//int[][] room2 = room.getRoom(actualroom);
 		
 		for(int i=0;i<Z.length;i++) {
 			for(int j=0;j<Z[0].length;j++) {
@@ -1282,11 +1184,21 @@ if (rp.intersects(l)) {
 					       
 					    // Text wird in den Stream geschrieben
 					    int n = 0;
+					    int f = 0;
+					    int m = 0;
 					    if(player.getHatRuestung() == true)
 					    {
 					    	n = 1;
 					    }
-					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth() + "," + player.getMaxMana() + "," + totalxp);
+					    if(player.getFireres() == true)
+					    {
+					    	f = 1;
+					    }
+					    if(player.getUpMagicdmg() == true)
+					    {
+					    	m = 1;
+					    }
+					    writer.write("" + actualroom + "," + this.lifes +  "," + player.getHealth() + "," + player.getMana() + "," + player.getMoney() + "," + player.getHealthpotions() + "," + player.getManapotions() + "," + n + "," + player.getMaxHealth() + "," + player.getMaxMana() + "," + totalxp + "," + f + "," + m);
 					       
 					    // Schreibt den Stream in die Datei
 					    // Sollte immer am Ende ausgeführt werden, sodass der Stream 
@@ -1318,20 +1230,11 @@ if (rp.intersects(l)) {
 			setsaveMaxMana(player.getMaxMana());
 			setsaveWinnerpoints(player.getWinnerpoints());
 			setsaveWinnerpoints2(player.getWinnerpoints2());
+			setsaveFireres(player.getFireres());
+			setsavegetUpMagicdmg(player.getUpMagicdmg());
 			
 			startRoom();
 		}
-	}
-
-	public void lastRoom() {
-		if (actualroom > 1) {
-			actualroom--;
-			room.removeAll();
-			container.remove(room);
-			room = null;
-			startRoomRev();
-		}
-
 	}
 
 	public boolean getDown() {
@@ -1388,10 +1291,19 @@ if (rp.intersects(l)) {
 		this.savewinpoints2 = n;
 	}
 	
+	public void setsaveFireres(boolean b)
+	{
+		this.saveFireres = b;
+	}
+	
+	public void setsavegetUpMagicdmg(boolean b)
+	{
+		this.saveUpMagicdmg = b;
+	}
+	
 	public void story()
 	{
 		timer.cancel();
-		//container.remove(room);
 		main.NPCstory();
 	}
 
@@ -1407,16 +1319,10 @@ if (rp.intersects(l)) {
 		timer.cancel();
 		main.Taucher();
 	}
-	/*public void gameStop1() {
-		timer.cancel();
-		main.gameStop();
-	}*/
-	
 
 	public void shop()
 	{
 		timer.cancel();
-		//container.remove(room);
 		main.shop(player);
 	}
 	
@@ -1468,6 +1374,9 @@ if (rp.intersects(l)) {
 	public void berechneLevelXP()
 	{
 		this.levelxp = totalxp%3;
+	}
+	public boolean getquest2() {
+		return this.quest2;
 	}
 	
 }

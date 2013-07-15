@@ -24,9 +24,9 @@ public class Matrix {
 		if (roomnumber == 4) {
 			return getMat("Room4.txt");
 		}
-		if (roomnumber == 10) {
+		/*if (roomnumber == 10) {
 			return getMat("Room4_2.txt");
-		}
+		}*/
 		if (roomnumber == 5) {
 			return getMat("Room5.txt");
 		}
