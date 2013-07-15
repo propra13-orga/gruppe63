@@ -30,12 +30,13 @@ public class Infobar extends Elements {
 		g.drawString("MaxHealth: " + player.getMaxHealth(), 20, 30);
 		g.drawString("Playerlevel: " + game.getPlayerlevel() + " (Levelup bei 3xp)", 280, 30);
 		g.drawString("Erfahrung: " + game.getLevelXP(), 280, 45);
+		g.drawString("MaxMana: " + player.getMaxMana(), 470, 30);
 		if (game.getClient()!=0){
 			g.drawString("Winnerpoints: " + player.getWinnerpoints(), 400, 15);
 			g.drawString("Winnerpoints2: " + player.getWinnerpoints2(), 400, 45);
 		}
 		
-	//g.dispose();
+
 	}
 	
 
