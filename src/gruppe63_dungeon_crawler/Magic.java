@@ -27,7 +27,9 @@ public class Magic extends Elements{
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	 }
-	
+	/**
+	 * hier wird die Bewegung der Feuerbaelle festgelegt 
+	 **/
 	public void move(){
 		x=this.getX();
 		y=this.getY();
@@ -41,31 +43,15 @@ public class Magic extends Elements{
 		}
 		
 		if(room.Environment(x,y-vy,width,height)!=1) {	
-			y = y-vy;
+			y = y+vy;
 			this.setLocation(x,y);
 		}
 		else {
 			setVisible(false);
 		}
-		//room.status();*/
 	}
 	
-	/*public int getRandomMov() {
-		int rand = (int)(Math.random()*2)+1;
-		int r = 0;
-		switch(rand) {
-		case 1:
-			r = -1; break;
-		case 2:
-			r = 0; break;
-		case 3:
-			r = 1; break;		
-		}
-		return r;
-	}*/
-	
 	public void paintComponent(Graphics g){
-	//Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
 	g.drawImage(sprite, 0, 0, this);
 	Toolkit.getDefaultToolkit().sync();
 	g.dispose();
@@ -86,7 +72,9 @@ public class Magic extends Elements{
 	public int getMovY() {
 		return vy;
 	}
-	
+	/**
+	 * Kollisionsüberprüfung
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
@@ -94,7 +82,11 @@ public class Magic extends Elements{
 	public Image getSprite() {
 		return sprite;
 	}
-
+/**
+ * @param movDirX  gibt die Bewegungsrichtung wieder
+ * @param movDirY gibt die Bewegungsrichtung wieder
+ * @parem getDamage gibt den Schaden wieder, der zugefügt wird (ist oben deklariert)
+ */
 	public void setDirX(int movDirX) {
 		this.vx = movDirX;
 	}

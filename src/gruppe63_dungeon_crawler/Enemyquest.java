@@ -28,7 +28,12 @@ public class Enemyquest extends Elements {
 	private boolean alive=true;
 	
 	private Image sprite;
-
+/**
+ * 
+ * @param x
+ * @param y siehe Bubous
+ * @param room
+ */
 	public Enemyquest(int x, int y, Room room) {
 		super(x, y, 40, 40);
 		this.room = room;
@@ -51,7 +56,6 @@ public class Enemyquest extends Elements {
 	public int getPosY() {
 		return this.getY();
 	}
-
 	public int getHealth() {
 		return this.health;
 	}
@@ -71,7 +75,10 @@ public class Enemyquest extends Elements {
 	public void setAttack(boolean b) {
 		this.attack = b;
 	}
-
+/**
+ * 
+ * @param player Kollision mit dem Player wird überprüft und dann wird Leben gesenkt oder auch nicht.
+ */
 	public void collision(Player player) {
 		if (alive) {
 		Rectangle rb = getBounds();
@@ -91,7 +98,7 @@ public class Enemyquest extends Elements {
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
-	
+
 	public void setDead(){
 		this.alive=false;
 	}

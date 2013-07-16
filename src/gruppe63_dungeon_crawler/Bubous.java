@@ -21,7 +21,12 @@ public class Bubous extends Elements {
 	@SuppressWarnings("unused")
 	private boolean alive=true;
 	private Image sprite;
-
+/**
+ * 
+ * @param x  hier wird die x Variable aus der Klasse Room verwendet 
+ * @param y  hier wird die y Variable aus der Klasse Room verwendet 
+ * @param room  Es wird bekannt gegeben, dass aus dem Room  geladen werden soll.
+ */
 	public Bubous(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;

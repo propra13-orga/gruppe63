@@ -9,6 +9,10 @@ public class Armor extends Elements {
 
 	/**
 	 * Ist das Item für die Ruestung  und funktioniert wie die anderen Items
+	 * 
+	 * @paint die Ruestung (Armor) wird gezeichnet und aus spirit geladen
+	 * @spirit spirit wird als Platzhalter für Image eingelesen und spaeter in paint durch Angabe der Spiritvariable geladen.
+	 * @super in public Armor  Angabe der Groeße vom Item.
 	 */
 	private static final long serialVersionUID = 1L;
 

@@ -20,7 +20,12 @@ public class Geld extends Elements {
 	private boolean alive=true;
 	
 	private Image sprite;
-
+/**
+ * 
+ * @param x
+ * @param y  siehe Bubous
+ * @param room
+ */
 	public Geld(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;
@@ -31,9 +36,6 @@ public class Geld extends Elements {
 	}
 
 	private int collision = 0;
-	//private int hits = 0;
-
-	//private int damage = 100;
 	Game game;
 
     public void paintComponent(Graphics g) {
@@ -45,10 +47,6 @@ public class Geld extends Elements {
 		return collision;
 
 	}
-
-	//public int getDamage() {
-	//	return this.damage;
-	//}
 	
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);

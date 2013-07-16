@@ -31,9 +31,6 @@ public class Leben extends Elements {
 	}
 
 	private int collision = 0;
-	//private int hits = 0;
-
-	//private int damage = 100;
 	Game game;
 
     public void paintComponent(Graphics g) {
@@ -45,11 +42,6 @@ public class Leben extends Elements {
 		return collision;
 
 	}
-
-	//public int getDamage() {
-	//	return this.damage;
-	//}
-	
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

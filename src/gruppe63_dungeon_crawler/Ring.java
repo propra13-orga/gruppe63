@@ -10,6 +10,10 @@ public class Ring extends Elements {
 	/**
 	 * Ring, der gefunden werden muss. Gehört der Nixe und kommt erst dann ins Spiel, wenn
 	 * man ihren Quest akzeptiert.
+	 * 
+	 * @paint Ring wird gezeichnet und aus spirit geladen
+	 * @spirit spirit wird als Platzhalter für das einlesen von Image wird eingelesen und spaeter in paint geladen.
+	 * @super in public Ring  angabe der groeße vom Item.
 	 */
 	private static final long serialVersionUID = 1L;
 

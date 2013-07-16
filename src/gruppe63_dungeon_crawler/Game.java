@@ -65,6 +65,7 @@ public class Game extends JPanel implements Runnable {
 	private int totalxp=0;
 	private int levelxp=0;
 	private int playerLevel=0;
+	@SuppressWarnings("unused")
 	private int playerXP=0;
 	
 	private ArrayList<Enemy> enemies;
@@ -1132,6 +1133,7 @@ if (rp.intersects(l)) {
 	    
 	}
 	
+	@SuppressWarnings("unused")
 	private void enemyInit(int[][] Z) {
 		enemies = new ArrayList<Enemy>();
 		
@@ -1167,6 +1169,7 @@ if (rp.intersects(l)) {
 		startRoom();
 		}
 
+	@SuppressWarnings("static-access")
 	public void nextRoom() {
 		actualroom++;
 		// spielstand bei nächstem level (nach bossgegner, also raum 4 oder raum 7) in datei speichern

@@ -8,7 +8,12 @@ import java.awt.Toolkit;
 public class Taucher1 extends Elements {
 
 	/**
-	 * Ist für den Taucherquest da/ wird den Items ähnlich 
+	 * Ist für den Taucherquest da/ ist den Items ähnlich 
+	 * Taucherquest,  dieser und der erste müssen berührt werden, um den Quest zu bestehen
+	 * 
+	 * @paint Taucher wird gezeichnet und aus spirit geladen
+	 * @spirit spirit wird als Platzhalter für Image eingelesen und spaeter in paint durch Angabe der spiritvariable geladen.
+	 * @super in public Taucher1  Angabe der Groeße vom Item.
 	 */
 	private static final long serialVersionUID = 1L;
 

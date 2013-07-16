@@ -37,7 +37,7 @@ public class Weapon extends Elements {
 			setVisible(false);
 		}
 		
-		/*if(room.Environment(x,y-vy,width,height)!=1) {	
+		if(room.Environment(x,y-vy,width,height)!=1) {	
 			y = y-vy;
 			this.setLocation(x,y);
 		}
@@ -45,7 +45,7 @@ public class Weapon extends Elements {
 			vy = -vy;
 			y = y-vy;
 		}
-		//room.status();*/
+		//room.status();
 	}
 	
 	/*public int getRandomMov() {

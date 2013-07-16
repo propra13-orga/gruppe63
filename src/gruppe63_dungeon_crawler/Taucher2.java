@@ -9,6 +9,10 @@ public class Taucher2 extends Elements {
 
 	/**
 	 * Taucherquest,  dieser und der erste müssen berührt werden, um den Quest zu bestehen
+	*
+	 * @paint Taucher wird gezeichnet und aus spirit geladen
+	 * @spirit spirit wird als Platzhalter für Image eingelesen und spaeter in paint durch Angabe der spiritvariable geladen.
+	 * @super in public Taucher2  Angabe der Groeße vom Item.
 	 */
 	private static final long serialVersionUID = 1L;
 
