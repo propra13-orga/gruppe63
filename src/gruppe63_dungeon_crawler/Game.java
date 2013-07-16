@@ -65,7 +65,6 @@ public class Game extends JPanel implements Runnable {
 	private int totalxp=0;
 	private int levelxp=0;
 	private int playerLevel=0;
-	private int playerXP=0;
 	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Magic> fireballs;
@@ -98,6 +97,13 @@ public class Game extends JPanel implements Runnable {
 	public static int actualroom = 1;
 	private int endroom = 10;
 
+	/**
+	 * Konstruktor der Game-Klasse.
+	 * @param container
+	 * @param menu
+	 * @param n Gibt an, ob Multiplayer (!=0) oder Singleplayer (=0) gespielt wird.
+	 * @param b Parameter, der angibt, ob Spielstand aus Datei geladen werden soll (true) oder ein neues Spiel gestartet werden soll (false).
+	 */
 	public Game(Container container, Menu menu, int n, boolean b) {
 
 		load = b;
@@ -109,6 +115,10 @@ public class Game extends JPanel implements Runnable {
 	int fireballtimer = 0;
 	int fireballcounter = 0;
 
+	/**
+	 * Zyklus, der dauerhaft während des Spiels durchlaufen wird.
+	 * Hier sind Bewegung von Spieler und Gegnern, Kollisionsabfragen sowie Abfragen, ob das Game zu ende ist implementiert.
+	 */
 	public void run() {
 
 		int[] ladewerte = new int[13];
@@ -446,6 +456,9 @@ public class Game extends JPanel implements Runnable {
 		timer.schedule(action, 0, 5);
 	}
 
+	/**
+	 * Läd den Raum und setzt alle Elemente und zeichnet sie. Ebenso werden alte Werte des Spielers wiederhergestellt.
+	 */
 	void startRoom() {
 		
 				container.setBackground(Color.CYAN);
@@ -589,7 +602,9 @@ public class Game extends JPanel implements Runnable {
 		
 	}
 	
-	
+	/**
+	 * Setzt das Spiel nach einer Unterbrechung (z.B. Shop, NPCs) fort. Funktioniert wie run().
+	 */
 	public void continueGame() {
 
 		continueRoom();
@@ -856,6 +871,9 @@ public class Game extends JPanel implements Runnable {
 		timer.schedule(action, 0, 5);
 	}
 	
+	/**
+	 * Setzt den Raum fort.
+	 */
 	public void continueRoom() {
 
 		container.setBackground(Color.CYAN);
@@ -976,6 +994,9 @@ isbubous=true;
 		
 	}
 	
+	/**
+	 * Hier werden alle Kollisionen behandelt.
+	 */
 	public void collision() {
 		Rectangle rp = player.getBounds();
 		
@@ -1141,26 +1162,9 @@ if (rp.intersects(l)) {
 	    
 	}
 	
-	private void enemyInit(int[][] Z) {
-		enemies = new ArrayList<Enemy>();
-		
-		for(int i=0;i<Z.length;i++) {
-			for(int j=0;j<Z[0].length;j++) {
-				if(Z[i][j]==2) {
-					enemies.add(new Enemy((int)(j*Room.elementheight),(int)(i*Room.elementwidth),room));
-				}
-			}
-		}
-		
-		for (int i = 0; i < enemies.size(); i++) {
-			Enemy e = (Enemy) enemies.get(i);
-			room.add(e);
-		}
-	}
-	
-	
-	
-
+	/**
+	 * Beendet das Spiel nach einer Niederlage.
+	 */
 	public void gameOver() {
 		timer.cancel();
 		timer.purge();
@@ -1169,6 +1173,9 @@ if (rp.intersects(l)) {
 		main.win(false, player);
 	}
 
+	/**
+	 * Startet den aktuellen Raum neu (nachdem man gestorben ist, jedoch noch Leben hat).
+	 */
 	public void thisRoom() {
 		room.removeAll();
 		container.remove(room);
@@ -1176,6 +1183,10 @@ if (rp.intersects(l)) {
 		startRoom();
 		}
 
+	/**
+	 * Läd den nächsten Raum.
+	 * Ebenfalls werden hier die Speicherstände erstellt.
+	 */
 	public void nextRoom() {
 		actualroom++;
 		// spielstand bei nächstem level (nach bossgegner, also raum 4 oder raum 7) in datei speichern
@@ -1246,144 +1257,269 @@ if (rp.intersects(l)) {
 		}
 	}
 
+	/**
+	 * Gibt zurück, ob der Bossgegner tot ist.
+	 * @return
+	 */
 	public boolean getDown() {
 		return this.down;
 	}
 	
+	/**
+	 * Setzt Variable saveMoney.
+	 * @param n Wert, der saveMoney zugewiesen wird.
+	 */
 	public void setsaveMoney(int n){
 	this.saveMoney=n;	
 	}
 		
+	/**
+	 * Setzt Variable saveHealth.
+	 * @param n Wert, der saveHealth zugewiesen wird.
+	 */
 	public void setsaveHealth(int n){
 	this.saveHealth=n;	
 	}
 	
+	/**
+	 * Setzt Variable saveHealthpotions.
+	 * @param h Wert, der saveHealthpotions zugewiesen wird.
+	 */
 	public void setsaveHealthpotions(int h)
 	{
 		this.saveHealthpotions = h;
 	}
 	
+	/**
+	 * Setzt Variable saveManapotions.
+	 * @param m Wert, der saveManapotions zugewiesen wird.
+	 */
 	public void setsaveManapotions(int m)
 	{
 		this.saveManapotions = m;
 	}
 	
+	/**
+	 * Setzt Variable saveMana.
+	 * @param m Wert, der saveMana zugewiesen wird.
+	 */
 	public void setsaveMana(int m)
 	{
 		this.saveMana = m;
 	}
 	
+	/**
+	 * Setzt Variable saveHatRuestung.
+	 * @param r Wert, der saveHatRuestung zugewiesen wird.
+	 */
 	public void setsaveHatRuestung(boolean r)
 	{
 		this.saveHatRuestung = r;
 	}
+	
+	/**
+	 * Setzt Variable saveHatRing.
+	 * @param rg Wert, der saveHatRing zugewiesen wird.
+	 */
 	public void setsaveHatRing(boolean rg)
 	{
 		this.saveHatRing = rg;
 	}
 	
+	/**
+	 * Setzt Variable saveMaxHealth.
+	 * @param mh Wert, der saveMaxHealth zugewiesen wird.
+	 */
 	public void setsaveMaxHealth(int mh)
 	{
 		saveMaxHealth = mh;
 	}
+	
+	/**
+	 * Setzt Variable saveMaxMana.
+	 * @param mm Wert, der saveMaxMana zugewiesen wird.
+	 */
 	public void setsaveMaxMana(int mm)
 	{
 		saveMaxMana = mm;
 	}
 	
+	/**
+	 * Setzt Variable savewinpoints.
+	 * @param n Wert, der savewinpoints zugewiesen wird.
+	 */
 	public void setsaveWinnerpoints(int n)
 	{
 		this.savewinpoints = n;
 	}
+	
+	/**
+	 * Setzt Variable savewinpoints2.
+	 * @param n Wert, der savewinpoints2 zugewiesen wird.
+	 */
 	public void setsaveWinnerpoints2(int n)
 	{
 		this.savewinpoints2 = n;
 	}
 	
+	/**
+	 * Setzt Variable saveFireres.
+	 * @param b Wert, der setFireres zugewiesen wird.
+	 */
 	public void setsaveFireres(boolean b)
 	{
 		this.saveFireres = b;
 	}
 	
+	/**
+	 * Setzt Variable saveUpMagicdmg.
+	 * @param b Wert, der saveUpMagicdmg zugewiesen wird.
+	 */
 	public void setsavegetUpMagicdmg(boolean b)
 	{
 		this.saveUpMagicdmg = b;
 	}
 	
+	/**
+	 * Ruft das NPC Fenster auf, in dem die Steuerung und allgemeines erklärt wird.
+	 */
 	public void story()
 	{
 		timer.cancel();
 		main.NPCstory();
 	}
 
+	/**
+	 * Ruft das Nixequest Fenster auf.
+	 */
 	public void quest(){
 		timer.cancel();
 		main.NixeQuest();
 	}
+	
+	/**
+	 * Ruft das Froschquest Fenster auf.
+	 */
 	public void quest2() {
 		timer.cancel();
 		main.FroschQuest();
 	}
+	
+	/**
+	 * Ruft das Tauerfenster auf.
+	 */
 	public void taucher() {
 		timer.cancel();
 		main.Taucher();
 	}
 
+	/**
+	 * Öffnet den Shop.
+	 */
 	public void shop()
 	{
 		timer.cancel();
 		main.shop(player);
 	}
 	
+	/**
+	 * Öffnet das Levelupmenu.
+	 * @param punkte Anzahl der Punkte, die vergeben werden können.
+	 */
 	public void playerLevelUp(int punkte)
 	{
 		timer.cancel();
 		main.playerLevelUp(player, punkte);
 	}	
 	
+	/**
+	 * Gibt die Variable client zurück.
+	 * @return
+	 */
 	public int getClient(){
 		return this.client;
 	}
+	
+	/**
+	 * Setzt, ob Quest angenommen wurde.
+	 * @param b Wert, der gesetzt wird.
+	 */
 	public void setQuest(boolean b){
 		this.quest=b;
 	}
+	
+	/**
+	 * Setzt, ob Quest2 angenommen wurde.
+	 * @param a Wert, der gesetzt wird.
+	 */
 	public void setQuest2 (boolean a){
 		this.quest2=a;
 	}
+	
+	/**
+	 * Setzt, ob coop-Quest beendet wurde.
+	 * @param b Wert, der gesetzt wird.
+	 */
 	public void setcoopquestfinish(boolean b){
 		this.coopquestfinish=b;
 	}
 	
+	/**
+	 * Speichert die Position des Spielers in den Variablen player1X, player1Y.
+	 */
 	public void saveLocation1()
 	{
 		player1X = player.getPosX();
 		player1Y = player.getPosY();
 	}
 	
+	/**
+	 * Gibt die Anzahl der insgesamt erhaltenen Erfahrung zurück.
+	 * @return
+	 */
 	public int getTotalXP()
 	{
 		return totalxp;
 	}
 	
+	/**
+	 * Gibt die Erfahrung zurück, die seit dem letzten Levelup gesammelt wurde.
+	 * @return
+	 */
 	public int getLevelXP()
 	{
 		return levelxp;
 	}
 	
+	/**
+	 * Gibt das Level des Spielers zurück.
+	 * @return
+	 */
 	public int getPlayerlevel()
 	{
 		return this.playerLevel;
 	}
 	
+	/**
+	 * Berechnet das Level des Spielers.
+	 */
 	public void berechnePlayerlevel()
 	{
 		this.playerLevel = totalxp/3;
 	}
 	
+	/**
+	 * Berechnet die Erfahrung, die seit dem letzten Levelup gesammelt wurde.
+	 */
 	public void berechneLevelXP()
 	{
 		this.levelxp = totalxp%3;
 	}
+	
+	/**
+	 * Gibt quest2 zurück.
+	 * @return
+	 */
 	public boolean getquest2() {
 		return this.quest2;
 	}
