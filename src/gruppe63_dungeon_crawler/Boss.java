@@ -5,15 +5,24 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+/**
+ * 
+ * Erster Bossgegner.
+ * Leben: 30
+ * Bildbreite: 50
+ * Bildhöhe: 50
+ *
+ */
+
+
 public class Boss extends Elements {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
 	private Room room;
+	
 	private int health = 30;
 	private int width=50;
 	private int height=50;
@@ -45,7 +54,12 @@ public class Boss extends Elements {
 	public void setHealth(int n) {
 		this.health = n;
 	}
-
+	
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

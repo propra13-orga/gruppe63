@@ -5,11 +5,18 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+/**
+ * 
+ * Standardgegner.
+ * Bildbreite: 48
+ * Bildhöhe: 48
+ * Leben: 100
+ * Schaden: 10
+ *
+ */
+
 public class Enemy extends Elements {										
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Room room;
 	
@@ -30,7 +37,13 @@ public class Enemy extends Elements {
 		width = 48;
 	    height = 48;
 	}
-
+	
+	
+	/**
+	 * 
+	 * Bewegung des Standardgegners in eine zufällige Richtung.
+	 *
+	 */
 	public void move() {
 		x = this.getX();
 		y = this.getY();
@@ -58,6 +71,11 @@ public class Enemy extends Elements {
 	
 	}
 	
+	/**
+	 * 
+	 * Die Bewegungsrichtung wird zufällig bestimmt.
+	 *
+	 */
 	public int getRandomMov() {
 		int rand = (int)(Math.random()*2)+1;
 		int r = 0;
@@ -99,6 +117,11 @@ public class Enemy extends Elements {
 		g.dispose();
 		}
 	
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

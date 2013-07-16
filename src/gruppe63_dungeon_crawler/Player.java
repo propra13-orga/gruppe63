@@ -11,6 +11,26 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+
+
+/**
+ * 
+ * Die Spielfigur.
+ * 
+ * Bildbreite: 30
+ * Bildhöhe: 30
+ * 
+ * Besitzt je nach Fortschritt im Spiel unterschiedliche Eigenschaften und Gegenstände.
+ *  
+ * 
+ * Eigenschaften: 
+ * Leben, maximales Leben, Mana, maximale Mana, Schaden
+ * Gegenstände:
+ * Rüstung, Geld, Manatränke, Heiltränke
+ * 
+ * Über die Spielfigur wird auch die Verarbeitung der empfangenen Daten im Multiplayer geregelt.
+ *
+ */
 @SuppressWarnings({ "serial" })
 public class Player extends Elements {
 	private Room room;
@@ -110,7 +130,11 @@ public class Player extends Elements {
 		return getLevel() * 4f;
 	}*/
 
-
+	/**
+	 * 
+	 * Bewegung der Spielfigur, sowie Austausch der Daten im Multiplayer.
+	 *
+	 */
 	public void move(int n) {
 		x = this.getX();
 		y = this.getY();
@@ -176,6 +200,13 @@ public class Player extends Elements {
 		this.attack = b;
 	}
     
+	/**
+	 * 
+	 * Überschneiden sich das Rechteck der Spielfigur und eines Elements fügt der Spieler dem Element Schaden zu.
+	 * 
+	 * Die Angriffsgeschwindigkeit ist auf 1/20 herabgesetzt.
+	 *
+	 */
 	public void collision(Elements element) {
 		Rectangle rh = getBounds();
 		Rectangle rb = element.getBounds();
@@ -193,11 +224,20 @@ public class Player extends Elements {
 
 	}
 		
-
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
 
+	/**
+	 * 
+	 * Der Spieler kann Feuerbälle verschießen.
+	 *
+	 */
 	public void castMagic() {
 		Magic fireball = new Magic(x,y,room);
 		 magic.add(fireball);
@@ -208,10 +248,16 @@ public class Player extends Elements {
 		return this.magic;
 	}
 
+	
 	public ArrayList<Weapon> getWeapon() {
 		return this.weapon;
 	}
-
+	
+	/**
+	 * 
+	 * Der Spieler kann Pfeile verschießen.
+	 *
+	 */
 	public void shootWeapon() {
 		Weapon arrow = new Weapon(x,y,room);
 		weapon.add(arrow);
@@ -285,6 +331,12 @@ public class Player extends Elements {
 		manapotions = m;
 	}
 	
+	
+	/**
+	 * 
+	 * Verarbeitung des Datenversands im Multiplayer.
+	 *
+	 */
 	public void send(int n) {
 
         try {
@@ -294,11 +346,6 @@ public class Player extends Elements {
            InputStream is = ss.getInputStream();    
 
           
-           
-           
-           System.out.println("Client x:" + x);
-           System.out.println("Client y:" + y); 
-           
                   	   
            os.write(n);
            os.write(x/4);
@@ -318,9 +365,7 @@ public class Player extends Elements {
            int e = is.read()*100;
            int f = is.read();
                       
-           
-           System.out.println("Client x2:" + a1);
-           System.out.println("Client y2:" + b1);
+
            
            this.posX2=a1;
            this.posY2=b1;
@@ -348,18 +393,34 @@ public class Player extends Elements {
             
         }}
 	
+	/**
+	 * 
+	 * Der Raum in dem sich der ander Spieler zur Zeit befindet.
+	 *
+	 */
         public int getRoom2() {
         	
         	return r2;
         }
         	
-        	
-        	public int getposY2(){
+        /**
+         * 
+         * Y Position des anderen Spielers.
+         *
+         */
+           	public int getposY2(){
         		return posY2;
         	}
+        	
+        	 /**
+             * 
+             * X Position des anderen Spielers.
+             *
+             */	
         	public int getposX2(){
         		return posX2;
         	}
+        	
         	
         	public int getWinnerpoints(){
         		return this.winnerpoints;

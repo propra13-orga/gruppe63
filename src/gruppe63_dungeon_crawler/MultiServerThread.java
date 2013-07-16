@@ -5,7 +5,15 @@ import java.io.*;
 
 
 
- 
+/**
+ * 
+ * Thread zum Informationsaustausch der Clients.
+ * 
+ * 7 Daten werden empfangen und
+ * 6 Daten werden zurückgesandt.
+ * 
+ * 
+ */ 
 public class MultiServerThread extends Thread {
 	
     private Socket s1 = null;
@@ -27,7 +35,21 @@ public class MultiServerThread extends Thread {
     private int down;
 
 
-    
+    /**
+	 * 
+	 * 7 Daten werden empfangen:
+	 * 
+	 * Kennung, X Position des Spielers, Y Position des Spielers, aktueller Raum, Winnerpoints des eigenen Spielers,
+	 * Winnerpoints des anderen Spielers sowie die Berächtigung den nächsten Raum zu betreten.
+	 * 
+	 * Diese Daten werden in dem MultiServer zwischengespeichert.
+	 * 
+	 * 6 Daten werden zurückgesandt:
+	 * 
+	 * Dazu werden obige Informationen (ohne Kennung), aus der Zwischenspeicherung des MultiServers ausgelesen
+	 * und zurückgeschickt.
+	 *
+	 */
     public MultiServerThread(Socket s1) {
     super("KKMultiServerThread");
     this.s1 = s1;

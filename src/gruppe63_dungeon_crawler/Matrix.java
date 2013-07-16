@@ -7,9 +7,18 @@ import java.io.FileInputStream;
 import java.io.File;
 import java.util.StringTokenizer;
 
-
+/**
+ * 
+ * Liest die Räume aus Textdateien ein.
+ *
+ */
 public class Matrix {
 
+	/**
+	 * 
+	 * Gibt das Spielfeld des Raumes einer bestimmten Raumnummer als 2 dimensionale integer Matrix aus.
+	 *
+	 */
 	public static int[][] playedRoom(int roomnumber) {
 
 		if (roomnumber == 1) {
@@ -49,6 +58,11 @@ public class Matrix {
 		}
 	}
 
+	/**
+	 * 
+	 * Erstellt aus einer Textdatei eine 2 dimensionale Matrix.
+	 *
+	 */
 	public static int[][] getMat(String file) {
 
 		int[][] matrix;
@@ -113,7 +127,7 @@ public class Matrix {
 	 * j++) { if(Z[i][j] == 4) { n = j; } } } return n+1; }
 	 */
 
-	public static int Downx(int roomnumber) { // Kommt auch irgendwann weg.
+	/*public static int Downx(int roomnumber) { // Kommt auch irgendwann weg.
 
 		int n = 0;
 
@@ -143,6 +157,6 @@ public class Matrix {
 			}
 		}
 		return n + 1;
-	}
+	}*/
 
 }

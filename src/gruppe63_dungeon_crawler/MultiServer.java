@@ -2,6 +2,13 @@ package gruppe63_dungeon_crawler;
 import java.net.*;
 import java.io.*;
  
+/**
+ * 
+ * Server für die Kommunikation von zwei Clients.
+ * 
+ * Der Server empfängt und sendet Informationen über Port 1231.
+ *
+ */
 public class MultiServer implements Runnable{
 	
 	public static int x1=25;
@@ -21,7 +28,14 @@ public class MultiServer implements Runnable{
 	public static int down1=0;
 	public static int down2=0;
 	
-	@Override
+	
+	/**
+	 * 
+	 * Der Server horcht in einer Schleife an dem Port. Die Spielmechanik und die Kommunikation
+	 * des Servers werden durch unterschiedliche Threads bearbeitet.
+	 *
+	 */
+	@Override	
 	public void run() {
 		
      	
