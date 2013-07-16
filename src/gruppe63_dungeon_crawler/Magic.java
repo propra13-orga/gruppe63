@@ -24,8 +24,8 @@ public class Magic extends Elements{
 		//vy = getRandomMov();
 		setVisible(true);
 		sprite = Toolkit.getDefaultToolkit().getImage("res/Fireball.gif");
-		width = sprite.getWidth(null);
-	    height = sprite.getHeight(null);
+		width = 20;
+	    height = 20;
 	 }
 	
 	public void move(){

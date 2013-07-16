@@ -19,8 +19,8 @@ public class Fireball extends Elements {
 	private static final long serialVersionUID = 1L;
 
 	private Room room;
-	private int width=30;
-	private int heigth=30;
+	private int width;
+	private int heigth;
 
 	private int collision = 0;
 	private int hits = 0;
@@ -31,6 +31,8 @@ public class Fireball extends Elements {
 	public Fireball(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;
+		width=30;
+		heigth=30;
 	}
 
 	/**

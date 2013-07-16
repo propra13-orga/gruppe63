@@ -87,7 +87,7 @@ public class Player2 extends Elements {
 
 
 	public void move(Player player) {
-		System.out.println("test");
+		
 		this.setLocation(player.getposX2(),player.getposY2());
 	}
 
