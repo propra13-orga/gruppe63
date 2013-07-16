@@ -489,7 +489,8 @@ public class Game extends JPanel implements Runnable {
 							* Room.elementwidth, room);
 					room.add(player);
 					if(client!=0){player2 = new Player2(j * Room.elementheight, (i) * Room.elementwidth,room);
-					room.add(player2);}
+					room.add(player2);
+					player.setdown(true);}
 				}
 
 				if (Z[i][j] == 2) {
@@ -864,7 +865,9 @@ public class Game extends JPanel implements Runnable {
 					}
 				}
 				// Ende Bosskmapf 3.
-
+				if (actualroom==10 & player.getescape()) {
+					main.win(true, player);
+				}
 			}
 		};
 		timer = new Timer();
@@ -895,7 +898,8 @@ public class Game extends JPanel implements Runnable {
 					player.setLocation(player1X, player1Y);
 					room.add(player);
 					if(client!=0){player2.setLocation((j + 1) * Room.elementheight, i * Room.elementwidth);
-					room.add(player2);}
+					room.add(player2);
+					player.setdown(true);}
 				}
 
 				if (Z[i][j] == 2) {

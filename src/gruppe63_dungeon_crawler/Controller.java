@@ -134,6 +134,10 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_1) { // Taste 1 fuer Nahkampf.
 			player.setAttack(false);
 		}
+		
+		if (key == KeyEvent.VK_ESCAPE) {
+	    	player.setescape(false);
+	 }
 	}
 
 }
