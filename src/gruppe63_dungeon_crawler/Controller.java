@@ -100,6 +100,9 @@ public class Controller extends KeyAdapter {
 		if (key == KeyEvent.VK_SHIFT) {
 		    	player.shootWeapon();
 		 }
+		if (key == KeyEvent.VK_ESCAPE) {
+	    	player.setescape(true);
+	 }
 	}
 	
 
