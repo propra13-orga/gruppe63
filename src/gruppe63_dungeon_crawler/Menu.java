@@ -143,7 +143,9 @@ public class Menu extends JFrame implements ActionListener{
 	
 	
 
-
+	/**
+	 * Initialisiert das Anfangsmenu, das beim Programmstart angezeigt wird.
+	 */
 	public void initialize() {
 		
 		cp = this.getContentPane();
@@ -287,6 +289,10 @@ public class Menu extends JFrame implements ActionListener{
 
 	}
 
+	/**
+	 * Startet das Programm.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		final Menu f = new Menu();
@@ -301,6 +307,9 @@ public class Menu extends JFrame implements ActionListener{
 
 	}
 
+	/**
+	 * Hier werden sämtliche Buttons behandelt, wenn sie gedrückt werden.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -612,6 +621,11 @@ public class Menu extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Startet ein neues Spiel.
+	 * @param n Legt fest, ob Singleplayer oder Multiplayer.
+	 * @param b Legt fest, ob Spielstand geladen werden soll oder nicht.
+	 */
 	public void startGame(int n, boolean b)
 	{
 		// Start game, load dungeon
@@ -637,6 +651,11 @@ public class Menu extends JFrame implements ActionListener{
 		thread.start();
 	}
 	
+	/**
+	 * Menu, welches nach Beenden des Spiels aufgerufen wird (Sieg oder Niederlage).
+	 * @param win Boolean, ob Sieg oder Niederlage.
+	 * @param player Spieler, der gewonnen hat (wichtig für Multiplayer).
+	 */
 	public void win(boolean win, Player player) {
 		int client=game.getClient();
 		game = null;
@@ -687,7 +706,7 @@ public class Menu extends JFrame implements ActionListener{
 		bExitc2.weightx = 1.0;
 		
 		GameoverPanel.add(lEnde, lEndec);
-		GameoverPanel.add(bRestart, bRestartc);
+		if (client==0) {GameoverPanel.add(bRestart, bRestartc);}
 		GameoverPanel.add(bExit, bExitc2);
 		if (client!=0) {
 			GameoverPanel.add(lWinnerPoints1, lWinnerPoints1c);
@@ -708,6 +727,10 @@ public class Menu extends JFrame implements ActionListener{
 
 		}
 
+	/**
+	 * Initialisiert und zeigt den Shop an.
+	 * @param player Spieler, der gerade im Shop ist.
+	 */
 	public void shop(Player player) 
 	{
 		this.player = player;
@@ -769,6 +792,9 @@ public class Menu extends JFrame implements ActionListener{
 		this.setSize(xFrame, yFrame);
 	}
 	
+	/**
+	 * Initialisiert und zeigt das NPCmenu an, das allgemeine Dinge wie Steuerung und Hintergründe des Spiels erklärt.
+	 */
 	public void NPCstory()
 	{
 		storysite = 1;
@@ -800,6 +826,11 @@ public class Menu extends JFrame implements ActionListener{
 		this.setSize(xFrame, yFrame);
 	}
 
+	/**
+	 * Initialisiert und zeigt das Levelupmenu an.
+	 * @param p Spieler, der Levelup erreicht hat.
+	 * @param punkte Anzahl der Punkte, die vergeben werden können.
+	 */
 	public void playerLevelUp(Player p, int punkte)
 	{
 		this.player = p;
@@ -868,6 +899,9 @@ public class Menu extends JFrame implements ActionListener{
 		this.setSize(xFrame, yFrame);
 	}
 
+	/**
+	 * Initialisiert und zeigt den Nixequest an.
+	 */
 	public void NixeQuest() {
 		
 		questPanel = new JPanel();
@@ -911,6 +945,9 @@ public class Menu extends JFrame implements ActionListener{
 		
 	}
 
+	/**
+	 * Initialisiert und zeigt den Froschquest an.
+	 */
 	public void FroschQuest() {
 		
 		questPanel = new JPanel();
@@ -953,6 +990,9 @@ public class Menu extends JFrame implements ActionListener{
 		this.setSize(xFrame, yFrame);
 	}
 
+	/**
+	 * Initialisiert und zeigt das Tauchermenu an.
+	 */
 	public void Taucher() {
 		// TODO Auto-generated method stub
 		questPanel = new JPanel();
@@ -979,6 +1019,9 @@ public class Menu extends JFrame implements ActionListener{
 		questPanel.setVisible(true);
 	}
 	
+	/**
+	 * Initialisiert den Hintergrundsound.
+	 */
 	private void initSound()
 	{
 		try {

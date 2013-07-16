@@ -11,6 +11,15 @@ public class Infobar extends Elements {
 	private Player player;
 	private Game game;
 		
+	/**
+	 * Konstruktor der Infobar.
+	 * @param x x-Startkoordinate
+	 * @param y y-Startkoordinate
+	 * @param room Raum, in dem die Informationsleiste angezeigt wird.
+	 * @param player Wichtig, um die Werte des Spielers abzufragen;
+	 * dieser Parameter wird der Variable player zugewiesen.
+	 * @param game Ebenfalls wichtig, um die Werte des Games abzufragen.
+	 */
 	public Infobar(int x, int y, Room room, Player player, Game game){
 		//Groesse des Spielers
 		super(x,y,600,50);
@@ -19,6 +28,10 @@ public class Infobar extends Elements {
 		this.game = game;
 	}
 	
+	/**
+	 * Wird bei jedem repaint() in Game aufgerufen.
+	 * Hier werden die verschiedenen Elemente der Informationsleiste "gemalt".
+	 */
 	@SuppressWarnings("static-access")
 	public void paintComponent(Graphics g){
 		g.drawString("Lebenspunkte: " + player.getHealth() + " / " + player.getMaxHealth(), 20, 15);

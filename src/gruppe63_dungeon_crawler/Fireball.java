@@ -5,16 +5,22 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+/**
+ * 
+ * Feuerbälle in den Räumen der Bossgegner.
+ * Bildbreite: 30
+ * Bildhöhe: 30
+ * Schaden: 50
+ *
+ */
+
 public class Fireball extends Elements {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Room room;
-	private int width=30;
-	private int heigth=30;
+	private int width;
+	private int heigth;
 
 	private int collision = 0;
 	private int hits = 0;
@@ -25,8 +31,15 @@ public class Fireball extends Elements {
 	public Fireball(int x, int y, Room room) {
 		super(x, y, 30, 30);
 		this.room = room;
+		width=30;
+		heigth=30;
 	}
 
+	/**
+	 * 
+	 * Bewegung des Feuerballs.
+	 *
+	 */
 	public void move() {
 		x = this.getX();
 		y = this.getY();
@@ -52,6 +65,17 @@ public class Fireball extends Elements {
 		room.status();
 	}
 
+	/**
+	 * 
+	 * Überschneiden sich die Rechtecke des Feuerballs und des Spielers
+	 * fügt der Feuerball dem Spieler Schaden zu.
+	 * 
+	 * Damit der Feuerball nur einmal bei Kontakt mit dem Spieler Schaden verursacht,
+	 * wird seine Angriffsgeschwindigkeit herabgesetzt,
+	 * sodass er nur bei jedem 150ten Durchgang der Schleife tatsächlich Schaden verursacht.
+	 * Dies führt im Normalfall dazu, dass der Feuerball nur einmal Schaden verursacht.
+	 *  
+	 */	
 	public void collision(Player player) {
 		Rectangle rf = getBounds();
 		Rectangle rh = player.getBounds();
@@ -107,6 +131,11 @@ public class Fireball extends Elements {
 		return this.damage;
 	}
 	
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, heigth);
     }

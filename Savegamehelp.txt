@@ -1,2 +1,2 @@
 Bedeutung:
-Raum, Leben, Lebenspunkte, Manapunkte, Geld, Lebenstränke, Manatränke, Rüstung (1=true, 0=false), Maximallebenspunkte, Maximalmanapunkte, Erfahrungspunkte, Feuerrüstungsupgrade (1=true, 0=false), Feuerballschadenupgrade (1=true, 0=false)
+Raum, Leben, Lebenspunkte, Manapunkte, Geld, Lebenstränke, Manatränke, Rüstung (1=true, 0=false), Maximallebenspunkte, Maximalmanapunkte, Erfahrungspunkte

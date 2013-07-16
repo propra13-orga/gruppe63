@@ -5,11 +5,21 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.Rectangle;
 
+/**
+ * 
+ * Zweiter Bossgegner.
+ * Leben: 60
+ * Schaden: 100
+ * Angriffsgeschwindigkeit: 1/200
+ * Bildbreite: 35
+ * Bildhöhe: 35
+ * 
+ *
+ */
+
+
 public class Boss2 extends Elements {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
@@ -19,7 +29,7 @@ public class Boss2 extends Elements {
 	
 	private int health = 60;
 	private int damage = 100;
-	private boolean attack = false;
+	//private boolean attack = false;
 	private int hits = 0;
 	private boolean alive=true;
 	
@@ -61,20 +71,31 @@ public class Boss2 extends Elements {
 		return this.damage;
 	}
 
-	public boolean getAttack() {
-		return this.attack;
-	}
+	//public boolean getAttack() {
+	//	return this.attack;
+	//}
 
-	public void setAttack(boolean b) {
-		this.attack = b;
-	}
+	//public void setAttack(boolean b) {
+	//	this.attack = b;
+	//}
 
+	
+	/**
+	 * 
+	 * Überschneiden sich die Rechtecke des Bossgegners und des Spielers
+	 * fügt der Bossgegner, wenn er noch nicht getötet wurde, dem Spieler Schaden zu.
+	 * 
+	 * Damit der Bossgegner nicht bei jedem Durchgang der Spielschleife
+	 * Schaden verursacht, wird seine Angriffsgeschwindigkeit herabgesetzt,
+	 * sodass er nur bei jedem 200ten Durchgang der Schleife tatsächlich Schaden verursacht.
+	 *
+	 */
 	public void collision(Player player) {
 		if (alive) {
 		Rectangle rb = getBounds();
 		Rectangle rh = player.getBounds();
 		if (rb.intersects(rh)) {
-			if (hits % 1000 == 0) {
+			if (hits % 200 == 0) {
 				System.out.println("schaden");
 				player.setHealth(player.getHealth() - getDamage());
 				System.out.println(player.getHealth());
@@ -85,6 +106,11 @@ public class Boss2 extends Elements {
 		}
 	}
 
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

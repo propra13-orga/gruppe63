@@ -6,11 +6,15 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
 
+/**
+ * 
+ * Statischen Elemente.
+ *
+ */
+
 public class Elements extends JComponent {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private int width;
@@ -60,11 +64,11 @@ public class Elements extends JComponent {
 			Image img7 = Toolkit.getDefaultToolkit().getImage("res/eingang.gif");
 		    g.drawImage(img7, 0, 0, this);
 			break;
-		case 3:
-			Image img1 = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");
-			g.drawImage(img1, 0, 0, this);
-			g.finalize();
-			break;
+		//case 3:
+		//	Image img1 = Toolkit.getDefaultToolkit().getImage("res/ghost.gif");
+			//g.drawImage(img1, 0, 0, this);
+			//g.finalize();
+			//break;
 		case 5:
 			Image img8 = Toolkit.getDefaultToolkit().getImage("res/Ausgang.png");
 		    g.drawImage(img8, 0, 0, this);
@@ -105,6 +109,11 @@ public class Elements extends JComponent {
 
 	}
 	
+	/**
+	 * 
+	 * Rechteck zur Kollisionsabfrage.
+	 *
+	 */
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, heigth);
     }
