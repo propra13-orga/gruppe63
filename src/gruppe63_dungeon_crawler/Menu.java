@@ -385,7 +385,7 @@ public class Menu extends JFrame implements ActionListener{
 		
 		if(e.getSource()==this.bClient2)
 		{
-			
+			initSound();
 				this.startGame(2, false);
 			
 		}
@@ -397,9 +397,8 @@ public class Menu extends JFrame implements ActionListener{
 			MultiServer server = new MultiServer();
 			Thread t = new Thread(server);
 			t.start();
-			this.startGame(1, false);		
-			
-				
+			initSound();
+			this.startGame(1, false);
 			}
 			
 		if(e.getSource()==this.bSettings)
