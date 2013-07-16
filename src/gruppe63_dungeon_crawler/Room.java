@@ -7,10 +7,16 @@ import java.awt.MediaTracker;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * Mithilfe der eingelesenen Textdateien, wird der Raum gezeichnet
+ * und die Kollision mit unbeweglichen Objekten bearbeitet.
+ * 
+ *
+ */	
 public class Room extends JPanel {
 
-	// Das mit den Sprite- bzw. Elementgroeßen muss wahrscheinlich nochmal
-	// ueberarbeitet werden, das hab ich so nicht gut gemacht!
+
 
 	/**
 	 * 
@@ -36,14 +42,10 @@ public class Room extends JPanel {
 
 	private Player player;
 	private Game game;
-	//private Leben leben;
 	Image img;
 	static BufferedImage background;
 	boolean quit = false;
-	//private Mana mana;
-	//private Money money;
-	//private Armor armor;
-	//private Enemy enemy = new Enemy(1, 1, null);
+
 
 	public Room(int elementwidth, int elementheigth, int level, Game game) {
 		super();
@@ -145,7 +147,12 @@ public class Room extends JPanel {
 			return null;
 		}
 	}
-
+	/**
+     * 
+     * Zeichnet den Raum aus den Elementen.
+     * 
+     *
+     */	
 	public void paintRoom() {
 
 		int x, y;	
@@ -174,7 +181,13 @@ public class Room extends JPanel {
 		
 	}
 
-
+	/**
+     * 
+     * Kollisionabfrage.
+     * 
+     * Es wird untersucht, welches Element die Ecken des Spielfigurenbildes berühren.
+     *
+     */	
 	public int Environment(int x, int y, int sizeplx, int sizeply) { // Untersuche,
 																		// was
 																		// die
@@ -279,6 +292,12 @@ public class Room extends JPanel {
 		}
 	}
 	
+	/**
+     * 
+     * Reaktion auf Kollisionen im Mehrspieler.
+     * 
+     *
+     */	
 	public void status(Player player, Player2 player2) {
 		int collision = Environment(player.x, player.y,player.xDim,
 				player.yDim);
@@ -354,7 +373,12 @@ public class Room extends JPanel {
 		}
 
 	}
-	
+	/**
+     * 
+     * Reaktion auf Kollisionen im Einzelspieler.
+     * 
+     *
+     */	
 	public void status() {
 		
 		if (game.getClient()==0) {

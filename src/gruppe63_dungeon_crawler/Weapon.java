@@ -5,6 +5,16 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+
+/**
+ * 
+ * Die Qualle verschießt Pfeile.
+ * Bildbreite: 35
+ * Bildhöhe: 10
+ * Schaden: 20
+ * 
+ *
+ */	
 public class Weapon extends Elements {
 	private static final long serialVersionUID = 1L;
 	private Room room;
@@ -18,13 +28,18 @@ public class Weapon extends Elements {
 		super(x,y,35,10);
 		this.room = room;
 		vx = 2;
-		//vy = getRandomMov();
 		setVisible(true);
 		sprite = Toolkit.getDefaultToolkit().getImage("res/Arrow.png");
 		width = sprite.getWidth(null);
 	    height = sprite.getHeight(null);
 	 }
 	
+	/**
+     * 
+     * Bewegung des Pfeils.
+     * 
+     *
+     */	
 	public void move(){
 		x=this.getX();
 		y=this.getY();
@@ -37,33 +52,12 @@ public class Weapon extends Elements {
 			setVisible(false);
 		}
 		
-		/*if(room.Environment(x,y-vy,width,height)!=1) {	
-			y = y-vy;
-			this.setLocation(x,y);
-		}
-		else {
-			vy = -vy;
-			y = y-vy;
-		}
-		//room.status();*/
+
 	}
 	
-	/*public int getRandomMov() {
-		int rand = (int)(Math.random()*2)+1;
-		int r = 0;
-		switch(rand) {
-		case 1:
-			r = -1; break;
-		case 2:
-			r = 0; break;
-		case 3:
-			r = 1; break;		
-		}
-		return r;
-	}*/
+
 	
 	public void paintComponent(Graphics g){
-	//Image img = Toolkit.getDefaultToolkit().getImage("ghost.gif");
 	g.drawImage(sprite, 0, 0, this);
 	Toolkit.getDefaultToolkit().sync();
 	g.dispose();
@@ -85,6 +79,12 @@ public class Weapon extends Elements {
 		return vy;
 	}
 	
+	/**
+     * 
+     * Rechteck zur Kollisionsabfrage.
+     * 
+     *
+     */	
 	public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }

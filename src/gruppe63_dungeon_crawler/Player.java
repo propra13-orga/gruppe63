@@ -29,6 +29,9 @@ import java.util.ArrayList;
  * Rüstung, Geld, Manatränke, Heiltränke
  * 
  * Über die Spielfigur wird auch die Verarbeitung der empfangenen Daten im Multiplayer geregelt.
+ * 
+ * Da die Spielschleifen auf unterschiedlichen Rechnern unterschiedlich schnell ausgeführt werden
+ * wird der Mittelwert der Winnerpoints bestimmt. Dieser wird beiden Spielern angezeigt.
  *
  */
 @SuppressWarnings({ "serial" })
@@ -421,32 +424,47 @@ public class Player extends Elements {
         		return posX2;
         	}
         	
-        	
+        	 /**
+             * 
+             * Mittelwert der Winnerpoints für den Spieler dieses Clients.
+             *
+             */	
         	public int getWinnerpoints(){
         		return this.winnerpoints;
         	}
+        	
+        	 /**
+             * 
+             * Mittelwert der Winnerpoints für den Spieler des anderen Clients.
+             *
+             */	
         	public int getWinnerpoints2(){
         		return this.winnerpoints2;
         	}
-        	/*public void incWinnerpoints(){
-        		this.winnerpoints++;
-        	}
-        	public void setWinpoints(int n){
-        		this.winnerpoints=n;
-        	}
-        	public void setWinpoints2(int n){
-        		this.winnerpoints2=n;
-        	}*/
- 
+        
+        	 /**
+             * 
+             * Winnerpoints für den Spieler des anderen Clients,
+             * wie sie aufgrund der Rechengeschwindigkeit dieses Rechners gezählt werden.
+             *
+             */	
         	public int getwpunlocal() {
         		return this.wpunlocal;
         	}
-        	public void incwpunlocal(){
-        		this.wpunlocal++;
+        	
+           	public void incwpunlocal(){
+      		this.wpunlocal++;
         	}
 			public void incwplocal() {
 				this.wplocal++;
 			}
+			
+			/**
+             * 
+             * Winnerpoints für den Spieler dieses Clients,
+             * wie sie aufgrund der Rechengeschwindigkeit dieses Rechners gezählt werden.
+             *
+             */	
 			public int getwplocal(){
 				return this.wplocal;
 			}

@@ -33,7 +33,14 @@ public class Player2 extends Elements {
 	private int winnerpoints=0;
 	
 
-
+	/**
+     * 
+     * Vereinfachte Kopie der Klasse Player.
+     * 
+     * Player2 stellt im Mehrspielermodus den anderen Spieler dar.
+     * 
+     *
+     */	
 	public Player2(int x, int y, Room room) {
 		// Groesse des Spielers
 		super(x, y, 30, 30);
